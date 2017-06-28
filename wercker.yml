@@ -1,7 +1,7 @@
 box: ubuntu
 build:
   steps:
-    - zonalitica/hugo-build:
+    - arjen/hugo-build:
         version: "0.22.1" 
         theme: hugo-fi-spanish
         flags: --buildDrafts=false --noTimes
