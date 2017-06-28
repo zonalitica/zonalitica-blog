@@ -1,11 +1,11 @@
-baseurl = "http://hugo.spf13.com/"
+baseurl = "/"
 languageCode = "es-es"
 DefaultContentLanguage = "es"
 theme = "hugo-fi-spanish"
 preserveTaxonomyNames = true
 paginate = 3
-disqusShortname = "shortname"
-googleAnalytics = ""
+disqusShortname = "zonalitica"
+googleAnalytics = "UA-66899932-1"
 
 [params]
     # Sets the meta tag description, usually reserved for the main page
