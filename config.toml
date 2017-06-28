@@ -76,11 +76,16 @@ googleAnalytics = "UA-66899932-1"
     name = "Categorías"
     url = "/categories"
     weight = 2
+    
+[[menu.main]]
+    name = "Youtube"
+    url = "https://www.youtube.com/channel/UCFlEAg_0gMwwRXaceWTSwRQ"
+    weight = 3
 
 [[menu.main]]
     name = "Acerca"
     url = "/about"
-    weight = 3
+    weight = 4
 
 # Insert your username and the icon will apear on the page as long as
 # socialAppearAtTop or socialAppearAtBottom is set to true in the params area
