@@ -86,7 +86,7 @@ googleAnalytics = ""
 # socialAppearAtTop or socialAppearAtBottom is set to true in the params area
 # The social media icons will appear on the sidebar
 [social]
-    github          = "jpescador"
+    github          = "zonalitica"
     bitbucket       = ""
     jsfiddle        = "" 
     codepen         = ""
@@ -112,5 +112,5 @@ googleAnalytics = ""
     facebook        = ""
     facebook_admin  = ""
     twitter_domain  = ""
-    twitter         = "julio_pescador"
+    twitter         = "zonalitica"
     email           = ""

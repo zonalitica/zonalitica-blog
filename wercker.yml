@@ -1,0 +1,28 @@
+box: ubuntu
+build:
+  steps:
+    - zonalitica/hugo-build:
+        version: "0.22.1" 
+        theme: hugo-fi-spanish
+        flags: --buildDrafts=false --noTimes
+deploy:
+    steps:
+        - install-packages:
+            packages: openssh-client rsync
+        - add-to-known_hosts:
+            hostname: $HOSTNAME
+        - mktemp:
+            envvar: PRIVATEKEY_PATH
+        - create-file:
+            name: write key
+            filename: $PRIVATEKEY_PATH
+            content: $WERCKER_PRIVATE
+            overwrite: true
+        - script:
+            name: transfer blog
+            code: |
+                rsync -au -e "ssh -i $PRIVATEKEY_PATH -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" --progress public/* root@$HOSTNAME:/var/www/html
+                ssh -i $PRIVATEKEY_PATH -l root -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no $HOSTNAME chown -R www-data:www-data /var/www/
+        - script:
+            name: restart nginx
+            code: ssh -i $PRIVATEKEY_PATH -l root -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no $HOSTNAME nginx -s reload
