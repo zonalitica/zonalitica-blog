@@ -1,0 +1,16 @@
+<!-- Pagination -->
+<ul class="actions pagination">
+    {{ if .Paginator.HasPrev }}
+        <li><a href="{{ .Paginator.Prev.URL }}"
+                class="button big previous">Anterior</a></li>
+    {{ else }}
+        <li><a href="#" class="disabled button big previous">Anterior</a></li>
+    {{ end }}
+
+    {{ if .Paginator.HasNext }}
+        <li><a href="{{ .Paginator.Next.URL }}"
+                class="button big next">Siguiente</a></li>
+    {{ else }}
+        <li><a href="#" class="disabled button big next">Siguiente</a></li>
+    {{ end }}
+</ul>
