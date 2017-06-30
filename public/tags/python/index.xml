@@ -6,18 +6,20 @@
     <description>Recent content in Python on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>es-es</language>
-    <lastBuildDate>Mon, 26 Jun 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 30 Jun 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/python/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Bienvenidos</title>
+      <title>Bienvenidos (Otra vez!!!)</title>
       <link>/post/bienvenidos/</link>
-      <pubDate>Mon, 26 Jun 2017 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 30 Jun 2017 00:00:00 +0000</pubDate>
       
       <guid>/post/bienvenidos/</guid>
-      <description>Hello World!</description>
+      <description>Bienvenidos al relazamiento de Zonalítica!!!.
+Hace poco menos de 1 año lance este blog como una iniciativa en español para difundir información sobre Data Science, Big Data, Estadística y otros temas que mucho me apacionan! En ese momento pensé que Wordpress sería la mejor alternativa pero me equivoqué y me tomó algo de tiempo para corregir la situación.
+Pero ya estoy aquí con nueva plataforma y con muchas ganas de compartir valiosa información para los adictos (y no tan adictos) al apasionante mundo de los datos.</description>
     </item>
     
   </channel>

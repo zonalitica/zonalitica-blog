@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title></title>
-    <link>/</link>
-    <description>Recent content on </description>
+    <title>Blogdown on </title>
+    <link>/categories/blogdown/</link>
+    <description>Recent content in Blogdown on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>es-es</language>
     <lastBuildDate>Fri, 30 Jun 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/categories/blogdown/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -20,17 +20,6 @@
       <description>Bienvenidos al relazamiento de Zonalítica!!!.
 Hace poco menos de 1 año lance este blog como una iniciativa en español para difundir información sobre Data Science, Big Data, Estadística y otros temas que mucho me apacionan! En ese momento pensé que Wordpress sería la mejor alternativa pero me equivoqué y me tomó algo de tiempo para corregir la situación.
 Pero ya estoy aquí con nueva plataforma y con muchas ganas de compartir valiosa información para los adictos (y no tan adictos) al apasionante mundo de los datos.</description>
-    </item>
-    
-    <item>
-      <title>Acerca de Zonalítica</title>
-      <link>/about/</link>
-      <pubDate>Wed, 28 Jun 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/about/</guid>
-      <description>Zonalítica es un blog en español encargado de difundir información actual y oportuna sobre Data Science, Big Data, Estadística, Open Data y data journalism entre otros tópicos de actualidad en el oceáno de datos en el que navegamos a diario con nuestros dispositivos móviles y ordenadores.
-El rango de temas que se abordan es muy amplio: desde lo super técnico (programación, machine learning y bigdata) hasta herramientas point-and-click.
-Quién soy?</description>
     </item>
     
   </channel>

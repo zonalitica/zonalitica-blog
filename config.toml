@@ -1,4 +1,4 @@
-baseurl = "/"
+baseurl =  "http://zonalitica.com/"
 languageCode = "es-es"
 DefaultContentLanguage = "es"
 theme = "hugo-fi-spanish"
@@ -9,7 +9,7 @@ googleAnalytics = "UA-66899932-1"
 
 [params]
     # Sets the meta tag description, usually reserved for the main page
-    description          = "Blog en Español especializado en Data Science, Estadística y Open Data"
+    description          = "Blog en Español especializado en Data Science, Big Data, Estadística y Open Data"
     # This will appear on the top left of the navigation bar
     navbarTitle          = "Zonalítica"
     # Social media buttons that appear on the sidebar
@@ -43,9 +43,9 @@ googleAnalytics = "UA-66899932-1"
 [params.intro]
     header    = "Zonalítica"
 
-    paragraph = "Blog en Español especializado en Data Science, Estadística y Open Data"
+    paragraph = "Blog en Español especializado en Data Science, Big Data, Estadística y Open Data"
 
-    acerca     = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent tellus lacus, auctor vehicula molestie quis, tempor quis velit. Quisque in quam ac leo efficitur vulputate. Phasellus ullamcorper aliquam sodales. Maecenas sit amet condimentum ipsum. Proin sit amet ligula elit. Mauris."
+    acerca     = "Zonalítica es un blog en español encargado de difundir información actual y oportuna sobre Data Science, Big Data, Estadística, Open Data y data journalism..."
 
 # This will also appear on the sidebar.
 # A width of less than 100px is recommended
