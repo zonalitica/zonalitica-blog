@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on </title>
-    <link>/post/</link>
-    <description>Recent content in Posts on </description>
+    <title>Open data on </title>
+    <link>/categories/open-data/</link>
+    <description>Recent content in Open data on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>es-es</language>
     <lastBuildDate>Sat, 01 Jul 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/categories/open-data/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -20,17 +20,6 @@
       <description>Existen cientos (sino miles) de archivos de datos libres disponible en la red esperando a ser de alguna utilidad para aquellos con la voluntad de buscarlos y usarlos. La variedad de temas y formato de datos es inmensa!!!
 Está lista de fuentes datos libres es una compilación de enlaces que he recolectado a través del tiempo - no es exhaustiva y definitivamente es un trabajo en progreso&amp;hellip;
 Les recomiendo guardar está página en sus favoritos ya que la estaré actualizando constantemente con nuevas fuentes de datos libre.</description>
-    </item>
-    
-    <item>
-      <title>Bienvenidos (Otra vez!!!)</title>
-      <link>/post/bienvenidos/</link>
-      <pubDate>Fri, 30 Jun 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/post/bienvenidos/</guid>
-      <description>Bienvenidos al relazamiento de Zonalítica!!!.
-Hace poco menos de 1 año lance este blog como una iniciativa en español para difundir información sobre Data Science, Big Data, Estadística y otros temas que mucho me apacionan! En ese momento pensé que Wordpress sería la mejor alternativa pero me equivoqué y me tomó algo de tiempo para corregir la situación.
-Pero ya estoy aquí con nueva plataforma y con muchas ganas de compartir valiosa información para los adictos (y no tan adictos) al apasionante mundo de los datos.</description>
     </item>
     
   </channel>

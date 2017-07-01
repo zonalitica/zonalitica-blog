@@ -6,10 +6,21 @@
     <description>Recent content on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>es-es</language>
-    <lastBuildDate>Fri, 30 Jun 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 01 Jul 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Enlaces a fuentes de Datos Libres</title>
+      <link>/post/fuentes-de-datos-libres/</link>
+      <pubDate>Sat, 01 Jul 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/fuentes-de-datos-libres/</guid>
+      <description>Existen cientos (sino miles) de archivos de datos libres disponible en la red esperando a ser de alguna utilidad para aquellos con la voluntad de buscarlos y usarlos. La variedad de temas y formato de datos es inmensa!!!
+Está lista de fuentes datos libres es una compilación de enlaces que he recolectado a través del tiempo - no es exhaustiva y definitivamente es un trabajo en progreso&amp;hellip;
+Les recomiendo guardar está página en sus favoritos ya que la estaré actualizando constantemente con nuevas fuentes de datos libre.</description>
+    </item>
     
     <item>
       <title>Bienvenidos (Otra vez!!!)</title>
