@@ -6,10 +6,20 @@
     <description>Recent content in Herramientas on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>es-es</language>
-    <lastBuildDate>Fri, 30 Jun 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 04 Jul 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/herramientas/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Tabula - Herramienta Open Source para extraer tablas de archivos PDF</title>
+      <link>/post/tabula-extraer-tablas-de-archivos-pdf/</link>
+      <pubDate>Tue, 04 Jul 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/tabula-extraer-tablas-de-archivos-pdf/</guid>
+      <description>Para aquellos que han tenido la tarea de extraer información de archivos de PDF, saben perfectamente lo díficil e inhumano que esta labor significa. Es más, esto debería estar tipificado como un crimen de lesa humanidad.
+Es casi imposible conseguir un resultado positivo y satisfactorio y digo casi porque aún estoy a la espera de ese caso positivo. Copiar y pegar te devuelve una bofetada con una manopla de hierro directamente a la mandíbula y generalmente transcribir la información a mano es la única opción viable.</description>
+    </item>
     
     <item>
       <title>Bienvenidos (Otra vez!!!)</title>
