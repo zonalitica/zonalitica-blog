@@ -23,7 +23,7 @@
     <item>
       <title>Herramientas</title>
       <link>/categories/herramientas/</link>
-      <pubDate>Tue, 04 Jul 2017 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 12 Jul 2017 00:00:00 +0000</pubDate>
       
       <guid>/categories/herramientas/</guid>
       <description></description>
@@ -35,6 +35,24 @@
       <pubDate>Sat, 01 Jul 2017 00:00:00 +0000</pubDate>
       
       <guid>/categories/open-data/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Python</title>
+      <link>/categories/python/</link>
+      <pubDate>Wed, 12 Jul 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>R</title>
+      <link>/categories/r/</link>
+      <pubDate>Wed, 12 Jul 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/r/</guid>
       <description></description>
     </item>
     

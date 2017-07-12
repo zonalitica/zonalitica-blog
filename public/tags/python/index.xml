@@ -6,10 +6,19 @@
     <description>Recent content in Python on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>es-es</language>
-    <lastBuildDate>Fri, 30 Jun 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 12 Jul 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/python/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>3 Métodos para generar datos falsos o de prueba</title>
+      <link>/post/generar-datos-falsos-o-de-prueba/</link>
+      <pubDate>Wed, 12 Jul 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/generar-datos-falsos-o-de-prueba/</guid>
+      <description>Cuando se esta desarrollando una aplicación, hay asegurarse de probarla bajo condiciones que simulan de cerca un entorno de producción. Ya sea que estas desarrollando una interfaz de usuario o un modelo predictivo si introduces datos manualmente en tu entorno de prueba de un registro a la vez o creando unos algunos casos ficticios en Excel, nunca vas a acumular el volumen y la variedad de datos que tu aplicación acumulará en unos pocos días en producción.</description>
+    </item>
     
     <item>
       <title>Bienvenidos (Otra vez!!!)</title>
