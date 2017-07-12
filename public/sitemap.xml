@@ -8,6 +8,11 @@
   </url>
   
   <url>
+    <loc>/post/introduccion-visual-a-probabilidad-y-estadistica/</loc>
+    <lastmod>2017-07-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/post/tabula-extraer-tablas-de-archivos-pdf/</loc>
     <lastmod>2017-07-04T00:00:00+00:00</lastmod>
   </url>
@@ -53,7 +58,7 @@
   
   <url>
     <loc>/tags/herramientas/</loc>
-    <lastmod>2017-07-04T00:00:00+00:00</lastmod>
+    <lastmod>2017-07-12T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -102,6 +107,12 @@
   <url>
     <loc>/tags/sas/</loc>
     <lastmod>2017-06-30T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/categories/stats/</loc>
+    <lastmod>2017-07-12T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
