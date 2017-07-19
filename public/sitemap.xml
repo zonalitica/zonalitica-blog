@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/post/instalar-rjava-en-mac-osx/</loc>
+    <lastmod>2017-07-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/post/generar-datos-falsos-o-de-prueba/</loc>
     <lastmod>2017-07-12T00:00:00+00:00</lastmod>
   </url>
@@ -34,7 +39,7 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2017-07-12T00:00:00+00:00</lastmod>
+    <lastmod>2017-07-19T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -69,14 +74,26 @@
   </url>
   
   <url>
+    <loc>/tags/java/</loc>
+    <lastmod>2017-07-19T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/categories/open-data/</loc>
     <lastmod>2017-07-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
+    <loc>/tags/osx/</loc>
+    <lastmod>2017-07-19T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/post/</loc>
-    <lastmod>2017-07-12T00:00:00+00:00</lastmod>
+    <lastmod>2017-07-19T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -94,7 +111,7 @@
   
   <url>
     <loc>/tags/r/</loc>
-    <lastmod>2017-07-12T00:00:00+00:00</lastmod>
+    <lastmod>2017-07-19T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -119,6 +136,12 @@
   <url>
     <loc>/tags/</loc>
     <lastmod>2017-07-04T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/categories/tips/</loc>
+    <lastmod>2017-07-19T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

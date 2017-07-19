@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tips on </title>
+    <link>/categories/tips/</link>
+    <description>Recent content in Tips on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>es-es</language>
+    <lastBuildDate>Wed, 19 Jul 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/tips/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Instalar rJava en Mac OSX</title>
+      <link>/post/instalar-rjava-en-mac-osx/</link>
+      <pubDate>Wed, 19 Jul 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/instalar-rjava-en-mac-osx/</guid>
+      <description>Esta es una receta para instalar correctamente el paquete rJava en Mac
+El Error Error producido al intentar cargar rJava en Rstudio.
+library(rJava) Error : .onLoad failed in loadNamespace() for &amp;#39;rJava&amp;#39;, details: call: dyn.load(file, DLLpath = DLLpath, ...) error: unable to load shared object &amp;#39;/Library/Frameworks/R.framework/Versions/3.2/Resources/library/rJava/libs/rJava.so&amp;#39;: dlopen(/Library/Frameworks/R.framework/Versions/3.2/Resources/library/rJava/libs/rJava.so, 6): Library not loaded: @rpath/libjvm.dylib Referenced from: /Library/Frameworks/R.framework/Versions/3.2/Resources/library/rJava/libs/rJava.so Reason: image not found Error: package or namespace load failed for ‘rJava’  La Receta  Instalar howebrew (si aún no lo han instalado)  /usr/bin/ruby -e &amp;quot;$(curl -fsSL https://raw.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,114 @@
+---
+title: Instalar rJava en Mac OSX
+author: Alberto Negron
+date: '2017-07-19'
+slug: instalar-rjava-en-mac-osx
+categories:
+  - tips
+tags:
+  - R
+  - java
+  - osx
+description: ''
+featured: ''
+featuredalt: ''
+featuredpath: ''
+linktitle: ''
+---
+
+Esta es una receta para instalar correctamente el paquete `rJava` en Mac
+
+El Error
+-
+
+Error producido al intentar cargar `rJava` en Rstudio.
+
+```{r, eval = FALSE}
+library(rJava)
+Error : .onLoad failed in loadNamespace() for 'rJava', details:
+  call: dyn.load(file, DLLpath = DLLpath, ...)
+  error: unable to load shared object '/Library/Frameworks/R.framework/Versions/3.2/Resources/library/rJava/libs/rJava.so':
+  dlopen(/Library/Frameworks/R.framework/Versions/3.2/Resources/library/rJava/libs/rJava.so, 6): Library not loaded: @rpath/libjvm.dylib
+  Referenced from: /Library/Frameworks/R.framework/Versions/3.2/Resources/library/rJava/libs/rJava.so
+  Reason: image not found
+Error: package or namespace load failed for ‘rJava’
+```
+
+La Receta
+-
+
+- Instalar `howebrew` *(si aún no lo han instalado)*
+
+```{r, engine = 'bash', eval = FALSE}
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+```
+
+- Actualizar `homebrew` e instalar `java`
+
+```{r, engine = 'bash', eval = FALSE}
+$ brew update
+$ brew cask install java
+```
+
+- Una vez instalado `java` validamos:
+
+La versión `java` esta correctamente instalada:
+
+```{r, engine = 'bash', eval = FALSE}
+$ java -version
+java version "1.8.0_51"
+Java(TM) SE Runtime Environment (build 1.8.0_51-b16)
+Java HotSpot(TM) 64-Bit Server VM (build 25.51-b03, mixed mode)
+```
+
+y actualizamos la configuración de `R`:
+
+```{r, engine = 'bash', eval = FALSE}
+$ sudo R CMD javareconf -n
+Password:
+Java interpreter : /usr/bin/java
+Java version     : 1.8.0_51
+Java home path   : /Library/Java/JavaVirtualMachines/jdk1.8.0_51.jdk/Contents/Home/jre
+Java compiler    : /usr/bin/javac
+Java headers gen.: /usr/bin/javah
+Java archive tool: /usr/bin/jar
+Non-system Java on macOS
+
+trying to compile and link a JNI program
+detected JNI cpp flags    : -I$(JAVA_HOME)/../include -I$(JAVA_HOME)/../include/darwin
+detected JNI linker flags : -L$(JAVA_HOME)/lib/server -ljvm
+clang -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG -I/Library/Java/JavaVirtualMachines/jdk1.8.0_51.jdk/Contents/Home/jre/../include -I/Library/Java/JavaVirtualMachines/jdk1.8.0_51.jdk/Contents/Home/jre/../include/darwin  -I/usr/local/include   -fPIC  -Wall -g -O2  -c conftest.c -o conftest.o
+clang -dynamiclib -Wl,-headerpad_max_install_names -undefined dynamic_lookup -single_module -multiply_defined suppress -L/Library/Frameworks/R.framework/Resources/lib -L/usr/local/lib -o conftest.so conftest.o -L/Library/Java/JavaVirtualMachines/jdk1.8.0_51.jdk/Contents/Home/jre/lib/server -ljvm -F/Library/Frameworks/R.framework/.. -framework R -Wl,-framework -Wl,CoreFoundation
+
+
+JAVA_HOME        : /Library/Java/JavaVirtualMachines/jdk1.8.0_51.jdk/Contents/Home/jre
+Java library path: $(JAVA_HOME)/lib/server
+JNI cpp flags    : -I$(JAVA_HOME)/../include -I$(JAVA_HOME)/../include/darwin
+JNI linker flags : -L$(JAVA_HOME)/lib/server -ljvm
+```
+
+
+Si están utilizando otro IDE que no sea Rstudio entonces la receta termina aquí. De lo contrario queda un paso más.
+
+- El paso final es linkear unas librerias en `/usr/local/lib` para que Rstudio tenga el acceso correcto.
+
+```{r, engine = 'bash', eval = FALSE}
+$ sudo ln -f -s $(/usr/libexec/java_home)/jre/lib/server/libjvm.dylib /usr/local/lib
+```
+
+ya con este último paso pueden cargar `rjava` sin problemas!!!
+
+```{r,echo=FALSE}
+# need it for loading rjava correctly from knit perspective
+dyn.load('/Library/Java/JavaVirtualMachines/jdk1.8.0_51.jdk/Contents/Home/jre/lib/server/libjvm.dylib')
+```
+
+```{r}
+library(rJava)
+```
+
+
+```{r}
+sessionInfo()
+```
+
