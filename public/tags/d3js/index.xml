@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>D3js on </title>
+    <link>/tags/d3js/</link>
+    <description>Recent content in D3js on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>es-es</language>
+    <lastBuildDate>Wed, 26 Jul 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/d3js/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Explicación interactiva sobre Histogramas</title>
+      <link>/post/explicacion-interactiva-sobre-histogramas/</link>
+      <pubDate>Wed, 26 Jul 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/explicacion-interactiva-sobre-histogramas/</guid>
+      <description>Los histogramas son una forma de resumir una variable numérica. Utilizan conteos para agregar valores similares y muestran la distribución general. Sin embargo, pueden ser sensibles a las opciones de parámetros (por lo general sólo se usan las opciones por defecto).
+Aran Lunzer y Amelia McNamara han creado una explicación detallada e interactiva de como construir un histograma y como las opciones que seleccionamos (nro de bins, width y offset) pueden afectar.</description>
+    </item>
+    
+  </channel>
+</rss>
