@@ -1,0 +1,1381 @@
+---
+title: Galería ggvis - Parte 1
+author: Alberto Negron
+date: '2017-08-01'
+slug: ggvis-galeria-parte-1
+categories:
+  - R
+tags:
+  - R
+  - gráficos
+  - ggvis
+description: ''
+featured: ''
+featuredalt: ''
+featuredpath: ''
+linktitle: ''
+---
+
+<script src="/rmarkdown-libs/jquery/jquery.min.js"></script>
+<script src="/rmarkdown-libs/detect-resize/jquery.resize.js"></script>
+<link href="/rmarkdown-libs/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/jquery-ui/jquery-ui.min.js"></script>
+<script src="/rmarkdown-libs/d3/d3.min.js"></script>
+<script src="/rmarkdown-libs/vega/vega.min.js"></script>
+<script src="/rmarkdown-libs/lodash/lodash.min.js"></script>
+<script>var lodash = _.noConflict();</script>
+<link href="/rmarkdown-libs/ggvis/css/ggvis.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/ggvis/js/ggvis.js"></script>
+
+
+<p>Esta galería es un recordatorio para mí de como crear ciertos gráficos complejos con <code>ggvis</code> y tomé la oportunidad de compartirlo con ustedes. Espero que los ejemplos sean de valor y les den ideas de como construir gráficos más complejos.</p>
+<p>Dejen sus comentarios al final de la entrada.</p>
+<pre class="r"><code>library(dplyr)
+library(ggvis)</code></pre>
+<div id="timelines" class="section level2">
+<h2>Timelines</h2>
+<pre class="r"><code>ppl &lt;- read.csv(textConnection(&quot;Napoleon Bonaparte,1769,1821
+                               Simón Bolívar,1783,1830&quot;),
+                header = F,stringsAsFactors = F,col.names =c(&quot;name&quot;,&quot;born&quot;,&quot;died&quot;) )</code></pre>
+<pre class="r"><code>ppl %&gt;% ggvis(.,y=~name) %&gt;% 
+        layer_rects(x=~born,x2=~died,height:=1) %&gt;% 
+        layer_points(x=~born) %&gt;% 
+        layer_points(x=~died,fill:=&quot;red&quot;,stroke:=&quot;black&quot;) %&gt;% 
+   add_axis(&quot;x&quot;,grid = F, title=&quot;Born/Die&quot;, format = &quot;d&quot;)</code></pre>
+<div id="plot_id908945541-container" class="ggvis-output-container">
+<div id="plot_id908945541" class="ggvis-output"></div>
+<div class="plot-gear-icon">
+<nav class="ggvis-control">
+<a class="ggvis-dropdown-toggle" title="Controls" onclick="return false;"></a>
+<ul class="ggvis-dropdown">
+<li>
+Renderer: 
+<a id="plot_id908945541_renderer_svg" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id908945541" data-renderer="svg">SVG</a>
+ | 
+<a id="plot_id908945541_renderer_canvas" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id908945541" data-renderer="canvas">Canvas</a>
+</li>
+<li>
+<a id="plot_id908945541_download" class="ggvis-download" data-plot-id="plot_id908945541">Download</a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+<script type="text/javascript">
+var plot_id908945541_spec = {
+  "data": [
+    {
+      "name": ".0",
+      "format": {
+        "type": "csv",
+        "parse": {
+          "born": "number",
+          "died": "number"
+        }
+      },
+      "values": "\"name\",\"born\",\"died\"\n\"Napoleon Bonaparte\",1769,1821\n\"                               Simón Bolívar\",1783,1830"
+    },
+    {
+      "name": "scale/x",
+      "format": {
+        "type": "csv",
+        "parse": {
+          "domain": "number"
+        }
+      },
+      "values": "\"domain\"\n1765.95\n1833.05"
+    },
+    {
+      "name": "scale/y",
+      "format": {
+        "type": "csv",
+        "parse": {}
+      },
+      "values": "\"domain\"\n\"Napoleon Bonaparte\"\n\"                               Simón Bolívar\""
+    }
+  ],
+  "scales": [
+    {
+      "name": "x",
+      "domain": {
+        "data": "scale/x",
+        "field": "data.domain"
+      },
+      "zero": false,
+      "nice": false,
+      "clamp": false,
+      "range": "width"
+    },
+    {
+      "name": "y",
+      "type": "ordinal",
+      "domain": {
+        "data": "scale/y",
+        "field": "data.domain"
+      },
+      "points": true,
+      "sort": false,
+      "range": "height",
+      "padding": 0.5
+    }
+  ],
+  "marks": [
+    {
+      "type": "rect",
+      "properties": {
+        "update": {
+          "stroke": {
+            "value": "#000000"
+          },
+          "fill": {
+            "value": "#333333"
+          },
+          "y": {
+            "scale": "y",
+            "field": "data.name"
+          },
+          "x": {
+            "scale": "x",
+            "field": "data.born"
+          },
+          "x2": {
+            "scale": "x",
+            "field": "data.died"
+          },
+          "height": {
+            "value": 1
+          }
+        },
+        "ggvis": {
+          "data": {
+            "value": ".0"
+          }
+        }
+      },
+      "from": {
+        "data": ".0"
+      }
+    },
+    {
+      "type": "symbol",
+      "properties": {
+        "update": {
+          "fill": {
+            "value": "#000000"
+          },
+          "size": {
+            "value": 50
+          },
+          "y": {
+            "scale": "y",
+            "field": "data.name"
+          },
+          "x": {
+            "scale": "x",
+            "field": "data.born"
+          }
+        },
+        "ggvis": {
+          "data": {
+            "value": ".0"
+          }
+        }
+      },
+      "from": {
+        "data": ".0"
+      }
+    },
+    {
+      "type": "symbol",
+      "properties": {
+        "update": {
+          "size": {
+            "value": 50
+          },
+          "y": {
+            "scale": "y",
+            "field": "data.name"
+          },
+          "x": {
+            "scale": "x",
+            "field": "data.died"
+          },
+          "fill": {
+            "value": "red"
+          },
+          "stroke": {
+            "value": "black"
+          }
+        },
+        "ggvis": {
+          "data": {
+            "value": ".0"
+          }
+        }
+      },
+      "from": {
+        "data": ".0"
+      }
+    }
+  ],
+  "legends": [],
+  "axes": [
+    {
+      "type": "x",
+      "scale": "x",
+      "orient": "bottom",
+      "title": "Born/Die",
+      "format": "d",
+      "layer": "back",
+      "grid": false
+    },
+    {
+      "type": "y",
+      "scale": "y",
+      "orient": "left",
+      "layer": "back",
+      "grid": true,
+      "title": "name"
+    }
+  ],
+  "padding": null,
+  "ggvis_opts": {
+    "keep_aspect": false,
+    "resizable": true,
+    "padding": {},
+    "duration": 250,
+    "renderer": "svg",
+    "hover_duration": 0,
+    "width": 672,
+    "height": 480
+  },
+  "handlers": null
+};
+ggvis.getPlot("plot_id908945541").parseSpec(plot_id908945541_spec);
+</script>
+</div>
+<div id="falkensee" class="section level2">
+<h2>Falkensee</h2>
+<pre class="r"><code>data &lt;- read.csv(textConnection(&quot;1875,1309
+                                  1890,1558
+                                  1910,4512
+                                  1925,8180
+                                  1933,15915
+                                  1939,24824
+                                  1946,28275
+                                  1950,29189
+                                  1964,29881
+                                  1971,26007
+                                  1981,24029
+                                  1985,23340
+                                  1989,22307
+                                  1990,22087
+                                  1991,22139
+                                  1992,22105
+                                  1993,22242
+                                  1994,22801
+                                  1995,24273
+                                  1996,25640
+                                  1997,27393
+                                  1998,29505
+                                  1999,32124
+                                  2000,33791
+                                  2001,35297
+                                  2002,36179
+                                  2003,36829
+                                  2004,37493
+                                  2005,38376
+                                  2006,39008
+                                  2007,39366
+                                  2008,39821
+                                  2009,40179
+                                  2010,40511
+                                  2011,40465
+                                  2012,40905
+                                  2013,41258
+                                  2014,41777&quot;
+                                ),
+                 header=F,col.names=c(&quot;year&quot;,&quot;pop&quot;)) 
+  annotation &lt;- read.csv(textConnection(&quot;1933,1945,0,Nazi Rule,#CBCBCB
+                               1948,1989,0,GDR (East Germany),#FFCBCB&quot;),header=F,col.names=c(&#39;x1&#39;,&#39;x2&#39;,&#39;y1&#39;,&#39;desc&#39;,&#39;color&#39;),stringsAsFactors=F)
+  annotation$y2 &lt;- max(data$pop)</code></pre>
+<pre class="r"><code> data %&gt;% ggvis(x=~year,y=~pop) %&gt;%  
+        layer_rects(data=group_by(annotation,desc),
+                        x=~x1,x2=~x2,y=~y1,y2=~y2,
+                        fill=~desc,
+                        fillOpacity:=0.5, strokeOpacity:=0.5,strokeWidth:=0) %&gt;% 
+        scale_nominal(&quot;fill&quot;,range=c(&quot;#CBCBCB&quot;,&quot;#FFCBCB&quot;)) %&gt;%
+        layer_lines(stroke := &quot;#4682B4&quot;, strokeWidth := 4) %&gt;% 
+        layer_points(stroke := &quot;#4682B4&quot;, fill := &quot;white&quot;) %&gt;%
+        add_relative_scales() %&gt;%
+        add_legend(&quot;fill&quot;,
+                    title=&quot;Period&quot;,
+                    properties = legend_props(
+                                              legend = list(x = scaled_value(&quot;x_rel&quot;, 0.1),
+                                                            y = scaled_value(&quot;y_rel&quot;,0.9)
+                                                           ),
+                                              symbols=list(shape=&quot;square&quot;)
+                                                )
+                      ) %&gt;% 
+        add_axis(&quot;x&quot;,grid = F, title=&quot;Year&quot;, values = seq(1880,2010,10), format = &quot;d&quot;,
+           properties = axis_props(labels = list(fontSize=12), title = list(fontSize=16) )) %&gt;% 
+        add_axis(&quot;y&quot;,title=&quot;Population&quot;,title_offset=60,properties = axis_props(labels = list(fontSize=12), 
+                                                                          title = list(fontSize=16) ))%&gt;% 
+        add_axis(&quot;x&quot;, orient = &quot;top&quot;, ticks = 0, title = &quot;Population of Falkensee from 1875 to 2014 &quot;,
+             properties = axis_props( axis = list(stroke = &quot;white&quot;), labels = list(fontSize = 0),
+                                      title = list(fontSize=20)))</code></pre>
+<div id="plot_id923690314-container" class="ggvis-output-container">
+<div id="plot_id923690314" class="ggvis-output"></div>
+<div class="plot-gear-icon">
+<nav class="ggvis-control">
+<a class="ggvis-dropdown-toggle" title="Controls" onclick="return false;"></a>
+<ul class="ggvis-dropdown">
+<li>
+Renderer: 
+<a id="plot_id923690314_renderer_svg" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id923690314" data-renderer="svg">SVG</a>
+ | 
+<a id="plot_id923690314_renderer_canvas" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id923690314" data-renderer="canvas">Canvas</a>
+</li>
+<li>
+<a id="plot_id923690314_download" class="ggvis-download" data-plot-id="plot_id923690314">Download</a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+<script type="text/javascript">
+var plot_id923690314_spec = {
+  "data": [
+    {
+      "name": ".0",
+      "format": {
+        "type": "csv",
+        "parse": {
+          "year": "number",
+          "pop": "number"
+        }
+      },
+      "values": "\"year\",\"pop\"\n1875,1309\n1890,1558\n1910,4512\n1925,8180\n1933,15915\n1939,24824\n1946,28275\n1950,29189\n1964,29881\n1971,26007\n1981,24029\n1985,23340\n1989,22307\n1990,22087\n1991,22139\n1992,22105\n1993,22242\n1994,22801\n1995,24273\n1996,25640\n1997,27393\n1998,29505\n1999,32124\n2000,33791\n2001,35297\n2002,36179\n2003,36829\n2004,37493\n2005,38376\n2006,39008\n2007,39366\n2008,39821\n2009,40179\n2010,40511\n2011,40465\n2012,40905\n2013,41258\n2014,41777"
+    },
+    {
+      "name": ".0/arrange2",
+      "format": {
+        "type": "csv",
+        "parse": {
+          "year": "number",
+          "pop": "number"
+        }
+      },
+      "values": "\"year\",\"pop\"\n1875,1309\n1890,1558\n1910,4512\n1925,8180\n1933,15915\n1939,24824\n1946,28275\n1950,29189\n1964,29881\n1971,26007\n1981,24029\n1985,23340\n1989,22307\n1990,22087\n1991,22139\n1992,22105\n1993,22242\n1994,22801\n1995,24273\n1996,25640\n1997,27393\n1998,29505\n1999,32124\n2000,33791\n2001,35297\n2002,36179\n2003,36829\n2004,37493\n2005,38376\n2006,39008\n2007,39366\n2008,39821\n2009,40179\n2010,40511\n2011,40465\n2012,40905\n2013,41258\n2014,41777"
+    },
+    {
+      "name": "group_by(annotation, desc)1_flat",
+      "format": {
+        "type": "csv",
+        "parse": {
+          "x1": "number",
+          "x2": "number",
+          "y1": "number",
+          "y2": "number"
+        }
+      },
+      "values": "\"x1\",\"x2\",\"y1\",\"y2\",\"desc\"\n1948,1989,0,41777,\"GDR (East Germany)\"\n1933,1945,0,41777,\"Nazi Rule\""
+    },
+    {
+      "name": "group_by(annotation, desc)1",
+      "source": "group_by(annotation, desc)1_flat",
+      "transform": [
+        {
+          "type": "treefacet",
+          "keys": [
+            "data.desc"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "scale/fill",
+      "format": {
+        "type": "csv",
+        "parse": {}
+      },
+      "values": "\"domain\"\n\"Nazi Rule\"\n\"GDR (East Germany)\""
+    },
+    {
+      "name": "scale/x",
+      "format": {
+        "type": "csv",
+        "parse": {
+          "domain": "number"
+        }
+      },
+      "values": "\"domain\"\n1868.05\n2020.95"
+    },
+    {
+      "name": "scale/x_rel",
+      "format": {
+        "type": "csv",
+        "parse": {
+          "domain": "number"
+        }
+      },
+      "values": "\"domain\"\n0\n1"
+    },
+    {
+      "name": "scale/y",
+      "format": {
+        "type": "csv",
+        "parse": {
+          "domain": "number"
+        }
+      },
+      "values": "\"domain\"\n-2088.85\n43865.85"
+    },
+    {
+      "name": "scale/y_rel",
+      "format": {
+        "type": "csv",
+        "parse": {
+          "domain": "number"
+        }
+      },
+      "values": "\"domain\"\n0\n1"
+    }
+  ],
+  "scales": [
+    {
+      "domain": {
+        "data": "scale/fill",
+        "field": "data.domain"
+      },
+      "name": "fill",
+      "type": "ordinal",
+      "range": ["#CBCBCB", "#FFCBCB"],
+      "points": true,
+      "sort": false
+    },
+    {
+      "name": "x",
+      "domain": {
+        "data": "scale/x",
+        "field": "data.domain"
+      },
+      "zero": false,
+      "nice": false,
+      "clamp": false,
+      "range": "width"
+    },
+    {
+      "name": "x_rel",
+      "domain": {
+        "data": "scale/x_rel",
+        "field": "data.domain"
+      },
+      "range": "width",
+      "zero": false,
+      "nice": false,
+      "clamp": false
+    },
+    {
+      "name": "y",
+      "domain": {
+        "data": "scale/y",
+        "field": "data.domain"
+      },
+      "zero": false,
+      "nice": false,
+      "clamp": false,
+      "range": "height"
+    },
+    {
+      "name": "y_rel",
+      "domain": {
+        "data": "scale/y_rel",
+        "field": "data.domain"
+      },
+      "range": "height",
+      "zero": false,
+      "nice": false,
+      "clamp": false
+    }
+  ],
+  "marks": [
+    {
+      "type": "group",
+      "from": {
+        "data": "group_by(annotation, desc)1"
+      },
+      "marks": [
+        {
+          "type": "rect",
+          "properties": {
+            "update": {
+              "stroke": {
+                "value": "#000000"
+              },
+              "x": {
+                "scale": "x",
+                "field": "data.x1"
+              },
+              "x2": {
+                "scale": "x",
+                "field": "data.x2"
+              },
+              "y": {
+                "scale": "y",
+                "field": "data.y1"
+              },
+              "y2": {
+                "scale": "y",
+                "field": "data.y2"
+              },
+              "fill": {
+                "scale": "fill",
+                "field": "data.desc"
+              },
+              "fillOpacity": {
+                "value": 0.5
+              },
+              "strokeOpacity": {
+                "value": 0.5
+              },
+              "strokeWidth": {
+                "value": 0
+              }
+            },
+            "ggvis": {
+              "data": {
+                "value": "group_by(annotation, desc)1"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "line",
+      "properties": {
+        "update": {
+          "x": {
+            "scale": "x",
+            "field": "data.year"
+          },
+          "y": {
+            "scale": "y",
+            "field": "data.pop"
+          },
+          "stroke": {
+            "value": "#4682B4"
+          },
+          "strokeWidth": {
+            "value": 4
+          }
+        },
+        "ggvis": {
+          "data": {
+            "value": ".0/arrange2"
+          }
+        }
+      },
+      "from": {
+        "data": ".0/arrange2"
+      }
+    },
+    {
+      "type": "symbol",
+      "properties": {
+        "update": {
+          "size": {
+            "value": 50
+          },
+          "x": {
+            "scale": "x",
+            "field": "data.year"
+          },
+          "y": {
+            "scale": "y",
+            "field": "data.pop"
+          },
+          "stroke": {
+            "value": "#4682B4"
+          },
+          "fill": {
+            "value": "white"
+          }
+        },
+        "ggvis": {
+          "data": {
+            "value": ".0"
+          }
+        }
+      },
+      "from": {
+        "data": ".0"
+      }
+    }
+  ],
+  "legends": [
+    {
+      "orient": "right",
+      "title": "Period",
+      "properties": {
+        "symbols": {
+          "shape": {
+            "value": "square"
+          }
+        },
+        "legend": {
+          "x": {
+            "scale": "x_rel",
+            "value": 0.1
+          },
+          "y": {
+            "scale": "y_rel",
+            "value": 0.9
+          }
+        }
+      },
+      "fill": "fill"
+    }
+  ],
+  "axes": [
+    {
+      "type": "x",
+      "scale": "x",
+      "orient": "bottom",
+      "title": "Year",
+      "format": "d",
+      "values": [1880, 1890, 1900, 1910, 1920, 1930, 1940, 1950, 1960, 1970, 1980, 1990, 2000, 2010],
+      "layer": "back",
+      "grid": false,
+      "properties": {
+        "labels": {
+          "fontSize": {
+            "value": 12
+          }
+        },
+        "title": {
+          "fontSize": {
+            "value": 16
+          }
+        }
+      }
+    },
+    {
+      "type": "y",
+      "scale": "y",
+      "orient": "left",
+      "title": "Population",
+      "titleOffset": 60,
+      "layer": "back",
+      "grid": true,
+      "properties": {
+        "labels": {
+          "fontSize": {
+            "value": 12
+          }
+        },
+        "title": {
+          "fontSize": {
+            "value": 16
+          }
+        }
+      }
+    },
+    {
+      "type": "x",
+      "scale": "x",
+      "orient": "top",
+      "title": "Population of Falkensee from 1875 to 2014 ",
+      "ticks": 0,
+      "layer": "back",
+      "grid": true,
+      "properties": {
+        "labels": {
+          "fontSize": {
+            "value": 0
+          }
+        },
+        "title": {
+          "fontSize": {
+            "value": 20
+          }
+        },
+        "axis": {
+          "stroke": {
+            "value": "white"
+          }
+        }
+      }
+    }
+  ],
+  "padding": null,
+  "ggvis_opts": {
+    "keep_aspect": false,
+    "resizable": true,
+    "padding": {},
+    "duration": 250,
+    "renderer": "svg",
+    "hover_duration": 0,
+    "width": 672,
+    "height": 480
+  },
+  "handlers": null
+};
+ggvis.getPlot("plot_id923690314").parseSpec(plot_id923690314_spec);
+</script>
+</div>
+<div id="airpassengers" class="section level2">
+<h2>AirPassengers</h2>
+<pre class="r"><code>AirPassengers2 &lt;- as.data.frame(AirPassengers) %&gt;% 
+                 mutate(year=seq(as.Date(&quot;1949-01-01&quot;),as.Date(&quot;1960-12-31&quot;), by=&quot;1 month&quot;)) %&gt;% 
+                 select(year,passangers=x)</code></pre>
+<pre class="r"><code>AirPassengers2 %&gt;% ggvis(~year,~passangers) %&gt;% layer_lines(stroke:=&quot;darkred&quot;,strokeWidth:=2) %&gt;% 
+                  layer_smooths(stroke:=&quot;#67a9cf&quot;,se=T,span=0.75,fill:=&quot;grey96&quot;) %&gt;% 
+                  add_axis(&quot;x&quot;,grid=F,title=&quot;&quot;) %&gt;% 
+                  add_axis(&quot;y&quot;,grid=F,title=&quot;Monthly Passanger Numbers&quot;)</code></pre>
+<div id="plot_id669813731-container" class="ggvis-output-container">
+<div id="plot_id669813731" class="ggvis-output"></div>
+<div class="plot-gear-icon">
+<nav class="ggvis-control">
+<a class="ggvis-dropdown-toggle" title="Controls" onclick="return false;"></a>
+<ul class="ggvis-dropdown">
+<li>
+Renderer: 
+<a id="plot_id669813731_renderer_svg" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id669813731" data-renderer="svg">SVG</a>
+ | 
+<a id="plot_id669813731_renderer_canvas" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id669813731" data-renderer="canvas">Canvas</a>
+</li>
+<li>
+<a id="plot_id669813731_download" class="ggvis-download" data-plot-id="plot_id669813731">Download</a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+<script type="text/javascript">
+var plot_id669813731_spec = {
+  "data": [
+    {
+      "name": ".0/arrange1",
+      "format": {
+        "type": "csv",
+        "parse": {
+          "year": "number",
+          "passangers": "number"
+        }
+      },
+      "values": "\"year\",\"passangers\"\n-6.62688e+11,112\n-660009600000,118\n-657590400000,132\n-6.54912e+11,129\n-6.5232e+11,121\n-649641600000,135\n-647049600000,148\n-644371200000,148\n-641692800000,136\n-639100800000,119\n-636422400000,104\n-633830400000,118\n-6.31152e+11,115\n-628473600000,126\n-626054400000,141\n-6.23376e+11,135\n-6.20784e+11,125\n-618105600000,149\n-615513600000,170\n-612835200000,170\n-610156800000,158\n-607564800000,133\n-604886400000,114\n-602294400000,140\n-5.99616e+11,145\n-596937600000,150\n-594518400000,178\n-5.9184e+11,163\n-5.89248e+11,172\n-586569600000,178\n-583977600000,199\n-581299200000,199\n-578620800000,184\n-576028800000,162\n-573350400000,146\n-570758400000,166\n-5.6808e+11,171\n-565401600000,180\n-5.62896e+11,193\n-560217600000,181\n-557625600000,183\n-554947200000,218\n-552355200000,230\n-549676800000,242\n-546998400000,209\n-544406400000,191\n-5.41728e+11,172\n-5.39136e+11,194\n-536457600000,196\n-533779200000,196\n-5.3136e+11,236\n-528681600000,235\n-526089600000,229\n-523411200000,243\n-520819200000,264\n-518140800000,272\n-515462400000,237\n-512870400000,211\n-5.10192e+11,180\n-5.076e+11,201\n-504921600000,204\n-502243200000,188\n-4.99824e+11,235\n-497145600000,227\n-494553600000,234\n-491875200000,264\n-489283200000,302\n-486604800000,293\n-483926400000,259\n-481334400000,229\n-4.78656e+11,203\n-4.76064e+11,229\n-473385600000,242\n-470707200000,233\n-4.68288e+11,267\n-465609600000,269\n-463017600000,270\n-460339200000,315\n-457747200000,364\n-455068800000,347\n-452390400000,312\n-449798400000,274\n-4.4712e+11,237\n-4.44528e+11,278\n-441849600000,284\n-439171200000,277\n-436665600000,317\n-433987200000,313\n-431395200000,318\n-428716800000,374\n-426124800000,413\n-423446400000,405\n-4.20768e+11,355\n-4.18176e+11,306\n-415497600000,271\n-412905600000,306\n-410227200000,315\n-407548800000,301\n-405129600000,356\n-402451200000,348\n-399859200000,355\n-397180800000,422\n-394588800000,465\n-391910400000,467\n-3.89232e+11,404\n-3.8664e+11,347\n-383961600000,305\n-381369600000,336\n-378691200000,340\n-376012800000,318\n-373593600000,362\n-370915200000,348\n-368323200000,363\n-365644800000,435\n-363052800000,491\n-360374400000,505\n-3.57696e+11,404\n-3.55104e+11,359\n-352425600000,310\n-349833600000,337\n-347155200000,360\n-344476800000,342\n-342057600000,406\n-339379200000,396\n-336787200000,420\n-334108800000,472\n-331516800000,548\n-328838400000,559\n-3.2616e+11,463\n-3.23568e+11,407\n-320889600000,362\n-318297600000,405\n-315619200000,417\n-312940800000,391\n-310435200000,419\n-307756800000,461\n-305164800000,472\n-302486400000,535\n-299894400000,622\n-2.97216e+11,606\n-294537600000,508\n-291945600000,461\n-289267200000,390\n-286675200000,432"
+    },
+    {
+      "name": ".0/model_prediction2",
+      "format": {
+        "type": "csv",
+        "parse": {
+          "resp_upr_": "number",
+          "pred_": "number",
+          "resp_lwr_": "number",
+          "resp_": "number"
+        }
+      },
+      "values": "\"resp_upr_\",\"pred_\",\"resp_lwr_\",\"resp_\"\n144.788233750832,-6.62688e+11,88.8541589453388,116.821196348086\n145.286721355992,-657928344303.797,93.862744393251,119.574732874622\n145.995582851534,-653168688607.595,98.7731627912777,122.384372821406\n146.923378653271,-648409032911.392,103.573823840019,125.248601246645\n148.079032568637,-643649377215.19,108.252773848453,128.165903208545\n149.471275272167,-638889721518.987,112.798252258461,131.134763765314\n151.107715820149,-634130065822.785,117.199620130165,134.153667975157\n152.993489886953,-629370410126.582,121.448711905612,137.221100896282\n155.12957033657,-624610754430.38,125.541524837222,140.335547586896\n157.511052739566,-619851098734.177,129.479933470843,143.495493105204\n160.124159579083,-615091443037.975,133.271631642563,146.697895610823\n162.946175443163,-610331787341.772,136.930040909589,149.938108176376\n165.959536891792,-605572131645.57,140.479417988604,153.219477440198\n169.145517277975,-600812475949.367,143.946453338009,156.545985307992\n172.484847750315,-596052820253.165,147.358379620605,159.92161368546\n175.958993968343,-591293164556.962,150.741694988269,163.350344478306\n179.551126689614,-586533508860.76,154.121192494851,166.836159592233\n183.24669768191,-581773853164.557,157.519384183974,170.383040932942\n187.033664618765,-577014197468.354,160.956276193511,173.994970406138\n190.902475650625,-572254541772.152,164.44938418442,177.675929917523\n194.81931371002,-567494886075.949,168.017085163793,181.418199436906\n198.712405598268,-562735230379.747,171.670657248784,185.191531423526\n202.608585901131,-557975574683.544,175.392087233938,189.000336567534\n206.544321367004,-553215918987.342,179.158745305418,192.851533336211\n210.550221713273,-548456263291.139,182.9538586804,196.752040196836\n214.644397286165,-543696607594.937,186.773153947213,200.708775616689\n218.829049018084,-538936951898.734,190.628267108012,204.728658063048\n223.090521070317,-534177296202.532,194.546690936072,208.818606003194\n227.402418307286,-529417640506.329,198.568657501527,212.985537904407\n231.730899834622,-524657984810.127,202.741844633307,217.236372233965\n236.010494961618,-519898329113.924,207.118035897257,221.564265429438\n240.194292456204,-515138673417.721,211.687688985241,225.940990720723\n244.377537009093,-510379017721.519,216.365489130397,230.371513069745\n248.658273507378,-505619362025.316,221.06678341873,234.862528463054\n253.113951540167,-500859706329.114,225.727514234235,239.420732887201\n257.784856991525,-496100050632.911,230.320787665945,244.052822328735\n262.665240831867,-491340394936.709,234.865744716547,248.765492774207\n267.706682788899,-486580739240.506,239.424197631435,253.565440210167\n272.831869381105,-481821083544.304,244.086851865225,258.459360623165\n277.952598207446,-477061427848.101,248.955301792057,263.453949999752\n283.06888963513,-472301772151.899,254.181136592558,268.625013113844\n288.334194968847,-467542116455.696,259.843274893404,274.088734931125\n293.783837794784,-462782460759.494,265.789167931731,279.786502863257\n299.444679815621,-458022805063.291,271.863979295099,285.65432955536\n305.322046110767,-453263149367.089,277.934409194338,291.628227652552\n311.383374563348,-448503493670.886,283.905045036561,297.644209799954\n317.54988957085,-443743837974.684,289.726687714522,303.638288642686\n323.700600985894,-438984182278.481,295.392352665841,309.546476825867\n329.686477570156,-434224526582.279,300.923096419079,315.304786994617\n335.34854374925,-429464870886.076,306.349919838863,320.849231794056\n340.658381417883,-424705215189.873,311.737331642932,326.197856530408\n345.811519547891,-419945559493.671,317.149564194339,331.480541871115\n350.8786941558,-415185903797.468,322.561797852177,336.720246003989\n355.921980601136,-410426248101.266,327.952863727001,341.937422164068\n360.991374538999,-405666592405.063,333.313672633792,347.152523586395\n366.119885952831,-400906936708.861,338.652121059188,352.386003506009\n371.321775956457,-396147281012.658,343.994854359445,357.658315157951\n376.594740374351,-391387625316.456,349.385083180172,362.989911777262\n381.925944612067,-386627969620.253,354.876548585894,368.401246598981\n387.301276823241,-381868313924.051,360.524268893057,373.912772858149\n392.70321380587,-377108658227.848,366.29300910498,379.498111455425\n398.119842985771,-372349002531.646,372.07329013835,385.096566562061\n403.56279986555,-367589346835.443,377.853917725008,390.708358795279\n409.046119773305,-362829691139.24,383.622509065862,396.334314419584\n414.586235585377,-358070035443.038,389.36428381358,401.975259699478\n420.202078999891,-353310379746.835,395.061962799043,407.632020899467\n425.914980375734,-348550724050.633,400.695868192373,413.305424284054\n431.748247222083,-343791068354.43,406.2443450134,418.996296117742\n437.726350376647,-339031412658.228,411.684574953423,424.705462665035\n443.873762246786,-334271756962.025,416.993738134089,430.433750190437\n450.218191906487,-329512101265.823,422.152861158782,436.185526532635\n456.78173008567,-324752445569.62,427.147728044967,441.964729065319\n463.57297907264,-319992789873.418,431.968488350934,447.770733711787\n470.593611975832,-315233134177.215,436.612211344458,453.602911660145\n477.8397559447,-310473478481.013,441.081512252299,459.460634098499\n485.303765807434,-305713822784.81,445.382778622477,465.343272214956\n492.975883918252,-300954167088.608,449.524510476988,471.25019719762\n500.845518405354,-296194511392.405,453.516042063842,477.180780234598\n508.902089520267,-291434855696.203,457.366695507725,483.134392513996\n517.135514269694,-286675200000,461.085296178144,489.110405223919"
+    },
+    {
+      "name": "scale/x",
+      "format": {
+        "type": "csv",
+        "parse": {
+          "domain": "number"
+        }
+      },
+      "values": "\"domain\"\n-681523200000\n-2.6784e+11"
+    },
+    {
+      "name": "scale/y",
+      "format": {
+        "type": "csv",
+        "parse": {
+          "domain": "number"
+        }
+      },
+      "values": "\"domain\"\n62.1968668926057\n648.657292052733"
+    }
+  ],
+  "scales": [
+    {
+      "name": "x",
+      "domain": {
+        "data": "scale/x",
+        "field": "data.domain"
+      },
+      "type": "time",
+      "clamp": false,
+      "range": "width"
+    },
+    {
+      "name": "y",
+      "domain": {
+        "data": "scale/y",
+        "field": "data.domain"
+      },
+      "zero": false,
+      "nice": false,
+      "clamp": false,
+      "range": "height"
+    }
+  ],
+  "marks": [
+    {
+      "type": "line",
+      "properties": {
+        "update": {
+          "x": {
+            "scale": "x",
+            "field": "data.year"
+          },
+          "y": {
+            "scale": "y",
+            "field": "data.passangers"
+          },
+          "stroke": {
+            "value": "darkred"
+          },
+          "strokeWidth": {
+            "value": 2
+          }
+        },
+        "ggvis": {
+          "data": {
+            "value": ".0/arrange1"
+          }
+        }
+      },
+      "from": {
+        "data": ".0/arrange1"
+      }
+    },
+    {
+      "type": "area",
+      "properties": {
+        "update": {
+          "y2": {
+            "scale": "y",
+            "field": "data.resp_upr_"
+          },
+          "fillOpacity": {
+            "value": 0.2
+          },
+          "x": {
+            "scale": "x",
+            "field": "data.pred_"
+          },
+          "y": {
+            "scale": "y",
+            "field": "data.resp_lwr_"
+          },
+          "fill": {
+            "value": "grey96"
+          },
+          "stroke": {
+            "value": "transparent"
+          }
+        },
+        "ggvis": {
+          "data": {
+            "value": ".0/model_prediction2"
+          }
+        }
+      },
+      "from": {
+        "data": ".0/model_prediction2"
+      }
+    },
+    {
+      "type": "line",
+      "properties": {
+        "update": {
+          "strokeWidth": {
+            "value": 2
+          },
+          "x": {
+            "scale": "x",
+            "field": "data.pred_"
+          },
+          "y": {
+            "scale": "y",
+            "field": "data.resp_"
+          },
+          "stroke": {
+            "value": "#67a9cf"
+          },
+          "fill": {
+            "value": "transparent"
+          }
+        },
+        "ggvis": {
+          "data": {
+            "value": ".0/model_prediction2"
+          }
+        }
+      },
+      "from": {
+        "data": ".0/model_prediction2"
+      }
+    }
+  ],
+  "legends": [],
+  "axes": [
+    {
+      "type": "x",
+      "scale": "x",
+      "orient": "bottom",
+      "title": "",
+      "layer": "back",
+      "grid": false
+    },
+    {
+      "type": "y",
+      "scale": "y",
+      "orient": "left",
+      "title": "Monthly Passanger Numbers",
+      "layer": "back",
+      "grid": false
+    }
+  ],
+  "padding": null,
+  "ggvis_opts": {
+    "keep_aspect": false,
+    "resizable": true,
+    "padding": {},
+    "duration": 250,
+    "renderer": "svg",
+    "hover_duration": 0,
+    "width": 672,
+    "height": 480
+  },
+  "handlers": null
+};
+ggvis.getPlot("plot_id669813731").parseSpec(plot_id669813731_spec);
+</script>
+</div>
+<div id="bjsales" class="section level1">
+<h1>BJSales</h1>
+<pre class="r"><code>BJsales2 &lt;- as.data.frame(BJsales)  %&gt;% mutate(y=x,x=seq(1,length(y),1),group=cut(x,5))</code></pre>
+<pre class="r"><code>BJsales2 %&gt;% group_by(group) %&gt;% ggvis(~x,~y) %&gt;% 
+        layer_lines(stroke=~group,strokeWidth:=4) %&gt;% 
+        layer_smooths(stroke=~group,se=T, fill:=~group, strokeDash:=3) %&gt;% 
+        add_axis(&quot;x&quot;,grid=F) %&gt;% 
+        add_axis(&quot;y&quot;,grid=F) %&gt;% 
+        ungroup() %&gt;% 
+        layer_smooths(strokeDash:=3,stroke:=&quot;grey&quot;,se=T,fill:=&quot;tomato&quot;)</code></pre>
+<div id="plot_id747244752-container" class="ggvis-output-container">
+<div id="plot_id747244752" class="ggvis-output"></div>
+<div class="plot-gear-icon">
+<nav class="ggvis-control">
+<a class="ggvis-dropdown-toggle" title="Controls" onclick="return false;"></a>
+<ul class="ggvis-dropdown">
+<li>
+Renderer: 
+<a id="plot_id747244752_renderer_svg" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id747244752" data-renderer="svg">SVG</a>
+ | 
+<a id="plot_id747244752_renderer_canvas" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id747244752" data-renderer="canvas">Canvas</a>
+</li>
+<li>
+<a id="plot_id747244752_download" class="ggvis-download" data-plot-id="plot_id747244752">Download</a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+<script type="text/javascript">
+var plot_id747244752_spec = {
+  "data": [
+    {
+      "name": ".0/arrange1_flat",
+      "format": {
+        "type": "csv",
+        "parse": {
+          "x": "number",
+          "y": "number"
+        }
+      },
+      "values": "\"x\",\"y\",\"group\"\n1,200.1,\"(0.851,30.8]\"\n2,199.5,\"(0.851,30.8]\"\n3,199.4,\"(0.851,30.8]\"\n4,198.9,\"(0.851,30.8]\"\n5,199,\"(0.851,30.8]\"\n6,200.2,\"(0.851,30.8]\"\n7,198.6,\"(0.851,30.8]\"\n8,200,\"(0.851,30.8]\"\n9,200.3,\"(0.851,30.8]\"\n10,201.2,\"(0.851,30.8]\"\n11,201.6,\"(0.851,30.8]\"\n12,201.5,\"(0.851,30.8]\"\n13,201.5,\"(0.851,30.8]\"\n14,203.5,\"(0.851,30.8]\"\n15,204.9,\"(0.851,30.8]\"\n16,207.1,\"(0.851,30.8]\"\n17,210.5,\"(0.851,30.8]\"\n18,210.5,\"(0.851,30.8]\"\n19,209.8,\"(0.851,30.8]\"\n20,208.8,\"(0.851,30.8]\"\n21,209.5,\"(0.851,30.8]\"\n22,213.2,\"(0.851,30.8]\"\n23,213.7,\"(0.851,30.8]\"\n24,215.1,\"(0.851,30.8]\"\n25,218.7,\"(0.851,30.8]\"\n26,219.8,\"(0.851,30.8]\"\n27,220.5,\"(0.851,30.8]\"\n28,223.8,\"(0.851,30.8]\"\n29,222.8,\"(0.851,30.8]\"\n30,223.8,\"(0.851,30.8]\"\n31,221.7,\"(30.8,60.6]\"\n32,222.3,\"(30.8,60.6]\"\n33,220.8,\"(30.8,60.6]\"\n34,219.4,\"(30.8,60.6]\"\n35,220.1,\"(30.8,60.6]\"\n36,220.6,\"(30.8,60.6]\"\n37,218.9,\"(30.8,60.6]\"\n38,217.8,\"(30.8,60.6]\"\n39,217.7,\"(30.8,60.6]\"\n40,215,\"(30.8,60.6]\"\n41,215.3,\"(30.8,60.6]\"\n42,215.9,\"(30.8,60.6]\"\n43,216.7,\"(30.8,60.6]\"\n44,216.7,\"(30.8,60.6]\"\n45,217.7,\"(30.8,60.6]\"\n46,218.7,\"(30.8,60.6]\"\n47,222.9,\"(30.8,60.6]\"\n48,224.9,\"(30.8,60.6]\"\n49,222.2,\"(30.8,60.6]\"\n50,220.7,\"(30.8,60.6]\"\n51,220,\"(30.8,60.6]\"\n52,218.7,\"(30.8,60.6]\"\n53,217,\"(30.8,60.6]\"\n54,215.9,\"(30.8,60.6]\"\n55,215.8,\"(30.8,60.6]\"\n56,214.1,\"(30.8,60.6]\"\n57,212.3,\"(30.8,60.6]\"\n58,213.9,\"(30.8,60.6]\"\n59,214.6,\"(30.8,60.6]\"\n60,213.6,\"(30.8,60.6]\"\n61,212.1,\"(60.6,90.4]\"\n62,211.4,\"(60.6,90.4]\"\n63,213.1,\"(60.6,90.4]\"\n64,212.9,\"(60.6,90.4]\"\n65,213.3,\"(60.6,90.4]\"\n66,211.5,\"(60.6,90.4]\"\n67,212.3,\"(60.6,90.4]\"\n68,213,\"(60.6,90.4]\"\n69,211,\"(60.6,90.4]\"\n70,210.7,\"(60.6,90.4]\"\n71,210.1,\"(60.6,90.4]\"\n72,211.4,\"(60.6,90.4]\"\n73,210,\"(60.6,90.4]\"\n74,209.7,\"(60.6,90.4]\"\n75,208.8,\"(60.6,90.4]\"\n76,208.8,\"(60.6,90.4]\"\n77,208.8,\"(60.6,90.4]\"\n78,210.6,\"(60.6,90.4]\"\n79,211.9,\"(60.6,90.4]\"\n80,212.8,\"(60.6,90.4]\"\n81,212.5,\"(60.6,90.4]\"\n82,214.8,\"(60.6,90.4]\"\n83,215.3,\"(60.6,90.4]\"\n84,217.5,\"(60.6,90.4]\"\n85,218.8,\"(60.6,90.4]\"\n86,220.7,\"(60.6,90.4]\"\n87,222.2,\"(60.6,90.4]\"\n88,226.7,\"(60.6,90.4]\"\n89,228.4,\"(60.6,90.4]\"\n90,233.2,\"(60.6,90.4]\"\n91,235.7,\"(90.4,120]\"\n92,237.1,\"(90.4,120]\"\n93,240.6,\"(90.4,120]\"\n94,243.8,\"(90.4,120]\"\n95,245.3,\"(90.4,120]\"\n96,246,\"(90.4,120]\"\n97,246.3,\"(90.4,120]\"\n98,247.7,\"(90.4,120]\"\n99,247.6,\"(90.4,120]\"\n100,247.8,\"(90.4,120]\"\n101,249.4,\"(90.4,120]\"\n102,249,\"(90.4,120]\"\n103,249.9,\"(90.4,120]\"\n104,250.5,\"(90.4,120]\"\n105,251.5,\"(90.4,120]\"\n106,249,\"(90.4,120]\"\n107,247.6,\"(90.4,120]\"\n108,248.8,\"(90.4,120]\"\n109,250.4,\"(90.4,120]\"\n110,250.7,\"(90.4,120]\"\n111,253,\"(90.4,120]\"\n112,253.7,\"(90.4,120]\"\n113,255,\"(90.4,120]\"\n114,256.2,\"(90.4,120]\"\n115,256,\"(90.4,120]\"\n116,257.4,\"(90.4,120]\"\n117,260.4,\"(90.4,120]\"\n118,260,\"(90.4,120]\"\n119,261.3,\"(90.4,120]\"\n120,260.4,\"(90.4,120]\"\n121,261.6,\"(120,150]\"\n122,260.8,\"(120,150]\"\n123,259.8,\"(120,150]\"\n124,259,\"(120,150]\"\n125,258.9,\"(120,150]\"\n126,257.4,\"(120,150]\"\n127,257.7,\"(120,150]\"\n128,257.9,\"(120,150]\"\n129,257.4,\"(120,150]\"\n130,257.3,\"(120,150]\"\n131,257.6,\"(120,150]\"\n132,258.9,\"(120,150]\"\n133,257.8,\"(120,150]\"\n134,257.7,\"(120,150]\"\n135,257.2,\"(120,150]\"\n136,257.5,\"(120,150]\"\n137,256.8,\"(120,150]\"\n138,257.5,\"(120,150]\"\n139,257,\"(120,150]\"\n140,257.6,\"(120,150]\"\n141,257.3,\"(120,150]\"\n142,257.5,\"(120,150]\"\n143,259.6,\"(120,150]\"\n144,261.1,\"(120,150]\"\n145,262.9,\"(120,150]\"\n146,263.3,\"(120,150]\"\n147,262.8,\"(120,150]\"\n148,261.8,\"(120,150]\"\n149,262.2,\"(120,150]\"\n150,262.7,\"(120,150]\""
+    },
+    {
+      "name": ".0/arrange1",
+      "source": ".0/arrange1_flat",
+      "transform": [
+        {
+          "type": "treefacet",
+          "keys": [
+            "data.group"
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".0/model_prediction2_flat",
+      "format": {
+        "type": "csv",
+        "parse": {
+          "resp_upr_": "number",
+          "pred_": "number",
+          "resp_lwr_": "number",
+          "resp_": "number"
+        }
+      },
+      "values": "\"resp_upr_\",\"pred_\",\"resp_lwr_\",\"group\",\"resp_\"\n201.780455011362,1,198.37381119936,\"(0.851,30.8]\",200.077133105361\n201.471574617138,1.36708860759494,198.346803561383,\"(0.851,30.8]\",199.90918908926\n201.190183198483,1.73417721518987,198.324993362846,\"(0.851,30.8]\",199.757588280664\n200.936906560176,2.10126582278481,198.307497524856,\"(0.851,30.8]\",199.622202042516\n200.712356654836,2.46835443037975,198.29344682068,\"(0.851,30.8]\",199.502901737758\n200.51706213223,2.83544303797468,198.282055326437,\"(0.851,30.8]\",199.399558729334\n200.351367058373,3.20253164556962,198.272721701999,\"(0.851,30.8]\",199.312044380186\n200.215305091808,3.56962025316456,198.265155014706,\"(0.851,30.8]\",199.240230053257\n200.108474351252,3.93670886075949,198.25949987173,\"(0.851,30.8]\",199.183987111491\n200.02992851687,4.30379746835443,198.256458574706,\"(0.851,30.8]\",199.143193545788\n199.978416756879,4.67088607594937,198.257407155905,\"(0.851,30.8]\",199.117911956392\n199.952629260042,5.0379746835443,198.264037920831,\"(0.851,30.8]\",199.108333590437\n199.951135183389,5.40506329113924,198.278166813979,\"(0.851,30.8]\",199.114650998684\n199.97248423987,5.77215189873418,198.301629223919,\"(0.851,30.8]\",199.137056731894\n200.015300134605,6.13924050632911,198.336186547056,\"(0.851,30.8]\",199.17574334083\n200.078346412155,6.50632911392405,198.383460340351,\"(0.851,30.8]\",199.230903376253\n200.16056077521,6.87341772151899,198.444898002637,\"(0.851,30.8]\",199.302729388924\n200.261063356296,7.24050632911392,198.521764502913,\"(0.851,30.8]\",199.391413929604\n200.379148270805,7.60759493670886,198.615150827306,\"(0.851,30.8]\",199.497149549056\n200.51426744726,7.9746835443038,198.72599014882,\"(0.851,30.8]\",199.62012879804\n200.66660397067,8.34177215189873,198.86081923962,\"(0.851,30.8]\",199.763711605145\n200.836937025615,8.70886075949367,199.024996604236,\"(0.851,30.8]\",199.930966814925\n201.026015051949,9.07594936708861,199.21418403284,\"(0.851,30.8]\",200.120099542395\n201.23477008957,9.44303797468354,199.423821775976,\"(0.851,30.8]\",200.329295932773\n201.463718947583,9.81012658227848,199.649765314977,\"(0.851,30.8]\",200.55674213128\n201.712483355078,10.1772151898734,199.888765211195,\"(0.851,30.8]\",200.800624283137\n201.979485952997,10.5443037974684,200.138771114127,\"(0.851,30.8]\",201.059128533562\n202.261881909626,10.9113924050633,200.399000145928,\"(0.851,30.8]\",201.330441027777\n202.555730560692,11.2784810126582,200.669765261311,\"(0.851,30.8]\",201.612747911001\n202.85634485781,11.6455696202532,200.952125799099,\"(0.851,30.8]\",201.904235328455\n203.158760524592,12.0126582278481,201.247476068445,\"(0.851,30.8]\",202.203118296519\n203.480821615241,12.379746835443,201.582659620897,\"(0.851,30.8]\",202.531740618069\n203.838353065591,12.746835443038,201.967016200572,\"(0.851,30.8]\",202.902684633082\n204.227667949222,13.1139240506329,202.381096360736,\"(0.851,30.8]\",203.304382154979\n204.643289942367,13.4810126582278,202.807240052,\"(0.851,30.8]\",203.725264997183\n205.076100027695,13.8481012658228,203.231429918538,\"(0.851,30.8]\",204.153764973117\n205.512527912316,14.2151898734177,203.644099880086,\"(0.851,30.8]\",204.578313896201\n205.93521613462,14.5822784810127,204.039471025099,\"(0.851,30.8]\",204.987343579859\n206.324799454223,14.9493670886076,204.413772220803,\"(0.851,30.8]\",205.369285837513\n206.680432760133,15.3164556962025,204.778049100152,\"(0.851,30.8]\",205.729240930142\n207.028366170884,15.6835443037975,205.152903909752,\"(0.851,30.8]\",206.090635040318\n207.375330406363,16.0506329113924,205.534270825084,\"(0.851,30.8]\",206.454800615723\n207.727633350941,16.4177215189873,205.917732789591,\"(0.851,30.8]\",206.822683070266\n208.090668089305,16.7848101265823,206.299787546399,\"(0.851,30.8]\",207.195227817852\n208.468022391424,17.1518987341772,206.678738153351,\"(0.851,30.8]\",207.573380272387\n208.86086224001,17.5189873417722,207.055309455548,\"(0.851,30.8]\",207.958085847779\n209.267877103309,17.8860759493671,207.432702812559,\"(0.851,30.8]\",208.350289957934\n209.685815740651,18.253164556962,207.816060292864,\"(0.851,30.8]\",208.750938016758\n210.110353188587,18.620253164557,208.211597687727,\"(0.851,30.8]\",209.160975438157\n210.536990707969,18.9873417721519,208.625704564108,\"(0.851,30.8]\",209.581347636039\n210.961927714634,19.3544303797468,209.057708655922,\"(0.851,30.8]\",210.009818185278\n211.386230519803,19.7215189873418,209.500265220422,\"(0.851,30.8]\",210.443247870113\n211.813329205778,20.0886075949367,209.95044744208,\"(0.851,30.8]\",210.881888323929\n212.246352521301,20.4556962025316,210.405637682431,\"(0.851,30.8]\",211.325995101866\n212.687682831005,20.8227848101266,210.863964687122,\"(0.851,30.8]\",211.775823759064\n213.138606666965,21.1898734177215,211.324653034359,\"(0.851,30.8]\",212.231629850662\n213.599143088597,21.5569620253165,211.788194775003,\"(0.851,30.8]\",212.6936689318\n214.068112067173,21.9240506329114,212.256281048065,\"(0.851,30.8]\",213.162196557619\n214.543438493947,22.2911392405063,212.731498072568,\"(0.851,30.8]\",213.637468283257\n215.022632029381,22.6582278481013,213.21684729833,\"(0.851,30.8]\",214.119739663855\n215.503397122446,23.0253164556962,213.715119824007,\"(0.851,30.8]\",214.609258473226\n215.986457004735,23.3924050632911,214.222459561235,\"(0.851,30.8]\",215.104458282985\n216.473934353015,23.7594936708861,214.734635499632,\"(0.851,30.8]\",215.604284926324\n216.966952078954,24.126582278481,215.251289306381,\"(0.851,30.8]\",216.109120692668\n217.466790907346,24.493670886076,215.771904835542,\"(0.851,30.8]\",216.619347871444\n217.974905545851,24.8607594936709,216.295791958303,\"(0.851,30.8]\",217.135348752077\n218.492933131969,25.2278481012658,216.822078116018,\"(0.851,30.8]\",217.657505623994\n219.022684961325,25.5949367088608,217.349716591915,\"(0.851,30.8]\",218.18620077662\n219.566112168987,25.9620253164557,217.877520829776,\"(0.851,30.8]\",218.721816499381\n220.125239882191,26.3291139240506,218.404230281218,\"(0.851,30.8]\",219.264735081704\n220.702073784097,26.6962025316456,218.928603841932,\"(0.851,30.8]\",219.815338813015\n221.298478363035,27.0632911392405,219.449503883514,\"(0.851,30.8]\",220.373991123275\n221.915210293444,27.4303797468354,219.965060216343,\"(0.851,30.8]\",220.940135254894\n222.552563859149,27.7974683544304,220.473918502775,\"(0.851,30.8]\",221.513241180962\n223.210655231388,28.1645569620253,220.975648425595,\"(0.851,30.8]\",222.093151828492\n223.889165041572,28.5316455696203,221.470255207415,\"(0.851,30.8]\",222.679710124494\n224.58746351364,28.8987341772152,221.95805447832,\"(0.851,30.8]\",223.27275899598\n225.304736287781,29.2658227848101,222.439546452144,\"(0.851,30.8]\",223.872141369963\n226.04008570133,29.6329113924051,222.915314645575,\"(0.851,30.8]\",224.477700173453\n226.792600239463,30,223.385956427461,\"(0.851,30.8]\",225.089278333462\n225.296153843992,31,220.945903341871,\"(30.8,60.6]\",223.121028592932\n224.667163763481,31.3670886075949,220.676861987163,\"(30.8,60.6]\",222.672012875322\n224.069830013262,31.7341772151899,220.411010891275,\"(30.8,60.6]\",222.240420452268\n223.504381860709,32.1012658227848,220.14665249203,\"(30.8,60.6]\",221.82551717637\n222.971030884122,32.4683544303797,219.882106916328,\"(30.8,60.6]\",221.426568900225\n222.469882284881,32.8354430379747,219.615800667984,\"(30.8,60.6]\",221.042841476433\n222.000805552739,33.2025316455696,219.346395962443,\"(30.8,60.6]\",220.673600757591\n221.563273790174,33.5696202531646,219.072951402423,\"(30.8,60.6]\",220.318112596298\n221.156203919606,33.9367088607595,218.795081770701,\"(30.8,60.6]\",219.975642845154\n220.777709157011,34.3037974683544,218.513005556587,\"(30.8,60.6]\",219.645357356799\n220.42624484337,34.6708860759494,218.228532580522,\"(30.8,60.6]\",219.327388711946\n220.101040364386,35.0379746835443,217.944725901628,\"(30.8,60.6]\",219.022883133007\n219.801182609119,35.4050632911392,217.664818524497,\"(30.8,60.6]\",218.733000566808\n219.525733636738,35.7721518987342,217.392068283611,\"(30.8,60.6]\",218.458900960175\n219.273849993678,36.1392405063291,217.129638526187,\"(30.8,60.6]\",218.201744259932\n219.044866799962,36.5063291139241,216.880514025853,\"(30.8,60.6]\",217.962690412908\n218.83834157382,36.873417721519,216.647457158031,\"(30.8,60.6]\",217.742899365925\n218.654064794582,37.2405063291139,216.432997337041,\"(30.8,60.6]\",217.543531065812\n218.492049115984,37.6075949367089,216.239441802801,\"(30.8,60.6]\",217.365745459392\n218.352508717563,37.9746835443038,216.068896269422,\"(30.8,60.6]\",217.210702493492\n218.224407917288,38.3417721518987,215.918438650616,\"(30.8,60.6]\",217.071423283952\n218.096394466816,38.7088607594937,215.78256444439,\"(30.8,60.6]\",216.939479455603\n217.974449963857,39.0759493670886,215.660759647051,\"(30.8,60.6]\",216.817604805454\n217.864860627333,39.4430379746835,215.552297516751,\"(30.8,60.6]\",216.708579072042\n217.773382430543,39.8101265822785,215.456981557265,\"(30.8,60.6]\",216.615181993904\n217.704628338448,40.1772151898734,215.375758280708,\"(30.8,60.6]\",216.540193309578\n217.661680092286,40.5443037974684,215.311105422915,\"(30.8,60.6]\",216.4863927576\n217.646000883231,40.9113924050633,215.267119269788,\"(30.8,60.6]\",216.45656007651\n217.657654535105,41.2784810126582,215.24929547458,\"(30.8,60.6]\",216.453475004842\n217.695751746589,41.6455696202532,215.264082815683,\"(30.8,60.6]\",216.479917281136\n217.759075969244,42.0126582278481,215.318384595593,\"(30.8,60.6]\",216.538730282418\n217.895402903392,42.379746835443,215.47146878386,\"(30.8,60.6]\",216.683435843626\n218.131514487549,42.746835443038,215.741835793226,\"(30.8,60.6]\",216.936675140387\n218.44469934806,43.1139240506329,216.086645667275,\"(30.8,60.6]\",217.265672507667\n218.809961068533,43.4810126582278,216.465343492328,\"(30.8,60.6]\",217.63765228043\n219.197651548872,43.8481012658228,216.842026038411,\"(30.8,60.6]\",218.019838793641\n219.572438454055,44.2151898734177,217.186474310474,\"(30.8,60.6]\",218.379456382264\n219.894153272005,44.5822784810127,217.473305490522,\"(30.8,60.6]\",218.683729381264\n220.120063576988,44.9493670886076,217.679700674221,\"(30.8,60.6]\",218.899882125604\n220.283842590614,45.3164556962025,217.85451744576,\"(30.8,60.6]\",219.069180018187\n220.489368647654,45.6835443037975,218.094421863239,\"(30.8,60.6]\",219.291895255446\n220.729430467471,46.0506329113924,218.378415565448,\"(30.8,60.6]\",219.55392301646\n220.994928960714,46.4177215189873,218.683703819399,\"(30.8,60.6]\",219.839316390057\n221.275596847874,46.7848101265823,218.98866008226,\"(30.8,60.6]\",220.132128465067\n221.558861480374,47.1518987341772,219.273963180267,\"(30.8,60.6]\",220.41641233032\n221.82905761123,47.5189873417722,219.523384538061,\"(30.8,60.6]\",220.676221074646\n222.067357508944,47.8860759493671,219.723858064802,\"(30.8,60.6]\",220.895607786873\n222.2524551759,48.253164556962,219.864795935764,\"(30.8,60.6]\",221.058625555832\n222.361673481097,48.620253164557,219.936981459606,\"(30.8,60.6]\",221.149327470352\n222.372113383684,48.9873417721519,219.93141985484,\"(30.8,60.6]\",221.151766619262\n222.285606784064,49.3544303797468,219.853937853158,\"(30.8,60.6]\",221.069772318611\n222.130708407768,49.7215189873418,219.722349347243,\"(30.8,60.6]\",220.926528877505\n221.921183508452,50.0886075949367,219.542301895008,\"(30.8,60.6]\",220.73174270173\n221.670387386877,50.4556962025316,219.319812717507,\"(30.8,60.6]\",220.495100052192\n221.390722218666,50.8227848101266,219.061852160926,\"(30.8,60.6]\",220.226287189796\n221.093190812089,51.1898734177215,218.776789938811,\"(30.8,60.6]\",219.93499037545\n220.787177425349,51.5569620253165,218.474614314768,\"(30.8,60.6]\",219.630895870058\n220.480535092931,51.9240506329114,218.166844776125,\"(30.8,60.6]\",219.323689934528\n220.179973840977,52.2911392405063,217.866143818552,\"(30.8,60.6]\",219.023058829765\n219.89167345001,52.6582278481013,217.585704183338,\"(30.8,60.6]\",218.738688816674\n219.621933917372,53.0253164556962,217.338321469231,\"(30.8,60.6]\",218.480127693302\n219.349100311255,53.3924050632911,217.096492998072,\"(30.8,60.6]\",218.222796654663\n219.055325491188,53.7594936708861,216.834258033648,\"(30.8,60.6]\",217.944791762418\n218.743812933259,54.126582278481,216.552928517471,\"(30.8,60.6]\",217.648370725365\n218.417967639357,54.4936708860759,216.253614865248,\"(30.8,60.6]\",217.335791252302\n218.081416785774,54.8607594936709,215.937205318283,\"(30.8,60.6]\",217.009311052029\n217.738020509906,55.2278481012658,215.604355156779,\"(30.8,60.6]\",216.671187833343\n217.391861347353,55.5949367088608,215.255497262731,\"(30.8,60.6]\",216.323679305042\n217.047200407305,55.9620253164557,214.890885944547,\"(30.8,60.6]\",215.969043175926\n216.708393286217,56.3291139240506,214.510681023369,\"(30.8,60.6]\",215.609537154793\n216.379770750652,56.6962025316456,214.115067150229,\"(30.8,60.6]\",215.24741895044\n216.06546965606,57.0632911392405,213.704347507155,\"(30.8,60.6]\",214.884908581607\n215.766970815501,57.4303797468354,213.27664842775,\"(30.8,60.6]\",214.521809621626\n215.483528353602,57.7974683544304,212.829118763307,\"(30.8,60.6]\",214.156323558454\n215.214150285181,58.1645569620253,212.360068668285,\"(30.8,60.6]\",213.787109476733\n214.957288444996,58.5316455696203,211.868364477203,\"(30.8,60.6]\",213.412826461099\n214.710998280533,58.8987341772152,211.353268911854,\"(30.8,60.6]\",213.032133596193\n214.473099527647,59.2658227848101,210.81428040566,\"(30.8,60.6]\",212.643689966653\n214.241305545278,59.6329113924051,210.251003768959,\"(30.8,60.6]\",212.246154657118\n214.013312003288,60,209.663061501167,\"(30.8,60.6]\",211.838186752228\n213.588684643554,61,211.387472016882,\"(60.6,90.4]\",212.488078330218\n213.495928009505,61.3670886075949,211.476848269159,\"(60.6,90.4]\",212.486388139332\n213.406880822216,61.7341772151899,211.555530228474,\"(60.6,90.4]\",212.481205525345\n213.321554162331,62.1012658227848,211.622554005977,\"(60.6,90.4]\",212.472054084154\n213.23995015988,62.4683544303797,211.676964663431,\"(60.6,90.4]\",212.458457411656\n213.16201711852,62.8354430379747,211.717861088976,\"(60.6,90.4]\",212.439939103748\n213.087584072586,63.2025316455696,211.744461440069,\"(60.6,90.4]\",212.416022756328\n213.016279485743,63.5696202531646,211.756184444841,\"(60.6,90.4]\",212.386231965292\n212.947450396349,63.9367088607595,211.752730256727,\"(60.6,90.4]\",212.350090326538\n212.879750902254,64.3037974683544,211.733818235046,\"(60.6,90.4]\",212.30678456865\n212.811976519525,64.6708860759494,211.699941251576,\"(60.6,90.4]\",212.25595888555\n212.744011932702,65.0379746835443,211.652923817159,\"(60.6,90.4]\",212.19846787493\n212.675684099931,65.4050632911392,211.594690810936,\"(60.6,90.4]\",212.135187455434\n212.606807415514,65.7721518987342,211.527179675892,\"(60.6,90.4]\",212.066993545703\n212.537244084002,66.1392405063291,211.45228004476,\"(60.6,90.4]\",211.994762064381\n212.466946667602,66.5063291139241,211.37179119262,\"(60.6,90.4]\",211.919368930111\n212.395980261292,66.873417721519,211.287399861781,\"(60.6,90.4]\",211.841690061536\n212.324527837609,67.2405063291139,211.200674916991,\"(60.6,90.4]\",211.7626013773\n212.252884788618,67.6075949367089,211.11307280347,\"(60.6,90.4]\",211.682978796044\n212.181448477786,67.9746835443038,211.025947995039,\"(60.6,90.4]\",211.603698236413\n212.094714839188,68.3417721518987,210.927901878868,\"(60.6,90.4]\",211.511308359028\n211.976777928296,68.7088607594937,210.805987451092,\"(60.6,90.4]\",211.391382689694\n211.835462228255,69.0759493670886,210.66474244164,\"(60.6,90.4]\",211.250102334947\n211.678805997663,69.4430379746835,210.508656573737,\"(60.6,90.4]\",211.0937312857\n211.514579192557,69.8101265822785,210.34248787317,\"(60.6,90.4]\",210.928533532863\n211.349973410466,70.1772151898734,210.171572724235,\"(60.6,90.4]\",210.76077306735\n211.191405454688,70.5443037974684,210.002022305458,\"(60.6,90.4]\",210.596713880073\n211.044473147445,70.9113924050633,209.84076677644,\"(60.6,90.4]\",210.442619961943\n210.914066235622,71.2784810126582,209.695444372122,\"(60.6,90.4]\",210.304755303872\n210.804592187881,71.6455696202532,209.574175605666,\"(60.6,90.4]\",210.189383896773\n210.720220182248,72.0126582278481,209.485238273305,\"(60.6,90.4]\",210.102729227776\n210.628964433241,72.379746835443,209.402461640464,\"(60.6,90.4]\",210.015713036853\n210.512115682472,72.746835443038,209.302946023606,\"(60.6,90.4]\",209.907530853039\n210.386579010918,73.1139240506329,209.193411506201,\"(60.6,90.4]\",209.789995258559\n210.268103275355,73.4810126582279,209.081734395921,\"(60.6,90.4]\",209.674918835638\n210.170083595709,73.8481012658228,208.97814473729,\"(60.6,90.4]\",209.574114166499\n210.103038887494,74.2151898734177,208.89574877924,\"(60.6,90.4]\",209.499393833367\n210.07504097634,74.5822784810127,208.850099860592,\"(60.6,90.4]\",209.462570418466\n210.092864355891,74.9493670886076,208.858048652149,\"(60.6,90.4]\",209.47545650402\n210.143616497819,75.3164556962025,208.914385863736,\"(60.6,90.4]\",209.529001180777\n210.200636295405,75.6835443037975,208.98880100006,\"(60.6,90.4]\",209.594718647733\n210.26911996285,76.0506329113924,209.079514057328,\"(60.6,90.4]\",209.674317010089\n210.354744243806,76.4177215189873,209.185271827985,\"(60.6,90.4]\",209.770008035896\n210.4625947815,76.7848101265823,209.305412204907,\"(60.6,90.4]\",209.884003493204\n210.596590709897,77.1518987341772,209.44043959023,\"(60.6,90.4]\",210.018515150063\n210.75908631821,77.5189873417721,209.59242323084,\"(60.6,90.4]\",210.175754774525\n210.950835688759,77.8860759493671,209.765032580518,\"(60.6,90.4]\",210.357934134638\n211.171338909257,78.253164556962,209.963191087652,\"(60.6,90.4]\",210.567264998455\n211.419402278377,78.620253164557,210.19251598967,\"(60.6,90.4]\",210.805959134024\n211.693719809128,78.9873417721519,210.458736809664,\"(60.6,90.4]\",211.076228309396\n211.987350091095,79.3544303797468,210.756933508881,\"(60.6,90.4]\",211.372141799988\n212.29574081212,79.7215189873418,211.07711894862,\"(60.6,90.4]\",211.68642988037\n212.622890284777,80.0886075949367,211.419183913772,\"(60.6,90.4]\",212.021037099275\n212.972609914976,80.4556962025316,211.783226765745,\"(60.6,90.4]\",212.37791834036\n213.348228830401,80.8227848101266,212.16982814417,\"(60.6,90.4]\",212.759028487285\n213.7523680834,81.1898734177215,212.580276764013,\"(60.6,90.4]\",213.166322423706\n214.186829745245,81.5569620253165,213.01668032132,\"(60.6,90.4]\",213.601755033282\n214.652641092978,81.9240506329114,213.481921306363,\"(60.6,90.4]\",214.06728119967\n215.150251045131,82.2911392405063,213.979460567927,\"(60.6,90.4]\",214.564855806529\n215.679840217675,82.6582278481013,214.513027257354,\"(60.6,90.4]\",215.096433737515\n216.241694399402,83.0253164556962,215.086193916654,\"(60.6,90.4]\",215.663944158028\n216.832831677025,83.3924050632911,215.693019691878,\"(60.6,90.4]\",216.262925684452\n217.451159216542,83.7594936708861,216.327306295924,\"(60.6,90.4]\",216.889232756233\n218.097458506511,84.126582278481,216.988878107,\"(60.6,90.4]\",217.543168306755\n218.772613006893,84.4936708860759,217.677457531911,\"(60.6,90.4]\",218.225035269402\n219.477618597177,84.8607594936709,218.392654557935,\"(60.6,90.4]\",218.935136577556\n220.213589034413,85.2278481012658,219.133961294791,\"(60.6,90.4]\",219.673775164602\n220.981750608418,85.5949367088608,219.900757319424,\"(60.6,90.4]\",220.441253963921\n221.783419966669,85.9620253164557,220.692331851127,\"(60.6,90.4]\",221.237875908898\n222.619961566891,86.3291139240506,221.507926298941,\"(60.6,90.4]\",222.063943932916\n223.492727302962,86.6962025316456,222.346794635754,\"(60.6,90.4]\",222.919760969358\n224.402988898492,87.0632911392405,223.208268758869,\"(60.6,90.4]\",223.805628828681\n225.351733044699,87.4303797468354,224.091638003798,\"(60.6,90.4]\",224.721685524248\n226.339319476759,87.7974683544304,224.996196844242,\"(60.6,90.4]\",225.6677581605\n227.365719747896,88.1645569620253,225.921563718352,\"(60.6,90.4]\",226.643641733124\n228.430623986031,88.5316455696203,226.867638489582,\"(60.6,90.4]\",227.649131237806\n229.533521748412,88.8987341772152,227.834521592058,\"(60.6,90.4]\",228.684021670235\n230.673783322968,89.2658227848101,228.822432729227,\"(60.6,90.4]\",229.748108026097\n231.850725171253,89.6329113924051,229.831645430907,\"(60.6,90.4]\",230.84118530108\n233.063654804207,90,230.862442177535,\"(60.6,90.4]\",231.963048490871\n237.823932924099,91,234.801775459409,\"(90.4,120]\",236.312854191754\n238.511898870664,91.3670886075949,235.739800966466,\"(90.4,120]\",237.125849918565\n239.185163534451,91.7341772151899,236.643349559355,\"(90.4,120]\",237.914256546903\n239.844008036102,92.1012658227848,237.5113637732,\"(90.4,120]\",238.677685904651\n240.488701207498,92.4683544303797,238.342798431882,\"(90.4,120]\",239.41574981969\n241.119437979539,92.8354430379747,239.136682260269,\"(90.4,120]\",240.128060119904\n241.736249532171,93.2025316455696,239.892207734177,\"(90.4,120]\",240.814228633174\n242.338891671599,93.5696202531646,240.608842703165,\"(90.4,120]\",241.473867187382\n242.926733820829,93.9367088607595,241.286441399995,\"(90.4,120]\",242.106587610412\n243.498574392968,94.3037974683544,241.925264789764,\"(90.4,120]\",242.711919591366\n244.053282929525,94.6708860759494,242.526512800502,\"(90.4,120]\",243.289897865013\n244.590167526163,95.0379746835443,243.092156814673,\"(90.4,120]\",243.841162170418\n245.108436451261,95.4050632911392,243.624285443754,\"(90.4,120]\",244.366360947507\n245.607280723653,95.7721518987342,244.125004548762,\"(90.4,120]\",244.866142636208\n246.085957003311,96.1392405063291,244.59635434958,\"(90.4,120]\",245.341155676446\n246.543846006856,96.5063291139241,245.04025100944,\"(90.4,120]\",245.792048508148\n246.98048295291,96.873417721519,245.458456189573,\"(90.4,120]\",246.219469571241\n247.395564900229,97.2405063291139,245.852569711075,\"(90.4,120]\",246.624067305652\n247.788943254092,97.6075949367089,246.224037048523,\"(90.4,120]\",247.006490151307\n248.160609421534,97.9746835443038,246.574163674734,\"(90.4,120]\",247.367386548134\n248.494064661165,98.3417721518987,246.892087434975,\"(90.4,120]\",247.69307604807\n248.772893671243,98.7088607594937,247.16545550857,\"(90.4,120]\",247.969174589906\n249.005743684631,99.0759493670886,247.398402576686,\"(90.4,120]\",248.202073130659\n249.201524881529,99.4430379746835,247.594966853709,\"(90.4,120]\",248.398245867619\n249.368779075817,99.8101265822785,247.759554920339,\"(90.4,120]\",248.564166998078\n249.515254023381,100.177215189873,247.897367415274,\"(90.4,120]\",248.706310719327\n249.647633725458,100.544303797468,248.01466873186,\"(90.4,120]\",248.831151228659\n249.771477762253,100.911392405063,248.118847684474,\"(90.4,120]\",248.945162723364\n249.891373561105,101.278481012658,248.218265240362,\"(90.4,120]\",249.054819400733\n250.011246404897,101.645569620253,248.321944511222,\"(90.4,120]\",249.16659545806\n250.134696160931,102.012658227848,248.439126296555,\"(90.4,120]\",249.286911228743\n250.217993091485,102.379746835443,248.534064639621,\"(90.4,120]\",249.376028865553\n250.238221699132,102.746835443038,248.578090793857,\"(90.4,120]\",249.408156246494\n250.220643604613,103.113924050633,248.582482875697,\"(90.4,120]\",249.401563240155\n250.188932989288,103.481012658228,248.560106440952,\"(90.4,120]\",249.37451971512\n250.163532468745,103.848101265823,248.527058611209,\"(90.4,120]\",249.345295539977\n250.160935770337,104.215189873418,248.503385396286,\"(90.4,120]\",249.332160583312\n250.194276886486,104.582278481013,248.512492540937,\"(90.4,120]\",249.353384713712\n250.274908636138,104.949367088608,248.579566963388,\"(90.4,120]\",249.427237799763\n250.377934199953,105.316455696203,248.69026055516,\"(90.4,120]\",249.534097377556\n250.454208492549,105.683544303797,248.790417798536,\"(90.4,120]\",249.622313145542\n250.514079016123,106.050632911392,248.880808189011,\"(90.4,120]\",249.697443602567\n250.568794207409,106.417721518987,248.963165678662,\"(90.4,120]\",249.765979943036\n250.628790951115,106.784810126582,249.04003577159,\"(90.4,120]\",249.834413361352\n250.702904571684,107.151898734177,249.11556553216,\"(90.4,120]\",249.909235051922\n250.797821938121,107.518987341772,249.196050480175,\"(90.4,120]\",249.996936209148\n250.918032913493,107.886075949367,249.28998314138,\"(90.4,120]\",250.104008027436\n251.066305687494,108.253164556962,249.407577714888,\"(90.4,120]\",250.236941701191\n251.244455911342,108.620253164557,249.560000938289,\"(90.4,120]\",250.402228424815\n251.454145073519,108.987341772152,249.758573711912,\"(90.4,120]\",250.606359392715\n251.693142111547,109.354430379747,250.003840217872,\"(90.4,120]\",250.84849116471\n251.956482203254,109.721518987342,250.28337388251,\"(90.4,120]\",251.119928042882\n252.242915576608,110.088607594937,250.590285498828,\"(90.4,120]\",251.416600537718\n252.550928920463,110.455696202532,250.917963926865,\"(90.4,120]\",251.734446423664\n252.878346779217,110.822784810127,251.26046017111,\"(90.4,120]\",252.069403475164\n253.222021544402,111.189873417722,251.612797388924,\"(90.4,120]\",252.417409466663\n253.577681186516,111.556962025316,251.971123158696,\"(90.4,120]\",252.774402172606\n253.93998992141,111.924050632911,252.332648813466,\"(90.4,120]\",253.136319367438\n254.30281790694,112.291139240506,252.695379744268,\"(90.4,120]\",253.499098825604\n254.659666934644,112.658227848101,253.057689708454,\"(90.4,120]\",253.858678321549\n255.004277620157,113.025316455696,253.417831873357,\"(90.4,120]\",254.211054746757\n255.349195376419,113.392405063291,253.78428917085,\"(90.4,120]\",254.566742273635\n255.706425014084,113.759493670886,254.16342982493,\"(90.4,120]\",254.934927419507\n256.075453892447,114.126582278481,254.553427129111,\"(90.4,120]\",255.314440510779\n256.455909372563,114.493670886076,254.952314375148,\"(90.4,120]\",255.704111873856\n256.847573162008,114.860759493671,255.357970508277,\"(90.4,120]\",256.102771835142\n257.250388808489,115.227848101266,255.768112633598,\"(90.4,120]\",256.509250721044\n257.664454361719,115.594936708861,256.180303354211,\"(90.4,120]\",256.922378857965\n258.089991928056,115.962025316456,256.591981216566,\"(90.4,120]\",257.340986572311\n258.527289254999,116.329113924051,257.000519125976,\"(90.4,120]\",257.763904190487\n258.9766168405,116.696202531646,257.403307237297,\"(90.4,120]\",258.189962038898\n259.438160688259,117.063291139241,257.797868267425,\"(90.4,120]\",258.618014477842\n259.91337832088,117.430379746835,258.183329352446,\"(90.4,120]\",259.048353836663\n260.404019869773,117.79746835443,258.559978071779,\"(90.4,120]\",259.481998970776\n260.911003511608,118.164556962025,258.928247792338,\"(90.4,120]\",259.919625651973\n261.434861039852,118.53164556962,259.288958264236,\"(90.4,120]\",260.361909652044\n261.975848874232,118.898734177215,259.64320461133,\"(90.4,120]\",260.809526742781\n262.534059683523,119.26582278481,259.992245708427,\"(90.4,120]\",261.263152695975\n263.109512235515,119.632911392405,260.337414331317,\"(90.4,120]\",261.723463283416\n263.70221300924,120,260.68005554455,\"(90.4,120]\",262.191134276895\n262.37774829248,121,259.936268515612,\"(120,150]\",261.157008404046\n262.022025295582,121.367088607595,259.782558606082,\"(120,150]\",260.902291950832\n261.682625573538,121.73417721519,259.629196032138,\"(120,150]\",260.655910802838\n261.360466785782,122.101265822785,259.476017063674,\"(120,150]\",260.418241924728\n261.056456664156,122.46835443038,259.322867898182,\"(120,150]\",260.189662281169\n260.771443238858,122.835443037975,259.169654434792,\"(120,150]\",259.970548836825\n260.506142252265,123.20253164557,259.016414860459,\"(120,150]\",259.761278556362\n260.261046983352,123.569620253165,258.863409825536,\"(120,150]\",259.562228404444\n260.036338567609,123.936708860759,258.711212123866,\"(120,150]\",259.373775345737\n259.831938043204,124.303797468354,258.560924330698,\"(120,150]\",259.196431186951\n259.646971406317,124.670886075949,258.413555067993,\"(120,150]\",259.030263237155\n259.479739851004,125.037974683544,258.269557092374,\"(120,150]\",258.874648471689\n259.328446035092,125.405063291139,258.129459975304,\"(120,150]\",258.728953005198\n259.191278681192,125.772151898734,257.993807223463,\"(120,150]\",258.592542952328\n259.066479540759,126.139240506329,257.86308931469,\"(120,150]\",258.464784427724\n258.952390585637,126.506329113924,257.73769650643,\"(120,150]\",258.345043546034\n258.847478603638,126.873417721519,257.617894240164,\"(120,150]\",258.232686421901\n258.750341126726,127.240506329114,257.503817213218,\"(120,150]\",258.127079169972\n258.659700377229,127.607594936709,257.395475432556,\"(120,150]\",258.027587904892\n258.574391679277,127.974683544304,257.292765803338,\"(120,150]\",257.933578741308\n258.499048648906,128.341772151899,257.204875513839,\"(120,150]\",257.851962081372\n258.439692339443,128.708860759494,257.141107532865,\"(120,150]\",257.790399936154\n258.395100939813,129.075949367089,257.096594539857,\"(120,150]\",257.745847739835\n258.364154476478,129.443037974684,257.06628069554,\"(120,150]\",257.715217586009\n258.345435387529,129.810126582278,257.045407749013,\"(120,150]\",257.695421568271\n258.336884623459,130.177215189873,257.029858936972,\"(120,150]\",257.683371780215\n258.335583770052,130.544303797468,257.016376860821,\"(120,150]\",257.675980315436\n258.337706038449,130.911392405063,257.002612496606,\"(120,150]\",257.670159267528\n258.338639276492,131.278481012658,256.987002183677,\"(120,150]\",257.662820730084\n258.333236412077,131.645569620253,256.968517181323,\"(120,150]\",257.6508767967\n258.31613282937,132.012658227848,256.946349956536,\"(120,150]\",257.631241392953\n258.283661253884,132.379746835443,256.923283011204,\"(120,150]\",257.603472132544\n258.241240086789,132.746835443038,256.90008692732,\"(120,150]\",257.570663507055\n258.197048956414,133.113924050633,256.873644621056,\"(120,150]\",257.535346788735\n258.157985062499,133.481012658228,256.842121437175,\"(120,150]\",257.500053249837\n258.128334952432,133.848101265823,256.806293372789,\"(120,150]\",257.467314162611\n258.109195025216,134.215189873418,256.7701265734,\"(120,150]\",257.439660799308\n258.098947484782,134.582278481013,256.740301379578,\"(120,150]\",257.41962443218\n258.094535596465,134.949367088608,256.724937070491,\"(120,150]\",257.409736333478\n258.080626251557,135.316455696203,256.717222417754,\"(120,150]\",257.398924334656\n258.041370719462,135.683544303797,256.69726096349,\"(120,150]\",257.369315841476\n257.986708982998,136.050632911392,256.66725500314,\"(120,150]\",257.326981993069\n257.926915982376,136.417721518987,256.629793106451,\"(120,150]\",257.278354544414\n257.871611037482,136.784810126582,256.588119463491,\"(120,150]\",257.229865250487\n257.829119631912,137.151898734177,256.546772100618,\"(120,150]\",257.187945866265\n257.806031598305,137.518987341772,256.512024695147,\"(120,150]\",257.159028146726\n257.807161896336,137.886075949367,256.491925797361,\"(120,150]\",257.149543846848\n257.835934614831,138.253164556962,256.495914828384,\"(120,150]\",257.165924721608\n257.895004324996,138.620253164557,256.534200726969,\"(120,150]\",257.214602525983\n257.986901056143,138.987341772152,256.617116973756,\"(120,150]\",257.30200901495\n258.111136520499,139.354430379747,256.746417289744,\"(120,150]\",257.428776905122\n258.262839822434,139.721518987342,256.911202729618,\"(120,150]\",257.587021276026\n258.438785059605,140.088607594937,257.103691517762,\"(120,150]\",257.771238288683\n258.635532591102,140.455696202532,257.316325681871,\"(120,150]\",257.975929136486\n258.84910785607,140.822784810127,257.542082169584,\"(120,150]\",258.195595012827\n259.074750930357,141.189873417722,257.77472329184,\"(120,150]\",258.424737111098\n259.306793515162,141.556962025316,258.008919734224,\"(120,150]\",258.657856624693\n259.538707946982,141.924050632911,258.240201547026,\"(120,150]\",258.889454747004\n259.763325074712,142.291139240506,258.464740268135,\"(120,150]\",259.114032671423\n259.973178158877,142.658227848101,258.67900502381,\"(120,150]\",259.326091591344\n260.161021674097,143.025316455696,258.879395798157,\"(120,150]\",259.520208736127\n260.341903128135,143.392405063291,259.077678183462,\"(120,150]\",259.709790655799\n260.530347502172,143.759493670886,259.283823588664,\"(120,150]\",259.907085545418\n260.725933026626,144.126582278481,259.496348663152,\"(120,150]\",260.111140844889\n260.928351033719,144.493670886076,259.713656954512,\"(120,150]\",260.321003994116\n261.137417546036,144.860759493671,259.934027319966,\"(120,150]\",260.535722433001\n261.353079330314,145.227848101266,260.155607872586,\"(120,150]\",260.75434360145\n261.57540796926,145.594936708861,260.376421909472,\"(120,150]\",260.975914939366\n261.804575265967,145.962025316456,260.594392507337,\"(120,150]\",261.199483886652\n262.040806052375,146.329113924051,260.807389714051,\"(120,150]\",261.424097883213\n262.284311225205,146.696202531646,261.013297512699,\"(120,150]\",261.648804368952\n262.535221168548,147.063291139241,261.210094724805,\"(120,150]\",261.872657946676\n262.794193427257,147.430379746835,261.396556269441,\"(120,150]\",262.095374848349\n263.062419681383,147.79746835443,261.572692289577,\"(120,150]\",262.31755598548\n263.340710551205,148.164556962025,261.738921747138,\"(120,150]\",262.539816149171\n263.629564513512,148.53164556962,261.895975747538,\"(120,150]\",262.762770130525\n263.929257581697,148.898734177215,262.044807859589,\"(120,150]\",262.987032720643\n264.239933481329,149.26582278481,262.186503939928,\"(120,150]\",263.213218710629\n264.561676236332,149.632911392405,262.322209546833,\"(120,150]\",263.441942891583\n264.894559943042,150,262.453080166174,\"(120,150]\",263.673820054608"
+    },
+    {
+      "name": ".0/model_prediction2",
+      "source": ".0/model_prediction2_flat",
+      "transform": [
+        {
+          "type": "treefacet",
+          "keys": [
+            "data.group"
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".0/ungroup3/model_prediction4",
+      "format": {
+        "type": "csv",
+        "parse": {
+          "resp_upr_": "number",
+          "pred_": "number",
+          "resp_lwr_": "number",
+          "resp_": "number"
+        }
+      },
+      "values": "\"resp_upr_\",\"pred_\",\"resp_lwr_\",\"resp_\"\n202.091594965132,1,196.062205388611,199.076900176872\n203.15694136512,2.88607594936709,197.615598645204,200.386270005162\n204.199728061264,4.77215189873418,199.112945755402,201.656336908333\n205.217110523524,6.65822784810127,200.549255464012,202.883182993768\n206.206289732454,8.54430379746836,201.919491005246,204.06289036885\n207.164454030573,10.4303797468354,203.218628251348,205.191541140961\n208.088680266389,12.3164556962025,204.441754568578,206.265217417484\n208.975787744465,14.2025316455696,205.584214867139,207.280001305802\n209.822153126194,16.0886075949367,206.641796700401,208.231974913297\n210.623519424303,17.9746835443038,207.610921270404,209.117220347353\n211.373544303144,19.8607594936709,208.487509968156,209.93052713565\n212.061731828187,21.746835443038,209.265118026014,210.6634249271\n212.692701661164,23.6329113924051,209.953080148276,211.32289090472\n213.273408448433,25.5189873417722,210.563383036184,211.918395742309\n213.810771306455,27.4050632911392,211.108048920874,212.459410113665\n214.311810313907,29.2911392405063,211.598999071269,212.955404692588\n214.783746445966,31.1772151898734,212.04795385979,213.415850152878\n215.23405739137,33.0632911392405,212.466376945296,213.850217168333\n215.67049564751,34.9493670886076,212.865457177997,214.267976412754\n216.101081771714,36.8354430379747,213.256115348162,214.678598559938\n216.514351543922,38.7215189873418,213.630440988662,215.072396266292\n216.733212240157,40.6075949367089,213.822957655231,215.278084947694\n216.753712586155,42.493670886076,213.827279516226,215.29049605119\n216.626633344565,44.379746835443,213.68689237606,215.156762860312\n216.402384250654,46.2658227848101,213.445653066526,214.92401865859\n216.130127391476,48.1518987341772,213.148666067632,214.639396729554\n215.857240619227,50.0379746835443,212.842820094242,214.350030356735\n215.629178953259,51.9240506329114,212.576926694066,214.103052823662\n215.48972417102,53.8101265822785,212.401470656715,213.945597413867\n215.48152844785,55.6962025316456,212.368066373911,213.924797410881\n215.629486411224,57.5822784810127,212.512179626095,214.070833018659\n215.720226753345,59.4683544303797,212.633513300471,214.176870026908\n215.722637142581,61.3544303797468,212.686315621193,214.204476381887\n215.694023354709,63.2405063291139,212.706313953743,214.200168654226\n215.689911087558,65.126582278481,212.731015741556,214.210463414557\n215.761908996367,67.0126582278481,212.801845470653,214.28187723351\n215.956329301004,68.8987341772152,212.965524062429,214.460926681716\n216.314245873036,70.7848101265823,213.274010786577,214.794128329807\n216.872957686914,72.6708860759494,213.783039809909,215.327998748412\n217.668150242465,74.5569620253165,214.549958773859,216.109054508162\n218.761056259974,76.4430379746835,215.653695966705,217.20737611334\n220.195636705157,78.3291139240506,217.130777953736,218.663207329447\n221.914216453912,80.2151898734177,218.903582848288,220.4088996511\n223.855605168412,82.1012658227848,220.891401205864,222.373503187138\n225.956476871516,83.9873417721519,223.01565922128,224.486068046398\n228.149614638025,85.873417721519,225.20167403741,226.675644337718\n230.362936304091,87.7594936708861,227.379628035778,228.871282169935\n232.519798677964,89.6455696202532,229.48426462581,231.002031651887\n234.540415179151,91.5316455696203,231.453470605671,232.996942892411\n236.343738722862,93.4177215189873,233.22639327783,234.785066000346\n237.954117173772,95.3037974683544,234.840655099833,236.397386136802\n239.629468463216,97.1898734177215,236.541214948911,238.085341706064\n241.361647610085,99.0759493670886,238.309395350892,239.835521480489\n243.121993798946,100.962025316456,240.107573273961,241.614783536453\n244.880716612254,102.848101265823,241.899255288411,243.389985950332\n246.606352390566,104.73417721519,243.649621206438,245.127986798502\n248.265514641589,106.620253164557,245.325773673085,246.795644157337\n249.823032638177,108.506329113924,246.896599568249,248.359816103213\n251.242488004969,110.392405063291,248.332233420043,249.787360712506\n252.487091339221,112.278481012658,249.603180783961,251.045136061591\n253.55975995862,114.164556962025,250.714793535067,252.137276746844\n254.588346573495,116.050632911392,251.783308103981,253.185827338738\n255.580900102853,117.936708860759,252.813219656779,254.197059879816\n256.531461339813,119.822784810127,253.795668753637,255.163565046725\n257.434339137428,121.708860759494,254.72152789479,256.077933516109\n258.284117157406,123.594936708861,255.581394771826,256.932755964616\n259.075635775016,125.481012658228,256.365610362766,257.720623068891\n259.803936262024,127.367088607595,257.064314749137,258.43412550558\n260.464160852416,129.253164556962,257.667547050244,259.06585395133\n261.051416250279,131.139240506329,258.165381915292,259.608399082786\n261.563021170413,133.025316455696,258.550423016514,260.056722093464\n262.009663274783,134.911392405063,258.82930684899,260.419485061887\n262.396628470066,136.79746835443,259.00505559274,260.700842031403\n262.727094979704,138.683544303797,259.080169281893,260.903632130798\n263.00360737847,140.569620253165,259.057781599244,261.030694488857\n263.228267597969,142.455696202532,258.941468870761,261.084868234365\n263.402920025863,144.341772151899,258.735064966351,261.068992496107\n263.529297555799,146.227848101266,258.442515249938,260.985906402868\n263.609120443392,148.113924050633,258.067777723477,260.838449083434\n263.64415445485,150,257.614764878329,260.62945966659"
+    },
+    {
+      "name": "scale/stroke",
+      "format": {
+        "type": "csv",
+        "parse": {}
+      },
+      "values": "\"domain\"\n\"(0.851,30.8]\"\n\"(30.8,60.6]\"\n\"(60.6,90.4]\"\n\"(90.4,120]\"\n\"(120,150]\""
+    },
+    {
+      "name": "scale/x",
+      "format": {
+        "type": "csv",
+        "parse": {
+          "domain": "number"
+        }
+      },
+      "values": "\"domain\"\n-6.45\n157.45"
+    },
+    {
+      "name": "scale/y",
+      "format": {
+        "type": "csv",
+        "parse": {
+          "domain": "number"
+        }
+      },
+      "values": "\"domain\"\n192.62058766089\n268.336177670763"
+    }
+  ],
+  "scales": [
+    {
+      "name": "stroke",
+      "type": "ordinal",
+      "domain": {
+        "data": "scale/stroke",
+        "field": "data.domain"
+      },
+      "points": true,
+      "sort": false,
+      "range": "category10"
+    },
+    {
+      "name": "x",
+      "domain": {
+        "data": "scale/x",
+        "field": "data.domain"
+      },
+      "zero": false,
+      "nice": false,
+      "clamp": false,
+      "range": "width"
+    },
+    {
+      "name": "y",
+      "domain": {
+        "data": "scale/y",
+        "field": "data.domain"
+      },
+      "zero": false,
+      "nice": false,
+      "clamp": false,
+      "range": "height"
+    }
+  ],
+  "marks": [
+    {
+      "type": "group",
+      "from": {
+        "data": ".0/arrange1"
+      },
+      "marks": [
+        {
+          "type": "line",
+          "properties": {
+            "update": {
+              "x": {
+                "scale": "x",
+                "field": "data.x"
+              },
+              "y": {
+                "scale": "y",
+                "field": "data.y"
+              },
+              "stroke": {
+                "scale": "stroke",
+                "field": "data.group"
+              },
+              "strokeWidth": {
+                "value": 4
+              }
+            },
+            "ggvis": {
+              "data": {
+                "value": ".0/arrange1"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "group",
+      "from": {
+        "data": ".0/model_prediction2"
+      },
+      "marks": [
+        {
+          "type": "area",
+          "properties": {
+            "update": {
+              "y2": {
+                "scale": "y",
+                "field": "data.resp_upr_"
+              },
+              "fillOpacity": {
+                "value": 0.2
+              },
+              "x": {
+                "scale": "x",
+                "field": "data.pred_"
+              },
+              "y": {
+                "scale": "y",
+                "field": "data.resp_lwr_"
+              },
+              "fill": {
+                "field": "data.group"
+              },
+              "strokeDash": {
+                "value": 3
+              },
+              "stroke": {
+                "value": "transparent"
+              }
+            },
+            "ggvis": {
+              "data": {
+                "value": ".0/model_prediction2"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "group",
+      "from": {
+        "data": ".0/model_prediction2"
+      },
+      "marks": [
+        {
+          "type": "line",
+          "properties": {
+            "update": {
+              "strokeWidth": {
+                "value": 2
+              },
+              "x": {
+                "scale": "x",
+                "field": "data.pred_"
+              },
+              "y": {
+                "scale": "y",
+                "field": "data.resp_"
+              },
+              "stroke": {
+                "scale": "stroke",
+                "field": "data.group"
+              },
+              "strokeDash": {
+                "value": 3
+              },
+              "fill": {
+                "value": "transparent"
+              }
+            },
+            "ggvis": {
+              "data": {
+                "value": ".0/model_prediction2"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "area",
+      "properties": {
+        "update": {
+          "y2": {
+            "scale": "y",
+            "field": "data.resp_upr_"
+          },
+          "fillOpacity": {
+            "value": 0.2
+          },
+          "x": {
+            "scale": "x",
+            "field": "data.pred_"
+          },
+          "y": {
+            "scale": "y",
+            "field": "data.resp_lwr_"
+          },
+          "strokeDash": {
+            "value": 3
+          },
+          "fill": {
+            "value": "tomato"
+          },
+          "stroke": {
+            "value": "transparent"
+          }
+        },
+        "ggvis": {
+          "data": {
+            "value": ".0/ungroup3/model_prediction4"
+          }
+        }
+      },
+      "from": {
+        "data": ".0/ungroup3/model_prediction4"
+      }
+    },
+    {
+      "type": "line",
+      "properties": {
+        "update": {
+          "strokeWidth": {
+            "value": 2
+          },
+          "x": {
+            "scale": "x",
+            "field": "data.pred_"
+          },
+          "y": {
+            "scale": "y",
+            "field": "data.resp_"
+          },
+          "strokeDash": {
+            "value": 3
+          },
+          "stroke": {
+            "value": "grey"
+          },
+          "fill": {
+            "value": "transparent"
+          }
+        },
+        "ggvis": {
+          "data": {
+            "value": ".0/ungroup3/model_prediction4"
+          }
+        }
+      },
+      "from": {
+        "data": ".0/ungroup3/model_prediction4"
+      }
+    }
+  ],
+  "legends": [
+    {
+      "orient": "right",
+      "stroke": "stroke",
+      "title": "group"
+    }
+  ],
+  "axes": [
+    {
+      "type": "x",
+      "scale": "x",
+      "orient": "bottom",
+      "layer": "back",
+      "grid": false,
+      "title": "x"
+    },
+    {
+      "type": "y",
+      "scale": "y",
+      "orient": "left",
+      "layer": "back",
+      "grid": false,
+      "title": "y"
+    }
+  ],
+  "padding": null,
+  "ggvis_opts": {
+    "keep_aspect": false,
+    "resizable": true,
+    "padding": {},
+    "duration": 250,
+    "renderer": "svg",
+    "hover_duration": 0,
+    "width": 672,
+    "height": 480
+  },
+  "handlers": null
+};
+ggvis.getPlot("plot_id747244752").parseSpec(plot_id747244752_spec);
+</script>
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>## R version 3.4.0 (2017-04-21)
+## Platform: x86_64-apple-darwin15.6.0 (64-bit)
+## Running under: macOS Sierra 10.12.6
+## 
+## Matrix products: default
+## BLAS: /Library/Frameworks/R.framework/Versions/3.4/Resources/lib/libRblas.0.dylib
+## LAPACK: /Library/Frameworks/R.framework/Versions/3.4/Resources/lib/libRlapack.dylib
+## 
+## locale:
+## [1] en_GB.UTF-8/en_GB.UTF-8/en_GB.UTF-8/C/en_GB.UTF-8/en_GB.UTF-8
+## 
+## attached base packages:
+## [1] stats     graphics  grDevices utils     datasets  base     
+## 
+## other attached packages:
+## [1] bindrcpp_0.2 ggvis_0.4.3  dplyr_0.7.1 
+## 
+## loaded via a namespace (and not attached):
+##  [1] Rcpp_0.12.11     knitr_1.16       bindr_0.1        magrittr_1.5    
+##  [5] xtable_1.8-2     R6_2.2.2         rlang_0.1.1      stringr_1.2.0   
+##  [9] tools_3.4.0      htmltools_0.3.6  lazyeval_0.2.0   yaml_2.1.14     
+## [13] rprojroot_1.2    digest_0.6.12    assertthat_0.2.0 tibble_1.3.3    
+## [17] bookdown_0.4     shiny_1.0.3      glue_1.1.1       evaluate_0.10   
+## [21] mime_0.5         rmarkdown_1.6    blogdown_0.0.44  stringi_1.1.5   
+## [25] compiler_3.4.0   methods_3.4.0    backports_1.1.0  jsonlite_1.5    
+## [29] httpuv_1.3.3     pkgconfig_2.0.1</code></pre>
+</div>

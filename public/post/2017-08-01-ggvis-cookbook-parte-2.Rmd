@@ -1,0 +1,79 @@
+---
+title: Galería ggvis - Parte 2
+author: Alberto Negron
+date: '2017-08-02'
+slug: ggvis-galeria-parte-2
+categories:
+  - R
+tags:
+  - gráficos
+  - R
+description: ''
+featured: ''
+featuredalt: ''
+featuredpath: ''
+linktitle: ''
+---
+
+
+La segunda parte de la galería. No pude presentar todos los gráficos en un sólo post (creo que algo anda mal con la plantilla del blog pero la verdad ahorita no tengo tiempo de revisarlo).
+
+Si les parece interesante, dejen sus comentarios.
+
+```{r global_options, echo=FALSE}
+knitr::opts_chunk$set(tidy=F)
+```
+
+
+
+```{r libs, echo=TRUE, message=FALSE, warning=FALSE}
+library(dplyr)
+library(ggvis)
+
+```
+
+
+## Bar plots
+```{r bar_plot}
+hec <- as.data.frame(xtabs(Freq ~ Hair + Eye, HairEyeColor))
+hec %>% ggvis(x = ~Hair, y = ~Freq, fill = ~Eye, fillOpacity := 0.5) %>%
+  compute_stack(~Freq, ~Hair) %>%
+  layer_rects(y = ~stack_lwr_, y2 = ~stack_upr_, width = band())
+```
+
+
+## BOD
+
+```{r bod_jour}
+BOD %>% ggvis(~factor(Time),~demand) %>% 
+        layer_lines(stroke:="#bdbdbd") %>% 
+        layer_points(fill:="#feb24c",stroke:="#f03b20") %>% 
+        layer_text(text:=~demand,dx:=0,dy:=-10,fontSize:=12,fontStyle:="italic",font:="Helvetica Neue") %>% 
+        add_axis("x",title="Days",grid=F) %>% 
+        add_axis("y",title="Biochemical Oxygen Demand^(mg/l)",
+                 grid=F,properties = axis_props(ticks = list(stroke = "white"),
+                                                majorTicks = list(stroke = "white"),
+                                                labels = list(fill = "white"),
+                                                axis=list(stroke ="white")
+                                                )
+                 )
+```
+
+
+
+## Grouped plots
+
+```{r co2_jour}
+ CO2 %>% group_by(Type,Treatment) %>%  
+        ggvis(~uptake,~conc) %>% 
+        layer_points(fill=~interaction(Type,Treatment)) %>% 
+        layer_smooths(stroke=~interaction(Type,Treatment)) %>% 
+        add_axis("x",title="Uptake",grid=F) %>% 
+        add_axis("y",title="Concentration (ppm)",grid=F)
+
+```
+
+
+```{r session}
+sessionInfo()
+```

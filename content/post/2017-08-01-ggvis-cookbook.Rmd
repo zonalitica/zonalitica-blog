@@ -1,0 +1,176 @@
+---
+title: Galería ggvis - Parte 1
+author: Alberto Negron
+date: '2017-08-01'
+slug: ggvis-galeria-parte-1
+categories:
+  - R
+tags:
+  - R
+  - gráficos
+  - ggvis
+description: ''
+featured: ''
+featuredalt: ''
+featuredpath: ''
+linktitle: ''
+---
+
+
+Esta galería es un recordatorio para mí de como crear ciertos gráficos complejos con `ggvis` y tomé la oportunidad de compartirlo con ustedes. Espero que los ejemplos sean de valor y les den ideas de como construir gráficos más complejos.
+
+Dejen sus comentarios al final de la entrada.
+
+```{r global_options, echo=FALSE}
+knitr::opts_chunk$set(tidy=F)
+```
+
+
+
+```{r libs, echo=TRUE, message=FALSE, warning=FALSE}
+library(dplyr)
+library(ggvis)
+
+```
+
+
+
+## Timelines
+```{r timelines}
+ppl <- read.csv(textConnection("Napoleon Bonaparte,1769,1821
+                               Simón Bolívar,1783,1830"),
+                header = F,stringsAsFactors = F,col.names =c("name","born","died") )
+
+```
+
+```{r tlines}
+ppl %>% ggvis(.,y=~name) %>% 
+        layer_rects(x=~born,x2=~died,height:=1) %>% 
+        layer_points(x=~born) %>% 
+        layer_points(x=~died,fill:="red",stroke:="black") %>% 
+   add_axis("x",grid = F, title="Born/Die", format = "d")
+        
+
+```
+
+
+
+## Falkensee
+```{r falk_data}
+data <- read.csv(textConnection("1875,1309
+                                  1890,1558
+                                  1910,4512
+                                  1925,8180
+                                  1933,15915
+                                  1939,24824
+                                  1946,28275
+                                  1950,29189
+                                  1964,29881
+                                  1971,26007
+                                  1981,24029
+                                  1985,23340
+                                  1989,22307
+                                  1990,22087
+                                  1991,22139
+                                  1992,22105
+                                  1993,22242
+                                  1994,22801
+                                  1995,24273
+                                  1996,25640
+                                  1997,27393
+                                  1998,29505
+                                  1999,32124
+                                  2000,33791
+                                  2001,35297
+                                  2002,36179
+                                  2003,36829
+                                  2004,37493
+                                  2005,38376
+                                  2006,39008
+                                  2007,39366
+                                  2008,39821
+                                  2009,40179
+                                  2010,40511
+                                  2011,40465
+                                  2012,40905
+                                  2013,41258
+                                  2014,41777"
+                                ),
+                 header=F,col.names=c("year","pop")) 
+  annotation <- read.csv(textConnection("1933,1945,0,Nazi Rule,#CBCBCB
+                               1948,1989,0,GDR (East Germany),#FFCBCB"),header=F,col.names=c('x1','x2','y1','desc','color'),stringsAsFactors=F)
+  annotation$y2 <- max(data$pop)
+
+```
+
+```{r falk_jour}
+ data %>% ggvis(x=~year,y=~pop) %>%  
+        layer_rects(data=group_by(annotation,desc),
+                        x=~x1,x2=~x2,y=~y1,y2=~y2,
+                        fill=~desc,
+                        fillOpacity:=0.5, strokeOpacity:=0.5,strokeWidth:=0) %>% 
+        scale_nominal("fill",range=c("#CBCBCB","#FFCBCB")) %>%
+        layer_lines(stroke := "#4682B4", strokeWidth := 4) %>% 
+        layer_points(stroke := "#4682B4", fill := "white") %>%
+        add_relative_scales() %>%
+        add_legend("fill",
+                    title="Period",
+                    properties = legend_props(
+                                              legend = list(x = scaled_value("x_rel", 0.1),
+                                                            y = scaled_value("y_rel",0.9)
+                                                           ),
+                                              symbols=list(shape="square")
+                                                )
+                      ) %>% 
+        add_axis("x",grid = F, title="Year", values = seq(1880,2010,10), format = "d",
+           properties = axis_props(labels = list(fontSize=12), title = list(fontSize=16) )) %>% 
+        add_axis("y",title="Population",title_offset=60,properties = axis_props(labels = list(fontSize=12), 
+                                                                          title = list(fontSize=16) ))%>% 
+        add_axis("x", orient = "top", ticks = 0, title = "Population of Falkensee from 1875 to 2014 ",
+             properties = axis_props( axis = list(stroke = "white"), labels = list(fontSize = 0),
+                                      title = list(fontSize=20)))
+                 
+                 
+
+```
+
+
+## AirPassengers
+```{r airP}
+AirPassengers2 <- as.data.frame(AirPassengers) %>% 
+                 mutate(year=seq(as.Date("1949-01-01"),as.Date("1960-12-31"), by="1 month")) %>% 
+                 select(year,passangers=x)
+```
+
+```{r air_jour}
+AirPassengers2 %>% ggvis(~year,~passangers) %>% layer_lines(stroke:="darkred",strokeWidth:=2) %>% 
+                  layer_smooths(stroke:="#67a9cf",se=T,span=0.75,fill:="grey96") %>% 
+                  add_axis("x",grid=F,title="") %>% 
+                  add_axis("y",grid=F,title="Monthly Passanger Numbers")
+
+```
+
+# BJSales
+
+```{r bjs}
+BJsales2 <- as.data.frame(BJsales)  %>% mutate(y=x,x=seq(1,length(y),1),group=cut(x,5))
+
+```
+
+```{r bj_jour}
+BJsales2 %>% group_by(group) %>% ggvis(~x,~y) %>% 
+        layer_lines(stroke=~group,strokeWidth:=4) %>% 
+        layer_smooths(stroke=~group,se=T, fill:=~group, strokeDash:=3) %>% 
+        add_axis("x",grid=F) %>% 
+        add_axis("y",grid=F) %>% 
+        ungroup() %>% 
+        layer_smooths(strokeDash:=3,stroke:="grey",se=T,fill:="tomato")
+
+```
+
+
+
+
+```{r session}
+sessionInfo()
+```

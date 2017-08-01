@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ggvis on </title>
+    <link>/tags/ggvis/</link>
+    <description>Recent content in Ggvis on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>es-es</language>
+    <lastBuildDate>Tue, 01 Aug 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/ggvis/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Galería ggvis - Parte 1</title>
+      <link>/post/ggvis-galeria-parte-1/</link>
+      <pubDate>Tue, 01 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/ggvis-galeria-parte-1/</guid>
+      <description>var lodash = _.noConflict();  Esta galería es un recordatorio para mí de como crear ciertos gráficos complejos con ggvis y tomé la oportunidad de compartirlo con ustedes. Espero que los ejemplos sean de valor y les den ideas de como construir gráficos más complejos.
+Dejen sus comentarios al final de la entrada.
+library(dplyr) library(ggvis) Timelines ppl &amp;lt;- read.csv(textConnection(&amp;quot;Napoleon Bonaparte,1769,1821 Simón Bolívar,1783,1830&amp;quot;), header = F,stringsAsFactors = F,col.</description>
+    </item>
+    
+  </channel>
+</rss>

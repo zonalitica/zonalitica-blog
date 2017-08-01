@@ -29,7 +29,7 @@
 
 
 
-<meta property="og:updated_time" content="2017-07-26T00:00:00&#43;00:00"/>
+<meta property="og:updated_time" content="2017-08-02T00:00:00&#43;00:00"/>
 
 
 
@@ -207,11 +207,11 @@ ga('send', 'pageview');
 
                 
                     <li>
-                        <a href="/post/explicacion-interactiva-sobre-histogramas/"><p>Explicación interactiva sobre Histogramas</p></a>
+                        <a href="/post/ggvis-galeria-parte-2/"><p>Galería ggvis - Parte 2</p></a>
                     </li>
                 
                     <li>
-                        <a href="/post/instalar-rjava-en-mac-osx/"><p>Instalar rJava en Mac OSX</p></a>
+                        <a href="/post/ggvis-galeria-parte-1/"><p>Galería ggvis - Parte 1</p></a>
                     </li>
                 
             </ul>
@@ -227,6 +227,132 @@ ga('send', 'pageview');
         
             
         
+
+        
+            <article class="post">
+    <header>
+    <div class="title">
+        
+            <h2><a href="/post/ggvis-galeria-parte-2/">Galería ggvis - Parte 2</a></h2>
+        
+        
+    </div>
+    <div class="meta">
+        
+            
+        
+
+        <time class="published"
+            datetime='2017-08-02'>
+            2017-08-02</time>
+        <span class="author">Alberto Negron</span>
+        
+            <p>7 minutos de lectura</p>
+        
+        
+    </div>
+</header>
+
+    
+
+    <p>var lodash = _.noConflict();  La segunda parte de la galería. No pude presentar todos los gráficos en un sólo post (creo que algo anda mal con la plantilla del blog pero la verdad ahorita no tengo tiempo de revisarlo).
+Si les parece interesante, dejen sus comentarios.
+library(dplyr) library(ggvis) Bar plots hec &lt;- as.data.frame(xtabs(Freq ~ Hair + Eye, HairEyeColor)) hec %&gt;% ggvis(x = ~Hair, y = ~Freq, fill = ~Eye, fillOpacity := 0.</p>
+
+    <footer>
+        <ul class="actions">
+            <li><a href="/post/ggvis-galeria-parte-2/" class="button big">Sigue Leyendo</a></li>
+        </ul>
+        <ul class="stats">
+    
+        
+
+        
+        
+            <li>
+                
+                
+                    
+
+                    
+                        Categoría
+                    
+                
+            </li>
+        
+    
+
+    
+    
+        <li><a href='/categories/r'>R</a></li>
+    
+</ul>
+
+    </footer>
+</article>
+
+        
+            <article class="post">
+    <header>
+    <div class="title">
+        
+            <h2><a href="/post/ggvis-galeria-parte-1/">Galería ggvis - Parte 1</a></h2>
+        
+        
+    </div>
+    <div class="meta">
+        
+            
+        
+
+        <time class="published"
+            datetime='2017-08-01'>
+            2017-08-01</time>
+        <span class="author">Alberto Negron</span>
+        
+            <p>11 minutos de lectura</p>
+        
+        
+    </div>
+</header>
+
+    
+
+    <p>var lodash = _.noConflict();  Esta galería es un recordatorio para mí de como crear ciertos gráficos complejos con ggvis y tomé la oportunidad de compartirlo con ustedes. Espero que los ejemplos sean de valor y les den ideas de como construir gráficos más complejos.
+Dejen sus comentarios al final de la entrada.
+library(dplyr) library(ggvis) Timelines ppl &lt;- read.csv(textConnection(&quot;Napoleon Bonaparte,1769,1821 Simón Bolívar,1783,1830&quot;), header = F,stringsAsFactors = F,col.</p>
+
+    <footer>
+        <ul class="actions">
+            <li><a href="/post/ggvis-galeria-parte-1/" class="button big">Sigue Leyendo</a></li>
+        </ul>
+        <ul class="stats">
+    
+        
+
+        
+        
+            <li>
+                
+                
+                    
+
+                    
+                        Categoría
+                    
+                
+            </li>
+        
+    
+
+    
+    
+        <li><a href='/categories/r'>R</a></li>
+    
+</ul>
+
+    </footer>
+</article>
 
         
             <article class="post">
@@ -284,134 +410,6 @@ Aran Lunzer y Amelia McNamara han creado una explicación detallada e interactiv
     
     
         <li><a href='/categories/stats'>stats</a></li>
-    
-</ul>
-
-    </footer>
-</article>
-
-        
-            <article class="post">
-    <header>
-    <div class="title">
-        
-            <h2><a href="/post/instalar-rjava-en-mac-osx/">Instalar rJava en Mac OSX</a></h2>
-        
-        
-    </div>
-    <div class="meta">
-        
-            
-        
-
-        <time class="published"
-            datetime='2017-07-19'>
-            2017-07-19</time>
-        <span class="author">Alberto Negron</span>
-        
-            <p>2 minutos de lectura</p>
-        
-        
-    </div>
-</header>
-
-    
-
-    <p>Esta es una receta para instalar correctamente el paquete rJava en Mac
-El Error Error producido al intentar cargar rJava en Rstudio.
-library(rJava) Error : .onLoad failed in loadNamespace() for &#39;rJava&#39;, details: call: dyn.load(file, DLLpath = DLLpath, &hellip;) error: unable to load shared object &#39;/Library/Frameworks/R.framework/Versions/3.2/Resources/library/rJava/libs/rJava.so&#39;: dlopen(/Library/Frameworks/R.framework/Versions/3.2/Resources/library/rJava/libs/rJava.so, 6): Library not loaded: @rpath/libjvm.dylib Referenced from: /Library/Frameworks/R.framework/Versions/3.2/Resources/library/rJava/libs/rJava.so Reason: image not found Error: package or namespace load failed for ‘rJava’  La Receta  Instalar howebrew (si aún no lo han instalado)  /usr/bin/ruby -e &quot;$(curl -fsSL <a href="https://raw">https://raw</a>.</p>
-
-    <footer>
-        <ul class="actions">
-            <li><a href="/post/instalar-rjava-en-mac-osx/" class="button big">Sigue Leyendo</a></li>
-        </ul>
-        <ul class="stats">
-    
-        
-
-        
-        
-            <li>
-                
-                
-                    
-
-                    
-                        Categoría
-                    
-                
-            </li>
-        
-    
-
-    
-    
-        <li><a href='/categories/tips'>tips</a></li>
-    
-</ul>
-
-    </footer>
-</article>
-
-        
-            <article class="post">
-    <header>
-    <div class="title">
-        
-            <h2><a href="/post/generar-datos-falsos-o-de-prueba/">3 Métodos para generar datos falsos o de prueba</a></h2>
-        
-        
-    </div>
-    <div class="meta">
-        
-            
-        
-
-        <time class="published"
-            datetime='2017-07-12'>
-            2017-07-12</time>
-        <span class="author">Alberto Negron</span>
-        
-            <p>7 minutos de lectura</p>
-        
-        
-    </div>
-</header>
-
-    
-
-    <p>Cuando se esta desarrollando una aplicación, hay asegurarse de probarla bajo condiciones que simulan de cerca un entorno de producción. Ya sea que estas desarrollando una interfaz de usuario o un modelo predictivo si introduces datos manualmente en tu entorno de prueba de un registro a la vez o creando unos algunos casos ficticios en Excel, nunca vas a acumular el volumen y la variedad de datos que tu aplicación acumulará en unos pocos días en producción.</p>
-
-    <footer>
-        <ul class="actions">
-            <li><a href="/post/generar-datos-falsos-o-de-prueba/" class="button big">Sigue Leyendo</a></li>
-        </ul>
-        <ul class="stats">
-    
-        
-
-        
-        
-            <li>
-                
-                
-                    
-
-                    
-                        Categorías
-                    
-                
-            </li>
-        
-    
-
-    
-    
-        <li><a href='/categories/herramientas'>herramientas</a></li>
-    
-        <li><a href='/categories/python'>Python</a></li>
-    
-        <li><a href='/categories/r'>R</a></li>
     
 </ul>
 
@@ -536,13 +534,13 @@ library(rJava) Error : .onLoad failed in loadNamespace() for &#39;rJava&#39;, de
                     <li>
                         <article>
                             <header>
-                                <h3><a href="/post/explicacion-interactiva-sobre-histogramas/">Explicación interactiva sobre Histogramas</a></h3>
+                                <h3><a href="/post/ggvis-galeria-parte-2/">Galería ggvis - Parte 2</a></h3>
                                 
                                     
                                 
                                 <time class="published" datetime=
-                                    '2017-07-26'>
-                                    July 26, 2017</time>
+                                    '2017-08-02'>
+                                    August 2, 2017</time>
                             </header>
                         </article>
                     </li>
@@ -550,13 +548,13 @@ library(rJava) Error : .onLoad failed in loadNamespace() for &#39;rJava&#39;, de
                     <li>
                         <article>
                             <header>
-                                <h3><a href="/post/instalar-rjava-en-mac-osx/">Instalar rJava en Mac OSX</a></h3>
+                                <h3><a href="/post/ggvis-galeria-parte-1/">Galería ggvis - Parte 1</a></h3>
                                 
                                     
                                 
                                 <time class="published" datetime=
-                                    '2017-07-19'>
-                                    July 19, 2017</time>
+                                    '2017-08-01'>
+                                    August 1, 2017</time>
                             </header>
                         </article>
                     </li>
@@ -594,6 +592,15 @@ library(rJava) Error : .onLoad failed in loadNamespace() for &#39;rJava&#39;, de
                     <li>
                         <article>
                             <header>
+                                <a href="/categories/r/">R</a>
+                                <span style="float:right;">3</span>
+                            </header>
+                        </article>
+                    </li>
+                
+                    <li>
+                        <article>
+                            <header>
                                 <a href="/categories/herramientas/">herramientas</a>
                                 <span style="float:right;">3</span>
                             </header>
@@ -613,15 +620,6 @@ library(rJava) Error : .onLoad failed in loadNamespace() for &#39;rJava&#39;, de
                         <article>
                             <header>
                                 <a href="/categories/python/">Python</a>
-                                <span style="float:right;">1</span>
-                            </header>
-                        </article>
-                    </li>
-                
-                    <li>
-                        <article>
-                            <header>
-                                <a href="/categories/r/">R</a>
                                 <span style="float:right;">1</span>
                             </header>
                         </article>

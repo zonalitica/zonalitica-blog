@@ -3,6 +3,16 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/post/ggvis-galeria-parte-2/</loc>
+    <lastmod>2017-08-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/ggvis-galeria-parte-1/</loc>
+    <lastmod>2017-08-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/post/explicacion-interactiva-sobre-histogramas/</loc>
     <lastmod>2017-07-26T00:00:00+00:00</lastmod>
   </url>
@@ -44,7 +54,7 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2017-07-26T00:00:00+00:00</lastmod>
+    <lastmod>2017-08-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -69,6 +79,18 @@
   <url>
     <loc>/tags/favoritos/</loc>
     <lastmod>2017-07-04T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/ggvis/</loc>
+    <lastmod>2017-08-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/gr%C3%A1ficos/</loc>
+    <lastmod>2017-08-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -104,7 +126,7 @@
   
   <url>
     <loc>/post/</loc>
-    <lastmod>2017-07-26T00:00:00+00:00</lastmod>
+    <lastmod>2017-08-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -122,13 +144,13 @@
   
   <url>
     <loc>/tags/r/</loc>
-    <lastmod>2017-07-19T00:00:00+00:00</lastmod>
+    <lastmod>2017-08-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/categories/r/</loc>
-    <lastmod>2017-07-12T00:00:00+00:00</lastmod>
+    <lastmod>2017-08-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
