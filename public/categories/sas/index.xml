@@ -2,13 +2,13 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>SAS on </title>
-    <link>/tags/sas/</link>
+    <link>/categories/sas/</link>
     <description>Recent content in SAS on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>es-es</language>
     <lastBuildDate>Thu, 24 Aug 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/tags/sas/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/categories/sas/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -19,17 +19,6 @@
       <guid>/post/3-nuevos-videos-sobre-programaci%C3%B3n-sas/</guid>
       <description>Aquí esta la lista de mis nuevos vídeos sobre programación SAS:
  Componentes de un Programa SAS Como orgranizar tus programas y archivos SAS El concepto de Librerías en SAS   </description>
-    </item>
-    
-    <item>
-      <title>Bienvenidos (Otra vez!!!)</title>
-      <link>/post/bienvenidos/</link>
-      <pubDate>Fri, 30 Jun 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/post/bienvenidos/</guid>
-      <description>Bienvenidos al relazamiento de Zonalítica!!!.
-Hace poco menos de 1 año lance este blog como una iniciativa en español para difundir información sobre Data Science, Big Data, Estadística y otros temas que mucho me apacionan! En ese momento pensé que Wordpress sería la mejor alternativa pero me equivoqué y me tomó algo de tiempo para corregir la situación.
-Pero ya estoy aquí con nueva plataforma y con muchas ganas de compartir valiosa información para los adictos (y no tan adictos) al apasionante mundo de los datos.</description>
     </item>
     
   </channel>
