@@ -6,10 +6,20 @@
     <description>Recent content in Python on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>es-es</language>
-    <lastBuildDate>Wed, 12 Jul 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 24 Aug 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/python/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Introducción a Expresiones Regulares con Python</title>
+      <link>/post/introduccion-a-expresiones-regulares-con-python/</link>
+      <pubDate>Thu, 24 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/introduccion-a-expresiones-regulares-con-python/</guid>
+      <description>Este es el primer post de una serie de artículos sobre NLP. Para los que no conocen que es el procesamiento de lenguajes naturales o Natural Language Processing (NLP) aquí les dejo una corta pero concisa definición:
+ &amp;hellip;es un campo de las ciencias de la computación, inteligencia artificial y lingüística que estudia las interacciones entre las computadoras y el lenguaje humano. El NLP se ocupa de la formulación e investigación de mecanismos eficaces computacionalmente para la comunicación entre personas y máquinas por medio de lenguajes naturales.</description>
+    </item>
     
     <item>
       <title>3 Métodos para generar datos falsos o de prueba</title>

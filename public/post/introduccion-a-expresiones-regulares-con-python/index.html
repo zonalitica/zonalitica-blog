@@ -1,0 +1,1162 @@
+<!DOCTYPE HTML>
+
+<html>
+    <head>
+        
+            
+                <title>Introducción a Expresiones Regulares con Python</title>
+            
+        
+
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="generator" content="Hugo 0.22.1" />
+        
+
+
+        
+            <meta name="author" content="Alberto Negron">
+        
+        
+            
+                <meta name="description" content="Blog en Español especializado en Data Science, Big Data, Estadística y Open Data">
+            
+        
+
+        
+
+  <meta name="twitter:card" content="summary"/>
+
+
+
+<meta name="twitter:text:title" content="Introducción a Expresiones Regulares con Python"/>
+<meta name="twitter:title" content="Introducción a Expresiones Regulares con Python"/>
+<meta name="twitter:description" content="Este es el primer post de una serie de artículos sobre NLP. Para los que no conocen que es el procesamiento de lenguajes naturales o Natural Language Processing (NLP) aquí les dejo una corta pero concisa definición:
+ &hellip;es un campo de las ciencias de la computación, inteligencia artificial y lingüística que estudia las interacciones entre las computadoras y el lenguaje humano. El NLP se ocupa de la formulación e investigación de mecanismos eficaces computacionalmente para la comunicación entre personas y máquinas por medio de lenguajes naturales."/>
+<meta name="twitter:site" content="@zonalitica"/>
+
+        <meta property="og:title" content="Introducción a Expresiones Regulares con Python" />
+<meta property="og:description" content="Este es el primer post de una serie de artículos sobre NLP. Para los que no conocen que es el procesamiento de lenguajes naturales o Natural Language Processing (NLP) aquí les dejo una corta pero concisa definición:
+ &hellip;es un campo de las ciencias de la computación, inteligencia artificial y lingüística que estudia las interacciones entre las computadoras y el lenguaje humano. El NLP se ocupa de la formulación e investigación de mecanismos eficaces computacionalmente para la comunicación entre personas y máquinas por medio de lenguajes naturales." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/introduccion-a-expresiones-regulares-con-python/" />
+
+
+
+<meta property="article:published_time" content="2017-08-24T00:00:00&#43;00:00"/>
+<meta property="article:modified_time" content="2017-08-24T00:00:00&#43;00:00"/>
+
+
+
+
+
+
+
+
+
+
+
+        
+<meta itemprop="name" content="Introducción a Expresiones Regulares con Python">
+<meta itemprop="description" content="Este es el primer post de una serie de artículos sobre NLP. Para los que no conocen que es el procesamiento de lenguajes naturales o Natural Language Processing (NLP) aquí les dejo una corta pero concisa definición:
+ &hellip;es un campo de las ciencias de la computación, inteligencia artificial y lingüística que estudia las interacciones entre las computadoras y el lenguaje humano. El NLP se ocupa de la formulación e investigación de mecanismos eficaces computacionalmente para la comunicación entre personas y máquinas por medio de lenguajes naturales.">
+
+
+<meta itemprop="dateModified" content="2017-08-24T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="1321">
+
+
+
+<meta itemprop="keywords" content="Python,R,blogdown,herramientas,open data,stats,tips,R,SAS,d3js,favoritos,ggvis,gráficos,herramientas,java,nlp,osx,python,regex," />
+
+        
+
+        
+
+        
+        
+            
+        
+
+        
+        
+            <link rel="stylesheet" href="/css/google-font.css" />
+            <link rel="stylesheet" href="/css/font-awesome.min.css" />
+            <link rel="stylesheet" href="/css/main.css" />
+            <link rel="stylesheet" href="/css/add-on.css" />
+            <link rel="stylesheet" href="/css/monokai-sublime.css">
+        
+
+        
+
+        
+        
+        
+            
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-66899932-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+        
+    </head>
+    <body>
+
+        
+        <div id="wrapper">
+
+    
+    
+<header id="header">
+    
+        <h2><a href="/">Zonalítica</i></a></h2>
+    
+
+    <nav class="links">
+        <ul>
+            
+                <li>
+                    <a href="/post">
+                        
+                            <i class="fa fa-newspaper-o">&nbsp;</i>Blog
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="/categories">
+                        Categorías
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="https://www.youtube.com/channel/UCFlEAg_0gMwwRXaceWTSwRQ">
+                        Youtube
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="/about">
+                        Acerca
+                    </a>
+                </li>
+            
+        </ul>
+    </nav>
+    <nav class="main">
+        <ul>
+            
+            <li id="share-nav" class="share-menu" style="display:none;">
+                <a class="fa-share-alt" href="#share-menu">Share</a>
+            </li>
+            
+            <li class="search">
+                <a class="fa-search" href="#search">Search</a>
+                <form id="search" method="get" action="//google.com/search">
+                    <input type="text" name="q" placeholder="Search" />
+                    <input type="hidden" name="q" value="site:/">
+                </form>
+            </li>
+            <li class="menu">
+                <a class="fa-bars" href="#menu">Menu</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+
+<section id="menu">
+
+    
+        <section>
+            <form class="search" method="get" action="//google.com/search">
+                <input type="text" name="q" placeholder="Search" />
+                <input type="hidden" name="q" value="site:/">
+            </form>
+        </section>
+
+    
+        <section>
+            <ul class="links">
+                
+                    <li>
+                        <a href="/post">
+                            <h3>
+                                
+                                    <i class="fa fa-newspaper-o">&nbsp;</i>
+                                
+                                Blog
+                            </h3>
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories">
+                            <h3>
+                                
+                                Categorías
+                            </h3>
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="https://www.youtube.com/channel/UCFlEAg_0gMwwRXaceWTSwRQ">
+                            <h3>
+                                
+                                Youtube
+                            </h3>
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/about">
+                            <h3>
+                                
+                                Acerca
+                            </h3>
+                        </a>
+                    </li>
+                
+            </ul>
+        </section>
+
+    
+        <section>
+            <ul class="links">
+                <header>
+                    <h3>Recent Posts</h3>
+                </header>
+                
+                    
+                
+
+                
+                    <li>
+                        <a href="/post/introduccion-a-expresiones-regulares-con-python/"><p>Introducción a Expresiones Regulares con Python</p></a>
+                    </li>
+                
+                    <li>
+                        <a href="/post/ggvis-galeria-parte-2/"><p>Galería ggvis - Parte 2</p></a>
+                    </li>
+                
+            </ul>
+        </section>
+
+    
+        
+</section>
+
+    <section id="share-menu">
+    <section id="social-share-nav">
+        <ul class="links">
+            <header>
+                <h3>Share this post <i class="fa fa-smile-o"></i></h3>
+            </header>
+            
+
+
+<li><a href="//twitter.com/share?url=%2fpost%2fintroduccion-a-expresiones-regulares-con-python%2f&text=Introducci%c3%b3n%20a%20Expresiones%20Regulares%20con%20Python&via=zonalitica" target="_blank" class="share-btn twitter">
+    <i class="fa fa-twitter"></i>
+    <p>Twitter</p>
+</a></li>
+
+
+<li><a href="//plus.google.com/share?url=%2fpost%2fintroduccion-a-expresiones-regulares-con-python%2f" target="_blank" class="share-btn google-plus">
+    <i class="fa fa-google-plus"></i>
+    <p>Google+</p>
+</a></li>
+
+
+<li><a href="//www.facebook.com/sharer/sharer.php?u=%2fpost%2fintroduccion-a-expresiones-regulares-con-python%2f" target="_blank" class="share-btn facebook">
+    <i class="fa fa-facebook"></i>
+    <p>Facebook</p>
+</a></li>
+
+
+<li><a href="//reddit.com/submit?url=%2fpost%2fintroduccion-a-expresiones-regulares-con-python%2f&title=Introducci%c3%b3n%20a%20Expresiones%20Regulares%20con%20Python" target="_blank" class="share-btn reddit">
+    <i class="fa fa-reddit-alien"></i>
+    <p>Reddit</p>
+</a></li>
+
+
+<li><a href="//www.linkedin.com/shareArticle?url=%2fpost%2fintroduccion-a-expresiones-regulares-con-python%2f&title=Introducci%c3%b3n%20a%20Expresiones%20Regulares%20con%20Python" target="_blank" class="share-btn linkedin">
+    <i class="fa fa-linkedin"></i>
+    <p>LinkedIn</p>
+</a></li>
+
+
+<li><a href="//www.stumbleupon.com/submit?url=%2fpost%2fintroduccion-a-expresiones-regulares-con-python%2f&title=Introducci%c3%b3n%20a%20Expresiones%20Regulares%20con%20Python" target="_blank" class="share-btn stumbleupon">
+    <i class="fa fa-stumbleupon"></i>
+    <p>StumbleUpon</p>
+</a></li>
+
+
+<li><a href="mailto:?subject=Check out this post by Alberto%20Negron&body=%2fpost%2fintroduccion-a-expresiones-regulares-con-python%2f" target="_blank" class="share-btn email">
+    <i class="fa fa-envelope"></i>
+    <p>Email</p>
+</a></li>
+
+        </ul>
+    </section>
+</section>
+
+    
+    <div id="main">
+        
+        
+        <article class="post">
+    <header>
+    <div class="title">
+        
+            <h1><a href="/post/introduccion-a-expresiones-regulares-con-python/">Introducción a Expresiones Regulares con Python</a></h1>
+            
+        
+        
+    </div>
+    <div class="meta">
+        
+            
+        
+
+        <time class="published"
+            datetime='2017-08-24'>
+            2017-08-24</time>
+        <span class="author">Alberto Negron</span>
+        
+            <p>7 minutos de lectura</p>
+        
+        
+    </div>
+</header>
+
+
+    <section id="social-share">
+        <ul class="icons">
+            
+
+
+<li><a href="//twitter.com/share?url=%2fpost%2fintroduccion-a-expresiones-regulares-con-python%2f&text=Introducci%c3%b3n%20a%20Expresiones%20Regulares%20con%20Python&via=zonalitica" target="_blank" class="share-btn twitter">
+    <i class="fa fa-twitter"></i>
+    <p>Twitter</p>
+</a></li>
+
+
+<li><a href="//plus.google.com/share?url=%2fpost%2fintroduccion-a-expresiones-regulares-con-python%2f" target="_blank" class="share-btn google-plus">
+    <i class="fa fa-google-plus"></i>
+    <p>Google+</p>
+</a></li>
+
+
+<li><a href="//www.facebook.com/sharer/sharer.php?u=%2fpost%2fintroduccion-a-expresiones-regulares-con-python%2f" target="_blank" class="share-btn facebook">
+    <i class="fa fa-facebook"></i>
+    <p>Facebook</p>
+</a></li>
+
+
+<li><a href="//reddit.com/submit?url=%2fpost%2fintroduccion-a-expresiones-regulares-con-python%2f&title=Introducci%c3%b3n%20a%20Expresiones%20Regulares%20con%20Python" target="_blank" class="share-btn reddit">
+    <i class="fa fa-reddit-alien"></i>
+    <p>Reddit</p>
+</a></li>
+
+
+<li><a href="//www.linkedin.com/shareArticle?url=%2fpost%2fintroduccion-a-expresiones-regulares-con-python%2f&title=Introducci%c3%b3n%20a%20Expresiones%20Regulares%20con%20Python" target="_blank" class="share-btn linkedin">
+    <i class="fa fa-linkedin"></i>
+    <p>LinkedIn</p>
+</a></li>
+
+
+<li><a href="//www.stumbleupon.com/submit?url=%2fpost%2fintroduccion-a-expresiones-regulares-con-python%2f&title=Introducci%c3%b3n%20a%20Expresiones%20Regulares%20con%20Python" target="_blank" class="share-btn stumbleupon">
+    <i class="fa fa-stumbleupon"></i>
+    <p>StumbleUpon</p>
+</a></li>
+
+
+<li><a href="mailto:?subject=Check out this post by Alberto%20Negron&body=%2fpost%2fintroduccion-a-expresiones-regulares-con-python%2f" target="_blank" class="share-btn email">
+    <i class="fa fa-envelope"></i>
+    <p>Email</p>
+</a></li>
+
+        </ul>
+    </section>
+    
+
+    <div id="content">
+        
+
+<p>Este es el primer post de una serie de artículos sobre <strong>NLP</strong>. Para los que no conocen que es el procesamiento de lenguajes naturales  o <strong>Natural Language Processing (NLP)</strong> aquí les dejo una corta pero concisa definición:</p>
+
+<blockquote>
+<p>&hellip;es un campo de las ciencias de la computación, inteligencia artificial y lingüística que estudia las interacciones entre las computadoras y el lenguaje humano. El NLP se ocupa de la formulación e investigación de mecanismos eficaces computacionalmente para la comunicación entre personas y máquinas por medio de lenguajes naturales. El PLN no trata de la comunicación por medio de lenguajes naturales de una forma abstracta, sino de diseñar mecanismos para comunicarse que sean eficaces computacionalmente.<strong>Wikipedia</strong></p>
+</blockquote>
+
+<p>Uno de los pilares fundamentales del <strong>NLP</strong> son las expresiones regulares:</p>
+
+<blockquote>
+<p>En cómputo teórico y teoría de lenguajes formales una expresión regular, también conocida como regex, regexp o expresión racional es una secuencia de caracteres que forma un patrón de búsqueda, principalmente utilizada para la búsqueda de patrones de cadenas de caracteres u operaciones de sustituciones. Por ejemplo, el grupo formado por las cadenas Handel, Händel y Haendel se describe con el patrón &ldquo;H(a|ä|ae)ndel&rdquo;. La mayoría de las formalizaciones proporcionan los siguientes constructores: una expresión regular es una forma de representar los lenguajes regulares (finitos o infinitos) y se construye utilizando caracteres del alfabeto sobre el cual se define el lenguaje. <strong>Wikipedia</strong></p>
+</blockquote>
+
+<p>Para digerir mejor la definición anterior piensen que una <strong>regex</strong> es: <em>Una secuencia de caracteres con una sintaxis especial que nos permite hallar ciertos patrones de caracteres en otras cadenas de texto</em>.</p>
+
+<p>Algunas de las aplicaciones más comunes:</p>
+
+<ul>
+<li>Conseguir todos los enlaces web en documento como por ejemplo una página html.</li>
+<li>Extraer direcciones de correo</li>
+<li>Remover o reemplazar caracteres no deseados.</li>
+</ul>
+
+<p>Las sintaxis más comunes en <strong>regex</strong> las pueden ver en la siguiente tabla:</p>
+
+<table>
+<thead>
+<tr>
+<th>Patrón</th>
+<th>Corresponde</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>\w+</td>
+<td>palabra</td>
+<td>&lsquo;Hola&rsquo;</td>
+</tr>
+
+<tr>
+<td>\d</td>
+<td>dígito</td>
+<td>9</td>
+</tr>
+
+<tr>
+<td>\s</td>
+<td>espacio</td>
+<td>&rdquo; &ldquo;</td>
+</tr>
+
+<tr>
+<td>.*</td>
+<td>wildcard</td>
+<td>&lsquo;receta23@&rsquo;</td>
+</tr>
+
+<tr>
+<td>+ ó *</td>
+<td>greedy match</td>
+<td>&lsquo;aaabbbbbcccc&rsquo;</td>
+</tr>
+
+<tr>
+<td>\S</td>
+<td>no es espacio</td>
+<td>&lsquo;sin_espacios&rsquo;</td>
+</tr>
+
+<tr>
+<td>[a-z]</td>
+<td>todas minusculas</td>
+<td>&lsquo;pkfjfus&rsquo;</td>
+</tr>
+</tbody>
+</table>
+
+<p>Esto es sólo un abre-boca, para ver todas las opciones les recomiendo este <a href="https://montcs.bloomu.edu/Information/Python/python-regex-cheatsheet.pdf">pdf</a></p>
+
+<h1 id="módulo-de-python-para-regex-re">Módulo de Python para Regex: <code>re</code></h1>
+
+<p>El módulo <code>re</code> cuenta con funciones para trabajar con expresiones regulares y cadenas. Las funciones más comunes son:</p>
+
+<ul>
+<li><code>split</code>: divide una cadena en subcadenas.</li>
+<li><code>findall</code>: devuelve una lista con las subcadenas que cumplen el patrón de la regex.</li>
+<li><code>search</code>: busca coincidencias de un patrón en una cadena de texto.</li>
+<li><code>match</code>: comprueba si una expresión regular tiene coincidencias con el comienzo de una cadena de texto.</li>
+</ul>
+
+<p>La sintaxis básica para cada función es: <code>re.fun(regex,cadena)</code> y devuelve objetos de tipo <code>iterator</code>, <code>string</code> o <code>match</code>.</p>
+
+<h2 id="diferencia-entre-search-y-match">Diferencia entre <code>search</code> y <code>match</code></h2>
+
+<p><code>search</code> ⇒  consigue un patrón en cualquier parte de la cadena y retorna un objecto de tipo <code>match.</code></p>
+
+<p><code>match</code> ⇒  consigue un patrón al comienzo de una cadena y retorna un objecto de tipo <code>match</code>.</p>
+
+<p>Ya hemos cubierto algo de teoría así que veamos algunos ejemplos:</p>
+
+<pre><code class="language-python">import re
+</code></pre>
+
+<pre><code class="language-python">frase = &quot;En un lugar de la Mancha, de cuyo nombre no quiero acordarme...&quot;
+
+# encontrar la primera letra
+print(re.match(r&quot;\w&quot;,frase)) # devuelve un objeto match
+</code></pre>
+
+<pre><code>&lt;_sre.SRE_Match object; span=(0, 1), match='E'&gt;
+</code></pre>
+
+<pre><code class="language-python"># otra forma - (la anterior es la más común)
+print(re.match(r&quot;\D&quot;,frase))
+</code></pre>
+
+<pre><code>&lt;_sre.SRE_Match object; span=(0, 1), match='E'&gt;
+</code></pre>
+
+<pre><code class="language-python"># encontrar la primera palabra
+print(re.match(r&quot;\w+&quot;,frase))
+</code></pre>
+
+<pre><code>&lt;_sre.SRE_Match object; span=(0, 2), match='En'&gt;
+</code></pre>
+
+<pre><code class="language-python"># encontrar las dos primeras palabras
+print(re.match(r&quot;\w+\s\w+&quot;,frase))
+</code></pre>
+
+<pre><code>&lt;_sre.SRE_Match object; span=(0, 5), match='En un'&gt;
+</code></pre>
+
+<blockquote>
+<p><strong>Nota</strong>: Es muy importante iniciar las cadenas de regex con <code>r</code>. <code>r</code> es <strong>raw string</strong> en Python y significa que los caracteres en la cadena no tienen ninguna interpretación especial. Recuerden  las expresiones regulares a menudo utilizan caracteres de escape (como por ejemplo la barra invertida \ ). Por ejemplo &ldquo;\n&rdquo; en Python se utiliza para indicar una nueva línea pero si usamos el <code>r</code> entonces se interpreta simplemente como &ldquo;\n&rdquo;.</p>
+</blockquote>
+
+<h1 id="algunos-ejercicios-con-findall-y-split">Algunos ejercicios con <code>findall</code> y <code>split</code></h1>
+
+<p>Hay algunos tópicos como los <em>brackets</em> que aún no hemos abordado pero no se preocupen que lo haremos pronto.</p>
+
+<pre><code class="language-python">sentencia = &quot;Hola Mundo!!! Hace 22 grados centigrados, será Verdad? Mientras no Llegue a 40 grados estamos bien. &quot;
+
+# Dividir la sentencia usando signos de puntuación
+print(re.split(r&quot;[!.?]&quot;, sentencia)) # devuelve una lista
+</code></pre>
+
+<pre><code>['Hola Mundo', '', '', ' Hace 22 grados centigrados, será Verdad', ' Mientras no Llegue a 40 grados estamos bien', ' ']
+</code></pre>
+
+<pre><code class="language-python"># Hallar todas las palabras que empiezen con mayúsculas
+print(re.findall(r&quot;[A-Z]\w+&quot;, sentencia)) # también devuelve una lista
+</code></pre>
+
+<pre><code>['Hola', 'Mundo', 'Hace', 'Verdad', 'Mientras', 'Llegue']
+</code></pre>
+
+<pre><code class="language-python"># Hallar todas las palabras que terminen en 'o'
+print(re.findall(r&quot;\w*o\b&quot;, sentencia))
+</code></pre>
+
+<pre><code>['Mundo', 'no']
+</code></pre>
+
+<pre><code class="language-python"># Dividir la sentencia usando los espacios
+print(re.split(r&quot;\s+&quot;, sentencia))
+</code></pre>
+
+<pre><code>['Hola', 'Mundo!!!', 'Hace', '22', 'grados', 'centigrados,', 'será', 'Verdad?', 'Mientras', 'no', 'Llegue', 'a', '40', 'grados', 'estamos', 'bien.', '']
+</code></pre>
+
+<pre><code class="language-python"># Hallar todos los digitos en la sentencia
+print(re.findall(r&quot;\d+&quot;, sentencia))
+</code></pre>
+
+<pre><code>['22', '40']
+</code></pre>
+
+<h1 id="grupos">Grupos</h1>
+
+<p>Los grupos nos permiten extraer un grupo de caracters. Una expresión regular puede tener múltiples grupos. <code>.group()</code> se utiliza para retornar la regex completa. <code>.group(1)</code> devuelve el primer subgrupo en la cadena y así sucesivamente.</p>
+
+<p>Algunos ejemplos:</p>
+
+<pre><code class="language-python">print(re.match(r&quot;\w+&quot;,frase).group()) #devuelve un string
+</code></pre>
+
+<pre><code>En
+</code></pre>
+
+<pre><code class="language-python"># grupos
+email = &quot;abcde574@gmail.com&quot;
+# extraer el usuario de la dirección de correos
+print(re.match(r&quot;(\w+)@.+&quot;,email).group(1))
+</code></pre>
+
+<pre><code>abcde574
+</code></pre>
+
+<pre><code class="language-python"># extraer el dominio de la dirección de correos
+print(re.match(r&quot;\w+@(.+)&quot;,email).group(1))
+</code></pre>
+
+<pre><code>gmail.com
+</code></pre>
+
+<pre><code class="language-python"># otra forma, cuando tenemos multiples grupos
+print(re.match(r&quot;(\w+)@(.+)&quot;,email).group(2)) 
+</code></pre>
+
+<pre><code>gmail.com
+</code></pre>
+
+<pre><code class="language-python"># Extraer multiple grupos
+print(re.match(r&quot;(\w+)@(.+)&quot;,email).groups()) # retorna un objecto tuple
+</code></pre>
+
+<pre><code>('abcde574', 'gmail.com')
+</code></pre>
+
+<pre><code class="language-python"># Extraer toda la expresión
+print(re.match(r&quot;\w+@(.+)&quot;,email).group())
+</code></pre>
+
+<pre><code>abcde574@gmail.com
+</code></pre>
+
+<h2 id="repeticiones">Repeticiones</h2>
+
+<p>En regex podemos utilizar el <code>+</code> and <code>*</code> para especificar repeticiones en el patrón:</p>
+
+<pre><code>+ -- 1 o mas ocurrencias 
+* -- 0 o mas ocurrencias 
+? -- match 0 ó 1 ocurrencias
+</code></pre>
+
+<h2 id="más-a-la-izquierda-más-largo">Más a la izquierda &amp; más largo</h2>
+
+<p>Un concepto importante en regex es que la búsqueda siempre consigue el primer patrón que está más a la izquierda (o más cercano al origen de la cadena) y segundo que intenta usar tantos caracteres como sea posible de la cadena. Por ejemplo <code>+</code> and <code>*</code> va tan lejos como sea posible, por eso se les conoce como &lsquo;greedy&rsquo; o codiciosos.</p>
+
+<p>Ejemplos:</p>
+
+<pre><code class="language-python">print(re.search(r'pi+', 'piiig').group())
+</code></pre>
+
+<pre><code>piii
+</code></pre>
+
+<pre><code class="language-python">print(re.findall(r'a+', 'caaasa casa casaaaaaa'))
+</code></pre>
+
+<pre><code>['aaa', 'a', 'a', 'a', 'a', 'aaaaaa']
+</code></pre>
+
+<pre><code class="language-python"># Sólo caaasa y casa
+print(re.findall(r'\w*a+sa\b', 'caaasa casa casaaaaaa'))
+</code></pre>
+
+<pre><code>['caaasa', 'casa']
+</code></pre>
+
+<h1 id="square-brackets">Square Brackets</h1>
+
+<p><code>[]</code> se utilizan para indicar un conjunto de caracteres, así pues <code>[abc]</code> coincide con <code>a</code> o <code>b</code> o <code>c</code>. <code>\w</code>, <code>\s</code> etc. funcionan dentro de los <code>[]</code> con la excepción del punto (<code>.</code>) que sólo significa un punto. Para problemas de extracción de emails los <code>[]</code> son una manera sencilla de agregar el <code>.</code> y <code>-</code>  a el conjunto de caracteres que pueden aparecer alrededor del <code>@</code>:</p>
+
+<pre><code class="language-python">lista_emails = [&quot;alberto@abcd.com&quot;,&quot;victoria-b@dva.no&quot;,&quot;irma-m@ttt.c0m&quot;]
+# imprimir emails con '-'
+for email in lista_emails:
+    match = re.search(r'\w+[.-]+\w+@[\w.-]+', email)
+    if match:
+        print(match.group())
+</code></pre>
+
+<pre><code>victoria-b@dva.no
+irma-m@ttt.c0m
+</code></pre>
+
+<h1 id="findall-and-groups"><code>findall</code> and Groups</h1>
+
+<p>Los <code>( )</code> como mecanismo de grupos puede ser combinado con <code>findall()</code>. Si el patrón incluye 2 ó mas paréntesis entonces es vez de retornar una lista de cadenas, retorna una tupla de cadenas y unido con <code>findall()</code> entonces retorna una lista de tuplas. Creo que se entiende mejor con un ejemplo:</p>
+
+<pre><code class="language-python">enredo = 'pop rock alberto@abcd.com, Madrid Barsa victoria-b@dva.no patatas bravas! irma-m@ttt.c0m'
+tuples = re.findall(r'([\w\.-]+)@([\w\.-]+)', enredo)
+print(tuples)
+</code></pre>
+
+<pre><code>[('alberto', 'abcd.com'), ('victoria-b', 'dva.no'), ('irma-m', 'ttt.c0m')]
+</code></pre>
+
+<pre><code class="language-python">for t in tuples:
+    print(t[0])  ## username
+    print(t[1])  ## dominio
+</code></pre>
+
+<pre><code>alberto
+abcd.com
+victoria-b
+dva.no
+irma-m
+ttt.c0m
+</code></pre>
+
+<h1 id="opciones">Opciones</h1>
+
+<p>Las funciones <code>re</code> que hemos abarcado hasta ahora pueden tomar parámetros extras que ayudan a modificar su comportamiento original. La opción se agregar como un argumento extra por ejemplo <code>re.search(pat, str, re.IGNORECASE)</code>.</p>
+
+<p>Las opciones mas importantes:</p>
+
+<ul>
+<li><code>IGNORECASE</code>: ignora mayúsculas y minúsculas, así pues <code>[a-z]</code> y <code>[A-Z]</code> son equivalentes.</li>
+<li><code>DOTALL</code>: convierte todos los puntos a nueva línea</li>
+<li><code>MULTILINE</code>: con cadenas de hechas de muchas líneas (imaginen un párrafo), esta opción permite allow <code>^</code> y <code>$</code> coincidir con el inicio y final de cada línea.</li>
+</ul>
+
+<p>Creo que por ahora lo voy a dejar hasta aquí. Las expresiones regulares son un tema bien complejo y esto es sólo una introducción a los conceptos más sencillos.</p>
+
+<p>En los siguientes posts cubriremos un poco más de regex en relación con <strong>NLP</strong>.</p>
+
+<p>Suscríbanse al blog para que se mantengan informados!</p>
+
+    </div>
+
+    <footer>
+        <ul class="stats">
+    
+        
+
+        
+        
+            <li>
+                
+                
+                    
+
+                    
+                        Categoría
+                    
+                
+            </li>
+        
+    
+
+    
+    
+        <li><a href='/categories/python'>Python</a></li>
+    
+</ul>
+
+    </footer>
+</article>
+<ul class="actions pagination">
+    
+        <li><a href="/post/ggvis-galeria-parte-2/"
+                class="button big previous">Galería ggvis - Parte 2</a></li>
+    
+
+    
+</ul>
+
+
+
+    
+        <article class="post">
+            <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'zonalitica';
+    var disqus_identifier = '\/post\/introduccion-a-expresiones-regulares-con-python\/';
+    var disqus_title = 'Introducción a Expresiones Regulares con Python';
+    var disqus_url = '\/post\/introduccion-a-expresiones-regulares-con-python\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        </article>
+    
+
+
+    </div>
+    
+<section id="sidebar">
+
+    
+        <section id="intro">
+            
+            
+                
+                    <a href="/" class="logo"><img src="/img/main/logo.jpeg" alt="Hugo Future Imperfect" /></a>
+                
+            
+            
+                <header>
+                    <h2>Zonalítica</h2>
+                    <p>Blog en Español especializado en Data Science, Big Data, Estadística y Open Data</p>
+                </header>
+            
+            <ul class="icons">
+                
+                
+                    
+<li><a href="//github.com/zonalitica" target="_blank" title="GitHub" class="fa fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//youtube.com/channel/UCFlEAg_0gMwwRXaceWTSwRQ" target="_blank" title="YouTube" class="fa fa-youtube"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//twitter.com/zonalitica" target="_blank" title="Twitter" class="fa fa-twitter"></a></li>
+
+
+
+
+                
+            </ul>
+        </section>
+
+    
+        <section id="recent-posts">
+            <ul class="posts">
+                <header>
+                    <h3>Entradas Recientes</h3>
+                </header>
+                
+                    
+                
+
+                
+                    
+                
+
+                
+                    <li>
+                        <article>
+                            <header>
+                                <h3><a href="/post/introduccion-a-expresiones-regulares-con-python/">Introducción a Expresiones Regulares con Python</a></h3>
+                                
+                                    
+                                
+                                <time class="published" datetime=
+                                    '2017-08-24'>
+                                    August 24, 2017</time>
+                            </header>
+                        </article>
+                    </li>
+                
+                    <li>
+                        <article>
+                            <header>
+                                <h3><a href="/post/ggvis-galeria-parte-2/">Galería ggvis - Parte 2</a></h3>
+                                
+                                    
+                                
+                                <time class="published" datetime=
+                                    '2017-08-02'>
+                                    August 2, 2017</time>
+                            </header>
+                        </article>
+                    </li>
+                
+
+                
+                    <li>
+                        <ul class="actions">
+                            <li><a href=
+                            
+                                /post/
+                            
+                            class="button">Ver más Entradas</a></li>
+                        </ul>
+                    </li>
+                
+            </ul>
+        </section>
+
+    
+    
+    
+    
+        <section id="categories">
+            <ul class="posts">
+                <header>
+                    <h3><a href="/categories/">Categorías</a></h3>
+                </header>
+
+                
+                    
+                
+
+                
+                    <li>
+                        <article>
+                            <header>
+                                <a href="/categories/r/">R</a>
+                                <span style="float:right;">3</span>
+                            </header>
+                        </article>
+                    </li>
+                
+                    <li>
+                        <article>
+                            <header>
+                                <a href="/categories/herramientas/">herramientas</a>
+                                <span style="float:right;">3</span>
+                            </header>
+                        </article>
+                    </li>
+                
+                    <li>
+                        <article>
+                            <header>
+                                <a href="/categories/python/">Python</a>
+                                <span style="float:right;">2</span>
+                            </header>
+                        </article>
+                    </li>
+                
+                    <li>
+                        <article>
+                            <header>
+                                <a href="/categories/stats/">stats</a>
+                                <span style="float:right;">2</span>
+                            </header>
+                        </article>
+                    </li>
+                
+                    <li>
+                        <article>
+                            <header>
+                                <a href="/categories/blogdown/">blogdown</a>
+                                <span style="float:right;">1</span>
+                            </header>
+                        </article>
+                    </li>
+                
+                    <li>
+                        <article>
+                            <header>
+                                <a href="/categories/open-data/">open data</a>
+                                <span style="float:right;">1</span>
+                            </header>
+                        </article>
+                    </li>
+                
+                    <li>
+                        <article>
+                            <header>
+                                <a href="/categories/tips/">tips</a>
+                                <span style="float:right;">1</span>
+                            </header>
+                        </article>
+                    </li>
+                
+            </ul>
+        </section>
+    
+
+    
+        
+        <section class="blurb">
+            <h2>Acerca</h2>
+            <p>Zonalítica es un blog en español encargado de difundir información actual y oportuna sobre Data Science, Big Data, Estadística, Open Data y data journalism...</p>
+
+            <ul class="actions">
+                <li><a href="/about/" class="button">Ver Más</a></li>
+            </ul>
+        </section>
+        
+      <section class="blurb">
+        
+<link href="//cdn-images.mailchimp.com/embedcode/classic-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	#mc_embed_signup{background:#f4f4f4; clear:left; font:14px Helvetica,Arial,sans-serif; }
+	 
+</style>
+<div id="mc_embed_signup">
+<form action="//zonalitica.us11.list-manage.com/subscribe/post?u=e1679d3df43f990777e3a6576&amp;id=87ebc72b06" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	<h2>Suscribite!!!</h2>
+<div class="indicates-required"><span class="asterisk">*</span> requerido</div>
+<div class="mc-field-group">
+	<label for="mce-EMAIL">Email  <span class="asterisk">*</span>
+</label>
+	<input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">
+</div>
+<div class="mc-field-group">
+	<label for="mce-FNAME">Nombre </label>
+	<input type="text" value="" name="FNAME" class="" id="mce-FNAME">
+</div>
+<div class="mc-field-group">
+	<label for="mce-LNAME">Apellido </label>
+	<input type="text" value="" name="LNAME" class="" id="mce-LNAME">
+</div>
+	<div id="mce-responses" class="clear">
+		<div class="response" id="mce-error-response" style="display:none"></div>
+		<div class="response" id="mce-success-response" style="display:none"></div>
+	</div>    
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_e1679d3df43f990777e3a6576_87ebc72b06" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Suscribir" name="subscribe" id="mc-embedded-subscribe" class="btn btn-primary"></div>
+    </div>
+</form>
+</div>
+<script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script><script type='text/javascript'>(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text'; 
+
+$.extend($.validator.messages, {
+  required: "Este campo es obligatorio.",
+  remote: "Por favor, rellena este campo.",
+  email: "Por favor, escribe una dirección de correo válida",
+  url: "Por favor, escribe una URL válida.",
+  date: "Por favor, escribe una fecha válida.",
+  dateISO: "Por favor, escribe una fecha (ISO) válida.",
+  number: "Por favor, escribe un número entero válido.",
+  digits: "Por favor, escribe sólo dígitos.",
+  creditcard: "Por favor, escribe un número de tarjeta válido.",
+  equalTo: "Por favor, escribe el mismo valor de nuevo.",
+  accept: "Por favor, escribe un valor con una extensión aceptada.",
+  maxlength: $.validator.format("Por favor, no escribas más de {0} caracteres."),
+  minlength: $.validator.format("Por favor, no escribas menos de {0} caracteres."),
+  rangelength: $.validator.format("Por favor, escribe un valor entre {0} y {1} caracteres."),
+  range: $.validator.format("Por favor, escribe un valor entre {0} y {1}."),
+  max: $.validator.format("Por favor, escribe un valor menor o igual a {0}."),
+  min: $.validator.format("Por favor, escribe un valor mayor o igual a {0}.")
+});}(jQuery));var $mcj = jQuery.noConflict(true);</script>
+
+      </section>
+
+    
+        <section id="footer">
+            <ul class="icons">
+                
+                
+                    
+<li><a href="//github.com/zonalitica" target="_blank" title="GitHub" class="fa fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//youtube.com/channel/UCFlEAg_0gMwwRXaceWTSwRQ" target="_blank" title="YouTube" class="fa fa-youtube"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//twitter.com/zonalitica" target="_blank" title="Twitter" class="fa fa-twitter"></a></li>
+
+
+
+
+                
+            </ul>
+
+            <p class="copyright">&copy;Zonaliítica - Creado con <a href="//gohugo.io" target="_blank">Hugo</a></p>
+        </section>
+
+</section>
+
+            </div>
+        <a id="back-to-top" href="#" class="fa fa-arrow-up fa-border fa-2x"></a>
+        
+
+        
+        
+            
+        
+
+        
+        
+            <script src="/js/jquery.min.js"></script>
+            <script src="/js/skel.min.js"></script>
+            <script src="/js/util.js"></script>
+            <script src="/js/main.js"></script>
+            <script src="/js/backToTop.js"></script>
+            <script src="/js/highlight.pack.js"></script>
+        
+
+        
+
+            
+            <script>hljs.initHighlightingOnLoad();</script>
+            
+    </body>
+</html>
+
