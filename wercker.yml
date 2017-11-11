@@ -7,8 +7,8 @@ build:
         flags: --buildDrafts=false --noTimes
 deploy:
     steps:
-#       - install-packages:
-#            packages: openssh-client rsync
+        - install-packages:
+            packages: openssh-client rsync
         - add-to-known_hosts:
             hostname: $HOSTNAME
         - mktemp:
