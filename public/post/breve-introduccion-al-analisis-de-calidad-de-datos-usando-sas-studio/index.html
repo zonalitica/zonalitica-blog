@@ -1,0 +1,944 @@
+<!DOCTYPE HTML>
+
+<html>
+    <head>
+        
+            
+                <title>Breve Introducción al Análisis de Calidad de Datos usando SAS Studio</title>
+            
+        
+
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="generator" content="Hugo 0.22.1" />
+        
+
+
+        
+            <meta name="author" content="Alberto Negron">
+        
+        
+            
+                <meta name="description" content="Blog en Español especializado en Data Science, Big Data, Estadística y Open Data">
+            
+        
+
+        
+
+  <meta name="twitter:card" content="summary"/>
+
+
+
+<meta name="twitter:text:title" content="Breve Introducción al Análisis de Calidad de Datos usando SAS Studio"/>
+<meta name="twitter:title" content="Breve Introducción al Análisis de Calidad de Datos usando SAS Studio"/>
+<meta name="twitter:description" content="&ldquo;Data is the new oil.&rdquo; Clive Humby
+ El británico Clive Humby tenía la visión muy clara de hacia donde se dirijía la tendencia digital cuando en el 2006 acuño la frase Los datos son el nuevo petróleo.
+En 2017, está frase sigue tan o más vigente que nunca. Vivimos en la era del Big Data donde casi cualquier dispositivo con el que interactuamos esta conectado a Internet generando datos a cada segundo (móviles, tabletas, laptops, televisores inteligentes, relojes, compañías por cable, accesorios deportivos, etc)."/>
+<meta name="twitter:site" content="@zonalitica"/>
+
+        <meta property="og:title" content="Breve Introducción al Análisis de Calidad de Datos usando SAS Studio" />
+<meta property="og:description" content="&ldquo;Data is the new oil.&rdquo; Clive Humby
+ El británico Clive Humby tenía la visión muy clara de hacia donde se dirijía la tendencia digital cuando en el 2006 acuño la frase Los datos son el nuevo petróleo.
+En 2017, está frase sigue tan o más vigente que nunca. Vivimos en la era del Big Data donde casi cualquier dispositivo con el que interactuamos esta conectado a Internet generando datos a cada segundo (móviles, tabletas, laptops, televisores inteligentes, relojes, compañías por cable, accesorios deportivos, etc)." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/breve-introduccion-al-analisis-de-calidad-de-datos-usando-sas-studio/" />
+
+
+
+<meta property="article:published_time" content="2017-11-11T00:00:00&#43;00:00"/>
+<meta property="article:modified_time" content="2017-11-11T00:00:00&#43;00:00"/>
+
+
+
+
+
+
+
+
+
+
+
+        
+<meta itemprop="name" content="Breve Introducción al Análisis de Calidad de Datos usando SAS Studio">
+<meta itemprop="description" content="&ldquo;Data is the new oil.&rdquo; Clive Humby
+ El británico Clive Humby tenía la visión muy clara de hacia donde se dirijía la tendencia digital cuando en el 2006 acuño la frase Los datos son el nuevo petróleo.
+En 2017, está frase sigue tan o más vigente que nunca. Vivimos en la era del Big Data donde casi cualquier dispositivo con el que interactuamos esta conectado a Internet generando datos a cada segundo (móviles, tabletas, laptops, televisores inteligentes, relojes, compañías por cable, accesorios deportivos, etc).">
+
+
+<meta itemprop="dateModified" content="2017-11-11T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="754">
+
+
+
+<meta itemprop="keywords" content="Python,R,SAS,blogdown,herramientas,open data,stats,tips,DQ,R,SAS,d3js,favoritos,ggvis,gráficos,herramientas,java,nlp,osx,python,regex," />
+
+        
+
+        
+
+        
+        
+            
+        
+
+        
+        
+            <link rel="stylesheet" href="/css/google-font.css" />
+            <link rel="stylesheet" href="/css/font-awesome.min.css" />
+            <link rel="stylesheet" href="/css/main.css" />
+            <link rel="stylesheet" href="/css/add-on.css" />
+            <link rel="stylesheet" href="/css/monokai-sublime.css">
+        
+
+        
+
+        
+        
+        
+            
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-66899932-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+        
+    </head>
+    <body>
+
+        
+        <div id="wrapper">
+
+    
+    
+<header id="header">
+    
+        <h2><a href="/">Zonalítica</i></a></h2>
+    
+
+    <nav class="links">
+        <ul>
+            
+                <li>
+                    <a href="/post">
+                        
+                            <i class="fa fa-newspaper-o">&nbsp;</i>Blog
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="/categories">
+                        Categorías
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="https://www.youtube.com/channel/UCFlEAg_0gMwwRXaceWTSwRQ">
+                        Youtube
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="/about">
+                        Acerca
+                    </a>
+                </li>
+            
+        </ul>
+    </nav>
+    <nav class="main">
+        <ul>
+            
+            <li id="share-nav" class="share-menu" style="display:none;">
+                <a class="fa-share-alt" href="#share-menu">Share</a>
+            </li>
+            
+            <li class="search">
+                <a class="fa-search" href="#search">Search</a>
+                <form id="search" method="get" action="//google.com/search">
+                    <input type="text" name="q" placeholder="Search" />
+                    <input type="hidden" name="q" value="site:/">
+                </form>
+            </li>
+            <li class="menu">
+                <a class="fa-bars" href="#menu">Menu</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+
+<section id="menu">
+
+    
+        <section>
+            <form class="search" method="get" action="//google.com/search">
+                <input type="text" name="q" placeholder="Search" />
+                <input type="hidden" name="q" value="site:/">
+            </form>
+        </section>
+
+    
+        <section>
+            <ul class="links">
+                
+                    <li>
+                        <a href="/post">
+                            <h3>
+                                
+                                    <i class="fa fa-newspaper-o">&nbsp;</i>
+                                
+                                Blog
+                            </h3>
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories">
+                            <h3>
+                                
+                                Categorías
+                            </h3>
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="https://www.youtube.com/channel/UCFlEAg_0gMwwRXaceWTSwRQ">
+                            <h3>
+                                
+                                Youtube
+                            </h3>
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/about">
+                            <h3>
+                                
+                                Acerca
+                            </h3>
+                        </a>
+                    </li>
+                
+            </ul>
+        </section>
+
+    
+        <section>
+            <ul class="links">
+                <header>
+                    <h3>Recent Posts</h3>
+                </header>
+                
+                    
+                
+
+                
+                    <li>
+                        <a href="/post/breve-introduccion-al-analisis-de-calidad-de-datos-usando-sas-studio/"><p>Breve Introducción al Análisis de Calidad de Datos usando SAS Studio</p></a>
+                    </li>
+                
+                    <li>
+                        <a href="/post/3-nuevos-videos-sobre-programaci%C3%B3n-sas/"><p>3 nuevos vídeos sobre Programación SAS</p></a>
+                    </li>
+                
+            </ul>
+        </section>
+
+    
+        
+</section>
+
+    <section id="share-menu">
+    <section id="social-share-nav">
+        <ul class="links">
+            <header>
+                <h3>Share this post <i class="fa fa-smile-o"></i></h3>
+            </header>
+            
+
+
+<li><a href="//twitter.com/share?url=%2fpost%2fbreve-introduccion-al-analisis-de-calidad-de-datos-usando-sas-studio%2f&text=Breve%20Introducci%c3%b3n%20al%20An%c3%a1lisis%20de%20Calidad%20de%20Datos%20usando%20SAS%20Studio&via=zonalitica" target="_blank" class="share-btn twitter">
+    <i class="fa fa-twitter"></i>
+    <p>Twitter</p>
+</a></li>
+
+
+<li><a href="//plus.google.com/share?url=%2fpost%2fbreve-introduccion-al-analisis-de-calidad-de-datos-usando-sas-studio%2f" target="_blank" class="share-btn google-plus">
+    <i class="fa fa-google-plus"></i>
+    <p>Google+</p>
+</a></li>
+
+
+<li><a href="//www.facebook.com/sharer/sharer.php?u=%2fpost%2fbreve-introduccion-al-analisis-de-calidad-de-datos-usando-sas-studio%2f" target="_blank" class="share-btn facebook">
+    <i class="fa fa-facebook"></i>
+    <p>Facebook</p>
+</a></li>
+
+
+<li><a href="//reddit.com/submit?url=%2fpost%2fbreve-introduccion-al-analisis-de-calidad-de-datos-usando-sas-studio%2f&title=Breve%20Introducci%c3%b3n%20al%20An%c3%a1lisis%20de%20Calidad%20de%20Datos%20usando%20SAS%20Studio" target="_blank" class="share-btn reddit">
+    <i class="fa fa-reddit-alien"></i>
+    <p>Reddit</p>
+</a></li>
+
+
+<li><a href="//www.linkedin.com/shareArticle?url=%2fpost%2fbreve-introduccion-al-analisis-de-calidad-de-datos-usando-sas-studio%2f&title=Breve%20Introducci%c3%b3n%20al%20An%c3%a1lisis%20de%20Calidad%20de%20Datos%20usando%20SAS%20Studio" target="_blank" class="share-btn linkedin">
+    <i class="fa fa-linkedin"></i>
+    <p>LinkedIn</p>
+</a></li>
+
+
+<li><a href="//www.stumbleupon.com/submit?url=%2fpost%2fbreve-introduccion-al-analisis-de-calidad-de-datos-usando-sas-studio%2f&title=Breve%20Introducci%c3%b3n%20al%20An%c3%a1lisis%20de%20Calidad%20de%20Datos%20usando%20SAS%20Studio" target="_blank" class="share-btn stumbleupon">
+    <i class="fa fa-stumbleupon"></i>
+    <p>StumbleUpon</p>
+</a></li>
+
+
+<li><a href="mailto:?subject=Check out this post by Alberto%20Negron&body=%2fpost%2fbreve-introduccion-al-analisis-de-calidad-de-datos-usando-sas-studio%2f" target="_blank" class="share-btn email">
+    <i class="fa fa-envelope"></i>
+    <p>Email</p>
+</a></li>
+
+        </ul>
+    </section>
+</section>
+
+    
+    <div id="main">
+        
+        
+        <article class="post">
+    <header>
+    <div class="title">
+        
+            <h1><a href="/post/breve-introduccion-al-analisis-de-calidad-de-datos-usando-sas-studio/">Breve Introducción al Análisis de Calidad de Datos usando SAS Studio</a></h1>
+            
+        
+        
+    </div>
+    <div class="meta">
+        
+            
+        
+
+        <time class="published"
+            datetime='2017-11-11'>
+            2017-11-11</time>
+        <span class="author">Alberto Negron</span>
+        
+            <p>4 minutos de lectura</p>
+        
+        
+    </div>
+</header>
+
+
+    <section id="social-share">
+        <ul class="icons">
+            
+
+
+<li><a href="//twitter.com/share?url=%2fpost%2fbreve-introduccion-al-analisis-de-calidad-de-datos-usando-sas-studio%2f&text=Breve%20Introducci%c3%b3n%20al%20An%c3%a1lisis%20de%20Calidad%20de%20Datos%20usando%20SAS%20Studio&via=zonalitica" target="_blank" class="share-btn twitter">
+    <i class="fa fa-twitter"></i>
+    <p>Twitter</p>
+</a></li>
+
+
+<li><a href="//plus.google.com/share?url=%2fpost%2fbreve-introduccion-al-analisis-de-calidad-de-datos-usando-sas-studio%2f" target="_blank" class="share-btn google-plus">
+    <i class="fa fa-google-plus"></i>
+    <p>Google+</p>
+</a></li>
+
+
+<li><a href="//www.facebook.com/sharer/sharer.php?u=%2fpost%2fbreve-introduccion-al-analisis-de-calidad-de-datos-usando-sas-studio%2f" target="_blank" class="share-btn facebook">
+    <i class="fa fa-facebook"></i>
+    <p>Facebook</p>
+</a></li>
+
+
+<li><a href="//reddit.com/submit?url=%2fpost%2fbreve-introduccion-al-analisis-de-calidad-de-datos-usando-sas-studio%2f&title=Breve%20Introducci%c3%b3n%20al%20An%c3%a1lisis%20de%20Calidad%20de%20Datos%20usando%20SAS%20Studio" target="_blank" class="share-btn reddit">
+    <i class="fa fa-reddit-alien"></i>
+    <p>Reddit</p>
+</a></li>
+
+
+<li><a href="//www.linkedin.com/shareArticle?url=%2fpost%2fbreve-introduccion-al-analisis-de-calidad-de-datos-usando-sas-studio%2f&title=Breve%20Introducci%c3%b3n%20al%20An%c3%a1lisis%20de%20Calidad%20de%20Datos%20usando%20SAS%20Studio" target="_blank" class="share-btn linkedin">
+    <i class="fa fa-linkedin"></i>
+    <p>LinkedIn</p>
+</a></li>
+
+
+<li><a href="//www.stumbleupon.com/submit?url=%2fpost%2fbreve-introduccion-al-analisis-de-calidad-de-datos-usando-sas-studio%2f&title=Breve%20Introducci%c3%b3n%20al%20An%c3%a1lisis%20de%20Calidad%20de%20Datos%20usando%20SAS%20Studio" target="_blank" class="share-btn stumbleupon">
+    <i class="fa fa-stumbleupon"></i>
+    <p>StumbleUpon</p>
+</a></li>
+
+
+<li><a href="mailto:?subject=Check out this post by Alberto%20Negron&body=%2fpost%2fbreve-introduccion-al-analisis-de-calidad-de-datos-usando-sas-studio%2f" target="_blank" class="share-btn email">
+    <i class="fa fa-envelope"></i>
+    <p>Email</p>
+</a></li>
+
+        </ul>
+    </section>
+    
+
+    <div id="content">
+        <blockquote>
+<p>&ldquo;Data is the new oil.&rdquo; Clive Humby</p>
+</blockquote>
+
+<p>El británico <em>Clive Humby</em>  tenía la visión muy clara de hacia donde se dirijía la tendencia digital cuando en el 2006 acuño la frase <strong>Los datos son el nuevo petróleo</strong>.</p>
+
+<p>En 2017, está frase sigue tan o más vigente que nunca. Vivimos en la era del <em>Big Data</em> donde casi cualquier dispositivo con el que interactuamos esta conectado a Internet generando datos a cada segundo (móviles, tabletas, laptops, televisores inteligentes, relojes, compañías por cable, accesorios deportivos, etc).</p>
+
+<p>Los datos convertidos en información ha pasado de ser un recurso más en las empresas a convertirse en el recurso más importante. Las empresas están invirtiendo cientos de millones de dólares al año en tecnologías y procesos que les permitan recolectar y gestionar toda esta data que viene en una gran variedad de formatos y frecuencias.</p>
+
+<p>De allí la suprema importancia de la calidad de los datos. Pero, ¿qué es calidad de datos? La calidad de datos son los estándares definidos por cada empresa o sector (farmacéutico, financiero, gas y petróleo, comercio, etc) para asegurar que la data que está almancenada en sus sistemas de información es veraz y oportuna.</p>
+
+<p>Existe un marco teórico de calidad de datos que se usa como punto de partida pero que posteriormente es personalizado a los requerimientos de cada empresa. Los estándares de calidad de datos en el sector farmacéutico son distintos a los de una entidad financiera por ejemplo.</p>
+
+<p>Algunos ejemplos prácticos de calidad de datos son:</p>
+
+<ul>
+<li>Eliminar registros duplicados. Imagínense por un momento, una empresa de ventas por catálogos que tiene clientes duplicados en su base datos y que a cada cliente le llegue 2 ó más catálogos. Pérdida de dinero y confianza.</li>
+<li>Asegurarse que no llamemos &ldquo;Sr.&rdquo; a María Laura o &ldquo;Srta.&rdquo; a Pedro Fernandez.</li>
+<li>Que valores de un indicador estén dentro de un rango acceptable de valores. Piensen en alguien con -1 año de edad o que nació el 13 de Enero de 1598 y compró un reloj online hace 2 días.</li>
+<li>Asegurarse que los datos que se cargan en un proceso ETL tengan el formato correcto. Imaginen un archivo CSV que generalmente viene con la edad de un usuario en la segunda columna y que en una actualización del archivo la columna 2 posee el salario.</li>
+</ul>
+
+<p>Se puede decir que los ejemplos sobre reglas para validar la calidad de los datos son un conjunto finito no numberable!</p>
+
+<p>Pasemos al ejemplo práctico con SAS. El siguiente código es bastante sencillo que tiene como objetivo mostrar como con una pocas líneas de código se pueden hacer cosas muy interesantes con SAS y el tema de la calidad de los datos.</p>
+
+<p>Es un ejemplo muy sencillo pero que espero les sirva para evaluar el poder de SAS.</p>
+
+<p>No los quiero aburrir mucho más con una lectura larga de la lógica detrás del código. Para eso he creado un vídeo en mi canal de Youtube donde hago una explicación exhaustiva.</p>
+
+<p>Link del vídeo <a href="https://youtu.be/KVLh2-G5zv0">aquí</a></p>
+
+<p>En el siguiente ejemplo he creado una data artificial sobre 5 pacientes. Esta data contiene información sobre el nombre del paciente y ciertos indicadores sobre su estado de salud. Seguidamente le vamos a aplicar unas reglas muy sencillas de calidad datos para validar la veracidad de la información.</p>
+
+<pre><code>libname valido &quot;/folders/myshortcuts/sas/data/proj003_dq/validos&quot;;
+libname invalido &quot;/folders/myshortcuts/sas/data/proj003_dq/invalidos&quot;;
+
+
+data work.pacientes;
+infile datalines delimiter=&quot;,&quot;;
+length pat_no $5 nombre $50 sexo $1 ritmo 3. presion_sis 3.  presion_dia 3.  cod_diag $5 ;
+input pat_no $ nombre $ sexo $ ritmo  presion_sis  presion_dia  cod_diag $ ;
+label pat_no = '# Paciente'
+      nombre = 'Nombre Paciente'
+      sexo   = 'Sexo'
+      ritmo  = 'Ritmo Cardíaco'
+      presion_sis = 'Presión Arterial (Sistólica)'
+      presion_dia = 'Presión Arterial (Diastólica)'
+      cod_diag    = 'Código Diagnóstico';
+datalines;
+00025,Jhon Bishop,M,90,125,70,123
+00A23,Carlos Ortega,M,500,130,65,125
+03123,Adriana Perez,2,45,210,50,ABC
+03122,Violeta Chamorros,f,60,120,83,23
+00025,Luis Moretti,M,97,115,79,9239
+;
+proc print label; run;
+</code></pre>
+
+<p>Las reglas de calidad de datos son muy sencillas:</p>
+
+<pre><code>
+**** Reglas de Calidad de Datos ************
+pat_no: Sólo acepta números
+nombre: al menos 2 palabras (nombre y Apellido)
+sexo: &quot;M&quot; o &quot;F&quot;
+ritmo: Valores entre 40 y 100 
+presion_sis: Valores entre 80 y 200  
+presion_dia: Valores entre 60 y 120  
+cod_diag: entre 1 y 3 digitos
+*********************************************;
+
+data  valido.pacientes(drop=dq: tot:) invalido.dq_pacientes;
+  set work.pacientes;
+dq_patno  = (verify(pat_no,'0123456789'))&gt;0;
+dq_nombre = countw(nombre) &lt; 2;
+dq_sexo   = sexo not in ('M','F');
+dq_ritmo  = abs((40&lt;=ritmo&lt;=100) - 1); 
+dq_sis    = abs((80&lt;=presion_sis&lt;=200) - 1); 
+dq_dia    = abs((60&lt;=presion_dia&lt;=120) - 1); 
+dq_cod	  = anyalpha(cod_diag) or length(cod_diag)&gt;3 or missing(cod_diag);
+tot_dq_r  = sum(of dq_:);
+dq_vector = cats(dq_patno,dq_nombre,dq_sexo,dq_ritmo,dq_sis,dq_dia,dq_cod);
+if tot_dq_r &gt; 0 then output invalido.dq_pacientes;
+ else output valido.pacientes;
+run;
+</code></pre>
+
+<p>Espero que hayan encontrado el post útil.</p>
+
+<p>SASludos,</p>
+
+    </div>
+
+    <footer>
+        <ul class="stats">
+    
+        
+
+        
+        
+            <li>
+                
+                
+                    
+
+                    
+                        Categoría
+                    
+                
+            </li>
+        
+    
+
+    
+    
+        <li><a href='/categories/sas'>SAS</a></li>
+    
+</ul>
+
+    </footer>
+</article>
+<ul class="actions pagination">
+    
+        <li><a href="/post/3-nuevos-videos-sobre-programaci%C3%B3n-sas/"
+                class="button big previous">3 nuevos vídeos sobre Programación SAS</a></li>
+    
+
+    
+</ul>
+
+
+
+    
+        <article class="post">
+            <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'zonalitica';
+    var disqus_identifier = '\/post\/breve-introduccion-al-analisis-de-calidad-de-datos-usando-sas-studio\/';
+    var disqus_title = 'Breve Introducción al Análisis de Calidad de Datos usando SAS Studio';
+    var disqus_url = '\/post\/breve-introduccion-al-analisis-de-calidad-de-datos-usando-sas-studio\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        </article>
+    
+
+
+    </div>
+    
+<section id="sidebar">
+
+    
+        <section id="intro">
+            
+            
+                
+                    <a href="/" class="logo"><img src="/img/main/logo.jpeg" alt="Hugo Future Imperfect" /></a>
+                
+            
+            
+                <header>
+                    <h2>Zonalítica</h2>
+                    <p>Blog en Español especializado en Data Science, Big Data, Estadística y Open Data</p>
+                </header>
+            
+            <ul class="icons">
+                
+                
+                    
+<li><a href="//github.com/zonalitica" target="_blank" title="GitHub" class="fa fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//youtube.com/channel/UCFlEAg_0gMwwRXaceWTSwRQ" target="_blank" title="YouTube" class="fa fa-youtube"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//twitter.com/zonalitica" target="_blank" title="Twitter" class="fa fa-twitter"></a></li>
+
+
+
+
+                
+            </ul>
+        </section>
+
+    
+        <section id="recent-posts">
+            <ul class="posts">
+                <header>
+                    <h3>Entradas Recientes</h3>
+                </header>
+                
+                    
+                
+
+                
+                    
+                
+
+                
+                    <li>
+                        <article>
+                            <header>
+                                <h3><a href="/post/breve-introduccion-al-analisis-de-calidad-de-datos-usando-sas-studio/">Breve Introducción al Análisis de Calidad de Datos usando SAS Studio</a></h3>
+                                
+                                    
+                                
+                                <time class="published" datetime=
+                                    '2017-11-11'>
+                                    November 11, 2017</time>
+                            </header>
+                        </article>
+                    </li>
+                
+                    <li>
+                        <article>
+                            <header>
+                                <h3><a href="/post/3-nuevos-videos-sobre-programaci%C3%B3n-sas/">3 nuevos vídeos sobre Programación SAS</a></h3>
+                                
+                                    
+                                
+                                <time class="published" datetime=
+                                    '2017-08-24'>
+                                    August 24, 2017</time>
+                            </header>
+                        </article>
+                    </li>
+                
+
+                
+                    <li>
+                        <ul class="actions">
+                            <li><a href=
+                            
+                                /post/
+                            
+                            class="button">Ver más Entradas</a></li>
+                        </ul>
+                    </li>
+                
+            </ul>
+        </section>
+
+    
+    
+    
+    
+        <section id="categories">
+            <ul class="posts">
+                <header>
+                    <h3><a href="/categories/">Categorías</a></h3>
+                </header>
+
+                
+                    
+                
+
+                
+                    <li>
+                        <article>
+                            <header>
+                                <a href="/categories/r/">R</a>
+                                <span style="float:right;">3</span>
+                            </header>
+                        </article>
+                    </li>
+                
+                    <li>
+                        <article>
+                            <header>
+                                <a href="/categories/herramientas/">herramientas</a>
+                                <span style="float:right;">3</span>
+                            </header>
+                        </article>
+                    </li>
+                
+                    <li>
+                        <article>
+                            <header>
+                                <a href="/categories/python/">Python</a>
+                                <span style="float:right;">2</span>
+                            </header>
+                        </article>
+                    </li>
+                
+                    <li>
+                        <article>
+                            <header>
+                                <a href="/categories/sas/">SAS</a>
+                                <span style="float:right;">2</span>
+                            </header>
+                        </article>
+                    </li>
+                
+                    <li>
+                        <article>
+                            <header>
+                                <a href="/categories/stats/">stats</a>
+                                <span style="float:right;">2</span>
+                            </header>
+                        </article>
+                    </li>
+                
+                    <li>
+                        <article>
+                            <header>
+                                <a href="/categories/blogdown/">blogdown</a>
+                                <span style="float:right;">1</span>
+                            </header>
+                        </article>
+                    </li>
+                
+                    <li>
+                        <article>
+                            <header>
+                                <a href="/categories/open-data/">open data</a>
+                                <span style="float:right;">1</span>
+                            </header>
+                        </article>
+                    </li>
+                
+                    <li>
+                        <article>
+                            <header>
+                                <a href="/categories/tips/">tips</a>
+                                <span style="float:right;">1</span>
+                            </header>
+                        </article>
+                    </li>
+                
+            </ul>
+        </section>
+    
+
+    
+        
+        <section class="blurb">
+            <h2>Acerca</h2>
+            <p>Zonalítica es un blog en español encargado de difundir información actual y oportuna sobre Data Science, Big Data, Estadística, Open Data y data journalism...</p>
+
+            <ul class="actions">
+                <li><a href="/about/" class="button">Ver Más</a></li>
+            </ul>
+        </section>
+        
+      <section class="blurb">
+        
+<link href="//cdn-images.mailchimp.com/embedcode/classic-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	#mc_embed_signup{background:#f4f4f4; clear:left; font:14px Helvetica,Arial,sans-serif; }
+	 
+</style>
+<div id="mc_embed_signup">
+<form action="//zonalitica.us11.list-manage.com/subscribe/post?u=e1679d3df43f990777e3a6576&amp;id=87ebc72b06" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	<h2>Suscribite!!!</h2>
+<div class="indicates-required"><span class="asterisk">*</span> requerido</div>
+<div class="mc-field-group">
+	<label for="mce-EMAIL">Email  <span class="asterisk">*</span>
+</label>
+	<input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">
+</div>
+<div class="mc-field-group">
+	<label for="mce-FNAME">Nombre </label>
+	<input type="text" value="" name="FNAME" class="" id="mce-FNAME">
+</div>
+<div class="mc-field-group">
+	<label for="mce-LNAME">Apellido </label>
+	<input type="text" value="" name="LNAME" class="" id="mce-LNAME">
+</div>
+	<div id="mce-responses" class="clear">
+		<div class="response" id="mce-error-response" style="display:none"></div>
+		<div class="response" id="mce-success-response" style="display:none"></div>
+	</div>    
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_e1679d3df43f990777e3a6576_87ebc72b06" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Suscribir" name="subscribe" id="mc-embedded-subscribe" class="btn btn-primary"></div>
+    </div>
+</form>
+</div>
+<script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script><script type='text/javascript'>(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text'; 
+
+$.extend($.validator.messages, {
+  required: "Este campo es obligatorio.",
+  remote: "Por favor, rellena este campo.",
+  email: "Por favor, escribe una dirección de correo válida",
+  url: "Por favor, escribe una URL válida.",
+  date: "Por favor, escribe una fecha válida.",
+  dateISO: "Por favor, escribe una fecha (ISO) válida.",
+  number: "Por favor, escribe un número entero válido.",
+  digits: "Por favor, escribe sólo dígitos.",
+  creditcard: "Por favor, escribe un número de tarjeta válido.",
+  equalTo: "Por favor, escribe el mismo valor de nuevo.",
+  accept: "Por favor, escribe un valor con una extensión aceptada.",
+  maxlength: $.validator.format("Por favor, no escribas más de {0} caracteres."),
+  minlength: $.validator.format("Por favor, no escribas menos de {0} caracteres."),
+  rangelength: $.validator.format("Por favor, escribe un valor entre {0} y {1} caracteres."),
+  range: $.validator.format("Por favor, escribe un valor entre {0} y {1}."),
+  max: $.validator.format("Por favor, escribe un valor menor o igual a {0}."),
+  min: $.validator.format("Por favor, escribe un valor mayor o igual a {0}.")
+});}(jQuery));var $mcj = jQuery.noConflict(true);</script>
+
+      </section>
+
+    
+        <section id="footer">
+            <ul class="icons">
+                
+                
+                    
+<li><a href="//github.com/zonalitica" target="_blank" title="GitHub" class="fa fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//youtube.com/channel/UCFlEAg_0gMwwRXaceWTSwRQ" target="_blank" title="YouTube" class="fa fa-youtube"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//twitter.com/zonalitica" target="_blank" title="Twitter" class="fa fa-twitter"></a></li>
+
+
+
+
+                
+            </ul>
+
+            <p class="copyright">&copy;Zonaliítica - Creado con <a href="//gohugo.io" target="_blank">Hugo</a></p>
+        </section>
+
+</section>
+
+            </div>
+        <a id="back-to-top" href="#" class="fa fa-arrow-up fa-border fa-2x"></a>
+        
+
+        
+        
+            
+        
+
+        
+        
+            <script src="/js/jquery.min.js"></script>
+            <script src="/js/skel.min.js"></script>
+            <script src="/js/util.js"></script>
+            <script src="/js/main.js"></script>
+            <script src="/js/backToTop.js"></script>
+            <script src="/js/highlight.pack.js"></script>
+        
+
+        
+
+            
+            <script>hljs.initHighlightingOnLoad();</script>
+            
+    </body>
+</html>
+
