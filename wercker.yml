@@ -9,6 +9,7 @@ deploy:
     steps:
         - install-packages:
             packages: openssh-client rsync
+            clear-cache: true
         - add-to-known_hosts:
             hostname: $HOSTNAME
         - mktemp:
