@@ -6,10 +6,20 @@
     <description>Recent content in Python on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>es-es</language>
-    <lastBuildDate>Thu, 24 Aug 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 01 Dec 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/python/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Introducción a Anaconda</title>
+      <link>/post/introduccion-a-anaconda/</link>
+      <pubDate>Fri, 01 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/introduccion-a-anaconda/</guid>
+      <description>Mis aventuras con Python empezarón por allá en el 2010 y desde entonces he trabajado con esta herramienta de forma intermitente. Como algunos de ustedes saben Python viene en varias formas y colores, con esto quiero decir que distintas distribuciones que pueden ser instaladas en un momento dado.
+Por lo general, la gente descarga Python de python.org lo cual es más que suficiente para la mayoría de las tareas básicas pero la perspectiva cambia cuando se trata de usar paquetes con referencia a Data Science.</description>
+    </item>
     
     <item>
       <title>Introducción a Expresiones Regulares con Python</title>
