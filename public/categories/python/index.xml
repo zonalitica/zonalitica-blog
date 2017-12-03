@@ -6,10 +6,21 @@
     <description>Recent content in Python on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>es-es</language>
-    <lastBuildDate>Fri, 01 Dec 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 02 Dec 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/python/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Comandos Básicos en Anaconda</title>
+      <link>/post/comandos-basicos-en-anaconda/</link>
+      <pubDate>Sat, 02 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/comandos-basicos-en-anaconda/</guid>
+      <description>Como les comente en el anterior post Anaconda es un ecosistema que nos permite instalar y administar multiple versiones de Python junto con más de 1000 paquetes y todas sus dependencias.
+Quiero aclarar que estos comandos se llevan a cabo en el terminal o línea de comando pero los mismos también se puede ejecutar directamente en Anaconda usando la versión gráfica (anaconda-navigator) y unos cuantos clicks.
+Comandos Básicos    Tarea Comando     Verificar versión de conda está instalada conda info   Actualizar coda a la versión mas reciente conda update conda   Instalar un paquete incluido en Anaconda conda install PACKAGENAME   Ejecutar un paquete después de instalación, ej.</description>
+    </item>
     
     <item>
       <title>Introducción a Anaconda</title>
